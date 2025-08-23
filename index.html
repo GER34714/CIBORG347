@@ -1,19 +1,22 @@
-/* Reset básico */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
+/* Fondo animado con efecto neon */
 body {
+  margin: 0;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background: #fdfdfd;
-  color: #333;
-  line-height: 1.6;
-  overflow-x: hidden;
+  color: #fff;
+  background: linear-gradient(-45deg, #0d0d0d, #1a1a40, #0d0d0d, #222);
+  background-size: 400% 400%;
+  animation: neonPulse 12s ease infinite;
+}
+
+@keyframes neonPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 header {
   text-align: center;
-  padding: 40px 20px;
-  background: #fff;
-  border-bottom: 1px solid #eee;
+  padding: 60px 20px;
 }
 
 header img {
@@ -22,53 +25,58 @@ header img {
 }
 
 h1 {
-  font-size: 2.5em;
-  color: #222;
-  margin-bottom: 5px;
+  font-size: 2.8em;
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #0077ff;
 }
 
 header p {
-  font-size: 1.2em;
-  color: #555;
+  font-size: 1.3em;
+  color: #ff00ff;
+  text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff0080;
 }
 
 section {
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
 }
 
 h2 {
   font-size: 2em;
   margin-bottom: 20px;
-  color: #222;
+  color: #0ff;
+  text-shadow: 0 0 12px #0ff, 0 0 25px #00f;
 }
 
 p {
   max-width: 800px;
   margin: 0 auto 25px auto;
   font-size: 1.1em;
-  color: #444;
+  color: #eee;
+  line-height: 1.6;
 }
 
 .cta {
   display: inline-block;
   margin-top: 15px;
   padding: 14px 30px;
-  background: #0d6efd;
+  background: #00ff88;
   border-radius: 40px;
-  color: #fff;
+  color: #111;
   font-weight: bold;
   text-decoration: none;
   font-size: 1.1em;
+  box-shadow: 0 0 15px #00ff88, 0 0 30px #00cc66;
   transition: all 0.3s ease;
 }
 
 .cta:hover {
-  background: #0b5ed7;
-  transform: scale(1.05);
+  background: #00cc66;
+  color: #fff;
+  transform: scale(1.08);
 }
 
-/* Redes con íconos */
+/* Redes */
 .redes {
   display: flex;
   flex-direction: column;
@@ -81,30 +89,28 @@ p {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: #333;
+  color: #fff;
   font-size: 1.1em;
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .redes a:hover {
-  color: #0d6efd;
+  color: #00f7ff;
 }
 
 .redes img {
   width: 28px;
   height: 28px;
-  filter: invert(20%) sepia(90%) saturate(2000%) hue-rotate(120deg);
+  filter: invert(100%);
 }
 
 /* Footer */
 footer {
-  background: #fff;
   text-align: center;
-  padding: 20px;
+  padding: 25px;
   font-size: 0.9em;
-  color: #777;
-  border-top: 1px solid #eee;
+  color: #aaa;
 }
 
 /* Botón flotante WhatsApp */
@@ -119,7 +125,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
   z-index: 1000;
   transition: all 0.3s ease;
 }
@@ -131,272 +137,14 @@ footer {
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   background: #1ebe57;
 }
 
-/* Responsivo */
+/* Responsive */
 @media (max-width: 768px) {
   h1 { font-size: 2em; }
   h2 { font-size: 1.6em; }
   p { font-size: 1em; }
   .cta { font-size: 1em; padding: 12px 20px; }
-  .redes { gap: 15px; }
 }
-  text-align: center;
-}
-
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #222;
-}
-
-p {
-  max-width: 800px;
-  margin: 0 auto 25px auto;
-  font-size: 1.1em;
-  color: #444;
-}
-
-.cta {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 14px 30px;
-  background: #0d6efd;
-  border-radius: 40px;
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1.1em;
-  transition: all 0.3s ease;
-}
-
-.cta:hover {
-  background: #0b5ed7;
-  transform: scale(1.05);
-}
-
-/* Redes con íconos */
-.redes {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.redes a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: #333;
-  font-size: 1.1em;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.redes a:hover {
-  color: #0d6efd;
-}
-
-.redes img {
-  width: 28px;
-  height: 28px;
-  filter: invert(20%) sepia(90%) saturate(2000%) hue-rotate(120deg);
-}
-
-/* Footer */
-footer {
-  background: #fff;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9em;
-  color: #777;
-  border-top: 1px solid #eee;
-}
-
-/* Botón flotante WhatsApp */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25d366;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.whatsapp-float img {
-  width: 35px;
-  height: 35px;
-  filter: invert(100%);
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  background: #1ebe57;
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.6em; }
-  p { font-size: 1em; }
-  .cta { font-size: 1em; padding: 12px 20px; }
-  .redes { gap: 15px; }
-}
-      color: #eee;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 30px 20px;
-      background: #111;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.8);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-
-    header img {
-      max-width: 160px;
-      height: auto;
-      animation: pulseGlow 3s infinite;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      color: #0ff;
-      text-shadow: 0 0 10px #0ff, 0 0 20px #f0f;
-      margin: 10px 0;
-    }
-
-    p {
-      max-width: 850px;
-      margin: 10px auto;
-      padding: 0 15px;
-      font-size: 1.2em;
-    }
-
-    section {
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 2em;
-      margin-bottom: 15px;
-      color: #f0f;
-      text-shadow: 0 0 10px #f0f, 0 0 20px #0ff;
-    }
-
-    .cta {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 30px;
-      background: linear-gradient(45deg, #0ff, #f0f, #0f0);
-      border: none;
-      border-radius: 40px;
-      color: #111;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.1em;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 10px #0ff, 0 0 15px #f0f;
-    }
-
-    .cta:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 25px #0ff, 0 0 35px #f0f, 0 0 15px #0f0;
-    }
-
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #999;
-      border-top: 1px solid #222;
-    }
-
-    /* Botón flotante WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25d366;
-      color: #fff;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-      text-decoration: none;
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.15) rotate(8deg);
-      background: #1ebe57;
-      box-shadow: 0 0 20px #25d366, 0 0 40px #25d366;
-    }
-
-    /* Animaciones */
-    @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 5px #0ff); }
-      50% { filter: drop-shadow(0 0 20px #f0f); }
-    }
-
-    /* Responsivo */
-    @media (max-width: 768px) {
-      h1 { font-size: 2em; }
-      h2 { font-size: 1.6em; }
-      p { font-size: 1em; }
-      .cta { font-size: 1em; padding: 12px 20px; }
-    }
-  </style>
-</head>
-<body>
-  <header role="banner">
-    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo">
-    <h1>Ciborg347™</h1>
-    <p>Landing Pages & Web Designs</p>
-  </header>
-
-  <main>
-    <section id="intro">
-      <h2>🚀 Llevá tu marca al futuro</h2>
-      <p>Diseñamos Landing Pages y Web Designs con estética gamer y cyberpunk. 
-      Interfaces modernas, rápidas y optimizadas para que tu negocio destaque en el mundo digital.</p>
-      <a href="mailto:ciborg347@gmail.com" class="cta" aria-label="Contactar por email">📩 Contactame</a>
-    </section>
-
-    <section id="contacto">
-      <h2>📱 Conectemos</h2>
-      <p>WhatsApp: <a href="https://wa.me/541164499481" style="color:#0ff;">+54 11 6449-9481</a></p>
-      <p>Email: <a href="mailto:ciborg347@gmail.com" style="color:#f0f;">ciborg347@gmail.com</a></p>
-      <p>Instagram: <a href="https://instagram.com/ciborg347" style="color:#0f0;">@ciborg347</a></p>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    © 2025 Ciborg347™ - Landing Pages & Web Designs
-  </footer>
-
-  <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/541164499481" class="whatsapp-float" aria-label="Abrir WhatsApp">💬</a>
-</body>
-</html>
