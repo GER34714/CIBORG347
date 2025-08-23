@@ -13,30 +13,23 @@
       text-align: center;
     }
 
-    /* NAVBAR FIJA */
+    /* NAVBAR */
     nav {
       position: fixed;
       top: 0;
       width: 100%;
       background: rgba(0, 0, 0, 0.85);
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* centramos menú */
       align-items: center;
       padding: 12px 40px;
       z-index: 1000;
       backdrop-filter: blur(6px);
     }
-    nav img {
-      height: 45px;
-      transition: transform 0.3s;
-    }
-    nav img:hover {
-      transform: scale(1.1);
-    }
     nav ul {
       list-style: none;
       display: flex;
-      gap: 25px;
+      gap: 35px;
       margin: 0;
       padding: 0;
     }
@@ -45,30 +38,31 @@
       color: #39ff14;
       font-weight: bold;
       transition: color 0.3s;
+      font-size: 1.05rem;
     }
     nav ul li a:hover {
       color: #00f7ff;
     }
 
-    /* Logo central con neon */
+    /* Logo central */
     .logo {
-      margin: 120px 0 50px;
+      margin: 140px 0 60px;
     }
     .logo img {
-      width: 260px;
-      filter: drop-shadow(0 0 18px #39ff14);
+      width: 320px;
+      filter: drop-shadow(0 0 20px #39ff14);
       animation: neonPulse 3s infinite alternate;
       transition: transform 0.3s;
     }
     .logo img:hover {
-      transform: scale(1.07);
+      transform: scale(1.1);
     }
     @keyframes neonPulse {
-      0% { filter: drop-shadow(0 0 12px #39ff14); }
-      25% { filter: drop-shadow(0 0 15px #00f7ff); }
-      50% { filter: drop-shadow(0 0 15px #ff00ff); }
-      75% { filter: drop-shadow(0 0 15px #8a2be2); }
-      100% { filter: drop-shadow(0 0 12px #39ff14); }
+      0% { filter: drop-shadow(0 0 15px #39ff14); }
+      25% { filter: drop-shadow(0 0 18px #00f7ff); }
+      50% { filter: drop-shadow(0 0 18px #ff00ff); }
+      75% { filter: drop-shadow(0 0 18px #8a2be2); }
+      100% { filter: drop-shadow(0 0 15px #39ff14); }
     }
 
     /* Secciones */
@@ -170,7 +164,7 @@
       height: 24px;
     }
 
-    /* Botón WhatsApp flotante */
+    /* WhatsApp flotante */
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -188,12 +182,23 @@
       transform: scale(1.1);
     }
 
+    /* Footer */
     footer {
       background: rgba(255,255,255,0.05);
-      padding: 20px;
+      padding: 30px 20px;
       font-size: 0.9rem;
       color: #777;
       margin-top: 40px;
+    }
+    footer img {
+      width: 100px;
+      display: block;
+      margin: 15px auto 5px;
+      filter: drop-shadow(0 0 8px #39ff14);
+      transition: transform 0.3s;
+    }
+    footer img:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
@@ -201,7 +206,6 @@
 
   <!-- NAVBAR -->
   <nav>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo">
     <ul>
       <li><a href="#quienes">Quiénes Somos</a></li>
       <li><a href="#ejemplos">Ejemplos</a></li>
@@ -291,12 +295,14 @@
     </div>
   </section>
 
-  <!-- Botón flotante WhatsApp -->
+  <!-- WhatsApp flotante -->
   <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
   </a>
 
+  <!-- Footer -->
   <footer>
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
     © 2025 Ciborg347™ - Landing Pages & Web Designs
   </footer>
 
