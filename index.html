@@ -11,62 +11,69 @@
       background: #0a0a0a;
       color: #fff;
       text-align: center;
+      scroll-behavior: smooth;
     }
 
-    /* Banner */
-    header {
-      padding: 15px 20px;
-      background: rgba(0, 0, 0, 0.7);
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       justify-content: center;
       align-items: center;
-      position: sticky;
-      top: 0;
+      padding: 14px 0;
       z-index: 1000;
+      backdrop-filter: blur(6px);
     }
-
-    nav {
+    nav ul {
+      list-style: none;
       display: flex;
-      gap: 40px;
+      gap: 50px;
+      margin: 0;
+      padding: 0;
     }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.1rem;
+    nav ul li a {
       position: relative;
+      text-decoration: none;
+      color: #39ff14;
+      font-weight: bold;
+      font-size: 1.1rem;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #39ff14;
-    }
-    nav a::after {
+    nav ul li a::after {
       content: "";
       position: absolute;
-      width: 0;
-      height: 2px;
-      left: 0;
       bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
       background: #39ff14;
-      transition: width 0.3s;
+      transition: width 0.3s ease;
     }
-    nav a:hover::after {
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
       width: 100%;
     }
+    nav ul li a:hover {
+      color: #00f7ff;
+    }
 
-    /* Logo central con neon */
+    /* Logo central */
     .logo {
-      margin: 60px 0 30px;
+      margin: 120px 0 50px;
     }
     .logo img {
-      width: 260px;
+      width: 300px;
       filter: drop-shadow(0 0 15px #39ff14);
       animation: neonPulse 3s infinite alternate;
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s;
     }
     .logo img:hover {
       transform: scale(1.08);
     }
+
     @keyframes neonPulse {
       0% { filter: drop-shadow(0 0 10px #39ff14); }
       25% { filter: drop-shadow(0 0 15px #00f7ff); }
@@ -77,7 +84,7 @@
 
     /* Secciones */
     section {
-      padding: 50px 20px;
+      padding: 80px 20px;
       max-width: 1100px;
       margin: auto;
     }
@@ -120,23 +127,28 @@
     }
     .price-card {
       background: rgba(255,255,255,0.05);
-      padding: 20px;
+      padding: 25px;
       border-radius: 12px;
-      min-width: 220px;
-      max-width: 300px;
+      min-width: 240px;
       box-shadow: 0 0 10px rgba(0,255,128,0.3);
       transition: transform 0.3s;
     }
     .price-card:hover {
-      transform: translateY(-5px);
+      transform: scale(1.05);
     }
     .price-card h3 {
       margin-bottom: 10px;
       color: #00f7ff;
     }
-    .price-card p {
-      font-size: 1rem;
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       color: #aaa;
+      text-align: left;
+    }
+    .price-card ul li {
+      margin: 8px 0;
     }
 
     /* Botón WhatsApp flotante */
@@ -152,8 +164,6 @@
       border-radius: 50%;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
       transition: transform 0.3s;
-      background: #25d366;
-      padding: 8px;
     }
     .whatsapp-float img:hover {
       transform: scale(1.1);
@@ -167,8 +177,8 @@
       align-items: center;
     }
     .contact-links a {
-      color: #fff;
       text-decoration: underline;
+      color: #39ff14;
       font-size: 1.1rem;
       display: flex;
       align-items: center;
@@ -176,11 +186,21 @@
       transition: color 0.3s;
     }
     .contact-links a:hover {
-      color: #39ff14;
+      color: #00f7ff;
     }
     .contact-links img {
       width: 22px;
       height: 22px;
+    }
+
+    /* Logo pequeño final con NEON PULSE */
+    .logo-final {
+      margin: 40px 0 10px;
+    }
+    .logo-final img {
+      width: 120px;
+      filter: drop-shadow(0 0 8px #39ff14);
+      animation: neonPulse 3s infinite alternate;
     }
 
     footer {
@@ -188,21 +208,20 @@
       padding: 20px;
       font-size: 0.9rem;
       color: #777;
-      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Banner con navegación -->
-  <header>
-    <nav>
-      <a href="#quienes">Quiénes Somos</a>
-      <a href="#ejemplos">Ejemplos</a>
-      <a href="#valores">Valores</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-  </header>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#quienes" class="active">Quiénes Somos</a></li>
+      <li><a href="#ejemplos">Ejemplos</a></li>
+      <li><a href="#valores">Valores</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
 
   <!-- Logo central -->
   <div class="logo">
@@ -235,18 +254,30 @@
     <div class="pricing">
       <div class="price-card">
         <h3>Básico</h3>
-        <p>Desde $80.000 ARS</p>
-        <p>✔ Dominio básico incluido</p>
+        <p><b>Desde $80.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Diseño responsive</li>
+          <li>✔ Hasta 3 secciones</li>
+        </ul>
       </div>
       <div class="price-card">
         <h3>Profesional</h3>
-        <p>Desde $120.000 ARS</p>
-        <p>✔ Dominio básico<br>✔ Formularios de contacto</p>
+        <p><b>Desde $120.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Formularios de contacto</li>
+          <li>✔ Integración redes sociales</li>
+        </ul>
       </div>
       <div class="price-card">
         <h3>Premium</h3>
-        <p>Desde $250.000 ARS</p>
-        <p>✔ Dominio propio<br>✔ Formularios avanzados<br>✔ Optimización SEO</p>
+        <p><b>Desde $250.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio propio</li>
+          <li>✔ Optimización SEO básica</li>
+          <li>✔ Soporte prioritario</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -256,11 +287,11 @@
     <h2>Contacto</h2>
     <p>📩 Ponete en contacto con nosotros y llevá tu proyecto al siguiente nivel.</p>
     <div class="contact-links">
-      <a href="https://wa.me/541164499481" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> WhatsApp: +54 11 6449-9481
+      <a href="https://wa.me/541164499481?text=Hola!%20Me%20darías%20más%20información%20por%20favor?" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"> WhatsApp: +54 11 6449-9481
       </a>
       <a href="mailto:ciborg347@gmail.com">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail"> Email: ciborg347@gmail.com
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> Email: ciborg347@gmail.com
       </a>
       <a href="https://instagram.com/ciborg347" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"> Instagram: @ciborg347
@@ -268,14 +299,43 @@
     </div>
   </section>
 
+  <!-- Logo pequeño final con NEON -->
+  <div class="logo-final">
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
+  </div>
+
   <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  <a href="https://wa.me/541164499481?text=Hola!%20Me%20darías%20más%20información%20por%20favor?" class="whatsapp-float" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
   </a>
 
   <footer>
     © 2025 Ciborg347™ - Landing Pages & Web Designs
   </footer>
+
+  <!-- JS para navbar dinámico -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
