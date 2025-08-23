@@ -1,39 +1,148 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciborg347™ | Landing Pages & Web Designs</title>
-  <meta name="description" content="Landing Pages y Web Designs con estilo gamer y cyberpunk. Innovación, velocidad y creatividad digital con Ciborg347™.">
-  <meta name="author" content="Ciborg347™">
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <!-- Preload logo para mayor velocidad -->
-  <link rel="preload" as="image" href="https://iili.io/KHOiff9.md.png">
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #fdfdfd;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ciborg347™ | Landing Pages & Web Designs">
-  <meta property="og:description" content="Diseño futurista, gamer y cyberpunk en landing pages y desarrollo web. Innovación, velocidad y creatividad digital.">
-  <meta property="og:image" content="https://iili.io/KHOiff9.md.png">
-  <meta property="og:url" content="https://tudominio.com">
-  <meta property="og:type" content="website">
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Ciborg347™ | Landing Pages & Web Designs">
-  <meta name="twitter:description" content="Diseño gamer y cyberpunk para Landing Pages y Web Designs innovadores.">
-  <meta name="twitter:image" content="https://iili.io/KHOiff9.md.png">
+header img {
+  max-width: 140px;
+  margin-bottom: 15px;
+}
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png">
+h1 {
+  font-size: 2.5em;
+  color: #222;
+  margin-bottom: 5px;
+}
 
-  <!-- Estilos -->
-  <style>
-    /* Reset básico */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+header p {
+  font-size: 1.2em;
+  color: #555;
+}
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #0a0a0a;
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+p {
+  max-width: 800px;
+  margin: 0 auto 25px auto;
+  font-size: 1.1em;
+  color: #444;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 14px 30px;
+  background: #0d6efd;
+  border-radius: 40px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background: #0b5ed7;
+  transform: scale(1.05);
+}
+
+/* Redes con íconos */
+.redes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.redes a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.redes a:hover {
+  color: #0d6efd;
+}
+
+.redes img {
+  width: 28px;
+  height: 28px;
+  filter: invert(20%) sepia(90%) saturate(2000%) hue-rotate(120deg);
+}
+
+/* Footer */
+footer {
+  background: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #777;
+  border-top: 1px solid #eee;
+}
+
+/* Botón flotante WhatsApp */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float img {
+  width: 35px;
+  height: 35px;
+  filter: invert(100%);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  background: #1ebe57;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.6em; }
+  p { font-size: 1em; }
+  .cta { font-size: 1em; padding: 12px 20px; }
+  .redes { gap: 15px; }
+}
       color: #eee;
       line-height: 1.6;
       overflow-x: hidden;
