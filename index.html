@@ -1,73 +1,245 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ciborg347™ | Landing Pages & Web Designs</title>
-  <meta name="description" content="Landing Pages profesionales y optimizadas para cualquier negocio. Diseños rápidos, modernos y adaptados a lo que tu marca necesita.">
-  <meta name="author" content="Ciborg347™">
+  <meta name="description" content="Landing Pages profesionales, rápidas y a medida para cualquier negocio. Diseños modernos, optimizados y listos para convertir." />
+  <meta name="author" content="Ciborg347™" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Ciborg347™ | Landing Pages & Web Designs">
-  <meta property="og:description" content="Landing Pages a medida, rápidas y optimizadas para tu negocio.">
-  <meta property="og:image" content="https://iili.io/KHOiff9.md.png">
-  <meta property="og:url" content="https://tudominio.com">
-  <meta property="og:type" content="website">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Ciborg347™ | Landing Pages & Web Designs" />
+  <meta property="og:description" content="Landing Pages a medida, rápidas y optimizadas para tu negocio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iili.io/KHOiff9.md.png" />
+  <meta property="og:url" content="https://tudominio.com" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png">
+  <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --bg1:#0b0f1a; --bg2:#121935; --bg3:#0b0f1a; --bg4:#1a223f;
+      --txt:#ffffff; --txt-soft:#e6e6e6; --muted:#a9b0c3;
+      --neon-cyan:#00f7ff; --neon-mag:#ff4dff; --cta:#00ff88; --cta-dark:#00cc66;
+      --ig-grad: radial-gradient(40% 50% at 30% 30%, #f9ed32 0%, #f76b1c 35%, #f56040 48%, #d62976 70%, #962fbf 85%, #4f5bd5 100%);
+      --panel: rgba(10,12,22,.45);
+      --panel-brd: rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+
+    /* Fondo animado neon (no tapa contenido) */
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--txt);
+      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), var(--bg4));
+      background-size: 400% 400%;
+      animation: bgPulse 14s ease-in-out infinite;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @keyframes bgPulse{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @media (prefers-reduced-motion: reduce){
+      body{animation: none}
+    }
+
+    /* Layout base */
+    header{
+      text-align:center;
+      padding:48px 20px 28px;
+    }
+    .logo{
+      width:120px; height:auto; display:block; margin:0 auto 14px;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,.35));
+    }
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(28px, 4vw, 38px);
+      letter-spacing:.5px;
+      color:var(--neon-cyan);
+      text-shadow: 0 0 8px rgba(0,247,255,.7), 0 0 18px rgba(0,119,255,.45);
+      font-weight: 800;
+    }
+    header .tagline{
+      margin:0;
+      font-size: clamp(14px, 2.2vw, 18px);
+      color: var(--neon-mag);
+      text-shadow: 0 0 6px rgba(255,77,255,.6);
+      font-weight: 600;
+    }
+
+    main{padding: 18px 16px 60px; display:grid; place-items:center;}
+    .panel{
+      width: min(980px, 96%);
+      background: var(--panel);
+      border: 1px solid var(--panel-brd);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 4vw, 34px);
+      backdrop-filter: blur(6px);
+    }
+
+    h2{
+      margin:0 0 12px;
+      font-size: clamp(22px, 3.5vw, 28px);
+      color: var(--neon-cyan);
+      text-shadow: 0 0 10px rgba(0,247,255,.5);
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    p{
+      margin:0 0 18px;
+      color: var(--txt-soft);
+      font-size: clamp(15px, 2.5vw, 17px);
+      line-height:1.7;
+    }
+    .cta{
+      display:inline-block;
+      margin-top: 6px;
+      padding: 12px 22px;
+      border-radius: 32px;
+      background: var(--cta);
+      color:#0b0f1a; font-weight: 800; text-decoration:none;
+      box-shadow: 0 0 18px rgba(0,255,136,.55), 0 6px 22px rgba(0,0,0,.35);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      letter-spacing:.3px;
+    }
+    .cta:hover{ background: var(--cta-dark); color:#fff; transform: translateY(-1px) scale(1.03) }
+
+    /* Bloque de redes */
+    .social{
+      margin-top: 22px;
+      display:flex; flex-direction:column; gap:14px; align-items:center;
+    }
+    .social a{
+      width:min(560px, 100%);
+      display:flex; align-items:center; gap:12px;
+      padding:12px 14px; border-radius:14px;
+      text-decoration:none; color:var(--txt);
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .social a:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12) }
+    .label{ font-weight:700; letter-spacing:.2px; }
+    .handle{ color: var(--muted); font-weight:600 }
+
+    /* Badges e iconos (tamaños CHICOS y prolijos) */
+    .badge{
+      width:28px; height:28px; border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center; flex: 0 0 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+    .badge svg{ width:16px; height:16px; display:block }
+    .wa { background:#25D366 }   /* WhatsApp */
+    .ig { background: var(--ig-grad) } /* Instagram */
+    .gm { background:#EA4335 }   /* Gmail */
+
+    .text-wrap{ display:flex; flex-direction:column; gap:2px }
+
+    /* Footer */
+    footer{
+      padding: 26px 12px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Botón flotante WhatsApp */
+    .wa-fab{
+      position: fixed; right:16px; bottom:18px;
+      background:#25D366; width:56px; height:56px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 20px rgba(37,211,102,.35);
+      transition: transform .15s ease, box-shadow .15s ease;
+      outline:none; border:none; cursor:pointer;
+    }
+    .wa-fab:hover{ transform: scale(1.06) }
+    .wa-fab svg{ width:26px; height:26px; fill:#fff }
+
+    /* Responsive tweaks */
+    @media (max-width:560px){
+      .logo{ width:100px }
+      .social a{ padding:10px 12px }
+      .badge{ width:26px; height:26px }
+      .badge svg{ width:15px; height:15px }
+    }
+  </style>
 </head>
 <body>
-  <!-- HEADER -->
   <header>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo" class="logo">
+    <img class="logo" src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo" />
     <h1>Ciborg347™</h1>
-    <p>Landing Pages & Web Designs</p>
+    <p class="tagline">Landing Pages & Web Designs</p>
   </header>
 
-  <!-- INTRO -->
   <main>
-    <section id="intro">
-      <h2>🚀 Creamos tu Landing Page a medida</h2>
+    <section class="panel" aria-labelledby="intro-title">
+      <h2 id="intro-title">🚀 Creamos tu Landing Page a medida</h2>
       <p>
-        En <strong>Ciborg347™</strong> diseñamos Landing Pages rápidas, modernas y optimizadas.  
-        Nos adaptamos a lo que cada cliente necesita: negocios, marcas personales, servicios o startups.  
-        Convertí tus visitas en clientes con una web profesional y de alto impacto.
+        En <strong>Ciborg347™</strong> desarrollamos <em>Landing Pages</em> rápidas, modernas y optimizadas para convertir.
+        Nos adaptamos a cualquier rubro: negocios locales, servicios profesionales, marcas personales y startups.
       </p>
-      <a href="mailto:ciborg347@gmail.com" class="cta">📩 Pedí tu presupuesto</a>
-    </section>
+      <p>
+        Te entregamos una página ligera, responsive, con buenas prácticas SEO y lista para escalar.
+      </p>
+      <a class="cta" href="mailto:ciborg347@gmail.com" aria-label="Solicitar presupuesto por email">📩 Pedí tu presupuesto</a>
 
-    <!-- CONTACTO -->
-    <section id="contacto">
-      <h2>📱 Conectemos</h2>
-      <div class="redes">
-        <a href="https://wa.me/541164499481" target="_blank">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
-          <span>+54 11 6449-9481</span>
+      <div class="social" aria-labelledby="contacto-title">
+        <h2 id="contacto-title">📱 Conectemos</h2>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/541164499481" target="_blank" rel="noopener">
+          <span class="badge wa" aria-hidden="true">
+            <!-- WhatsApp SVG -->
+            <svg viewBox="0 0 24 24" role="img" aria-label="WhatsApp"><path fill="#fff" d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.45 0 .1 5.35.1 11.95c0 2.1.56 4.15 1.62 5.95L0 24l6.27-1.64c1.73.95 3.69 1.45 5.7 1.45h.01c6.6 0 11.95-5.35 11.95-11.95 0-3.19-1.24-6.19-3.41-8.38zM12 21.9h-.01c-1.8 0-3.56-.48-5.1-1.39l-.37-.22-3.72.97.99-3.63-.24-.37A9.93 9.93 0 0 1 2.1 11.95C2.1 6.46 6.51 2.1 12.05 2.1c2.66 0 5.16 1.04 7.05 2.93 1.88 1.89 2.9 4.4 2.89 7.06 0 5.54-4.51 9.91-9.99 9.91zm5.77-7.45c-.31-.16-1.86-.91-2.14-1.01-.29-.11-.5-.16-.71.16-.21.32-.82 1.01-1 1.22-.18.21-.37.23-.68.08-.31-.16-1.29-.48-2.46-1.52-.91-.79-1.52-1.77-1.7-2.08-.18-.31-.02-.48.13-.63.14-.14.31-.37.47-.55.16-.18.21-.32.32-.53.11-.21.05-.39-.03-.55-.08-.16-.71-1.71-.98-2.34-.26-.63-.53-.54-.71-.55h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.64s1.13 3.06 1.29 3.27c.16.21 2.21 3.38 5.35 4.74.75.32 1.33.5 1.78.64.75.24 1.43.21 1.97.13.6-.09 1.86-.76 2.13-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37z"/></svg>
+          </span>
+          <span class="text-wrap">
+            <span class="label">WhatsApp</span>
+            <span class="handle">+54 11 6449-9481</span>
+          </span>
         </a>
-        <a href="mailto:ciborg347@gmail.com" target="_blank">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Email">
-          <span>ciborg347@gmail.com</span>
+
+        <!-- Email -->
+        <a href="mailto:ciborg347@gmail.com" target="_blank" rel="noopener">
+          <span class="badge gm" aria-hidden="true">
+            <!-- Gmail (sobre) -->
+            <svg viewBox="0 0 24 24" role="img" aria-label="Email"><path fill="#fff" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2v.01L12 11 4 6.01V6h16zM4 18V8.24l7.4 4.93a1 1 0 0 0 1.2 0L20 8.24V18H4z"/></svg>
+          </span>
+          <span class="text-wrap">
+            <span class="label">Email</span>
+            <span class="handle">ciborg347@gmail.com</span>
+          </span>
         </a>
-        <a href="https://instagram.com/ciborg347" target="_blank">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
-          <span>@ciborg347</span>
+
+        <!-- Instagram -->
+        <a href="https://instagram.com/ciborg347" target="_blank" rel="noopener">
+          <span class="badge ig" aria-hidden="true">
+            <!-- Instagram glyph -->
+            <svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><path fill="#fff" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.6.6.7.3 1.3.7 1.9 1.3.6.6 1 1.2 1.3 1.9.3.7.5 1.4.6 2.6.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.6 2.6-.3.7-.7 1.3-1.3 1.9-.6.6-1.2 1-1.9 1.3-.7.3-1.4.5-2.6.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.6-.6a5.5 5.5 0 0 1-1.9-1.3 5.5 5.5 0 0 1-1.3-1.9c-.3-.7-.5-1.4-.6-2.6C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.6-2.6.3-.7.7-1.3 1.3-1.9.6-.6 1.2-1 1.9-1.3.7-.3 1.4-.5 2.6-.6C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.2 0-3.5 0-4.8.1-1 .1-1.6.2-2 .4-.5.2-.9.5-1.3.9-.4.4-.7.8-.9 1.3-.2.4-.4 1-.4 2-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1 .2 1.6.4 2 .2.5.5.9.9 1.3.4.4.8.7 1.3.9.4.2 1 .4 2 .4 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1-.1 1.6-.2 2-.4.5-.2.9-.5 1.3-.9.4-.4.7-.8.9-1.3.2-.4.4-1 .4-2 .1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1-.2-1.6-.4-2-.2-.5-.5-.9-.9-1.3-.4-.4-.8-.7-1.3-.9-.4-.2-1-.4-2-.4-1.3-.1-1.6-.1-4.8-.1zm0 3.4a6.6 6.6 0 1 1 0 13.2 6.6 6.6 0 0 1 0-13.2zm0 1.8a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm5.9-2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/></svg>
+          </span>
+          <span class="text-wrap">
+            <span class="label">Instagram</span>
+            <span class="handle">@ciborg347</span>
+          </span>
         </a>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
-    © 2025 Ciborg347™ - Landing Pages & Web Designs
+    © 2025 Ciborg347™ — Landing Pages & Web Designs
   </footer>
 
-  <!-- BOTÓN FLOTANTE WHATSAPP -->
-  <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+  <!-- Botón flotante WhatsApp -->
+  <a class="wa-fab" href="https://wa.me/541164499481" target="_blank" rel="noopener" aria-label="Hablar por WhatsApp">
+    <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.45 0 .1 5.35.1 11.95c0 2.1.56 4.15 1.62 5.95L0 24l6.27-1.64c1.73.95 3.69 1.45 5.7 1.45h.01c6.6 0 11.95-5.35 11.95-11.95 0-3.19-1.24-6.19-3.41-8.38zM12 21.9h-.01c-1.8 0-3.56-.48-5.1-1.39l-.37-.22-3.72.97.99-3.63-.24-.37A9.93 9.93 0 0 1 2.1 11.95C2.1 6.46 6.51 2.1 12.05 2.1c2.66 0 5.16 1.04 7.05 2.93 1.88 1.89 2.9 4.4 2.89 7.06 0 5.54-4.51 9.91-9.99 9.91zm5.77-7.45c-.31-.16-1.86-.91-2.14-1.01-.29-.11-.5-.16-.71.16-.21.32-.82 1.01-1 1.22-.18.21-.37.23-.68.08-.31-.16-1.29-.48-2.46-1.52-.91-.79-1.52-1.77-1.7-2.08-.18-.31-.02-.48.13-.63.14-.14.31-.37.47-.55.16-.18.21-.32.32-.53.11-.21.05-.39-.03-.55-.08-.16-.71-1.71-.98-2.34-.26-.63-.53-.54-.71-.55h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.08-1.1 2.64s1.13 3.06 1.29 3.27c.16.21 2.21 3.38 5.35 4.74.75.32 1.33.5 1.78.64.75.24 1.43.21 1.97.13.6-.09 1.86-.76 2.13-1.49.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37z" fill="#fff"/></svg>
   </a>
 </body>
 </html>
