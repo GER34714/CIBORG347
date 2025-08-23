@@ -3,146 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciborg347™ Landing Pages</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
+  <title>Ciborg347™ Landing Pages & Web Designs</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at center, #0a0a0a, #000000);
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      text-align: center;
     }
-
-    /* Barra superior con glassmorphism */
     header {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.7);
+      padding: 15px 30px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      padding: 12px 40px;
       position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .socials {
-      display: flex;
-      gap: 20px;
-    }
-
-    .socials a {
-      font-size: 1.5rem;
-      transition: transform 0.2s, filter 0.2s;
-    }
-
-    .socials a:hover {
-      transform: scale(1.2);
-      filter: drop-shadow(0 0 6px currentColor);
-    }
-
-    .socials .fa-whatsapp { color: #25D366; }
-    .socials .fa-instagram { color: #E1306C; }
-    .socials .fa-envelope { color: #1DA1F2; }
-
-    /* Contenido principal */
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 120px 20px 40px;
-    }
-
-    main img {
-      max-width: 350px;
-      margin-bottom: 20px;
-      opacity: 0;
-      transform: scale(0.8);
-      animation: fadeZoomIn 1.8s ease forwards, glowLogo 3s infinite alternate;
-    }
-
-    /* Animaciones */
-    @keyframes fadeZoomIn {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes glowLogo {
-      from { filter: drop-shadow(0 0 10px #0ff); }
-      to { filter: drop-shadow(0 0 25px #ff00ff); }
-    }
-
-    h2 {
-      margin-top: 10px;
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: #ccc;
-    }
-
-    p {
-      margin-top: 20px;
-      font-size: 1.1rem;
-      max-width: 700px;
-      line-height: 1.6;
-      color: #ddd;
-    }
-
-    footer {
-      padding: 20px;
-      font-size: 0.9rem;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       width: 100%;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header img {
+      height: 40px;
+    }
+    header nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    header nav a:hover {
+      color: #00ff99;
+    }
+    .hero {
+      padding: 120px 20px 80px;
+    }
+    .hero img {
+      width: 220px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px #00ff99) drop-shadow(0 0 10px #00ff99); }
+      to { filter: drop-shadow(0 0 20px #00ff99) drop-shadow(0 0 40px #00ff99); }
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99;
+    }
+    .grid-ejemplos {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .ejemplo img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,255,153,0.5);
+      transition: transform 0.3s;
+    }
+    .ejemplo img:hover {
+      transform: scale(1.05);
+    }
+    .ejemplo p {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+    .social-icons {
+      margin-top: 20px;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      font-size: 1.8em;
+      display: inline-block;
+    }
+    .social-icons .fa-whatsapp { color: #25d366; }
+    .social-icons .fa-instagram { color: #e4405f; }
+    .social-icons .fa-envelope { color: #ea4335; }
+    footer {
+      background: #111;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
-  <!-- Barra superior -->
   <header>
-    <div class="socials">
+    <div class="logo">
+      <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo">
+      <span>Ciborg347™</span>
+    </div>
+    <nav>
+      <a href="#valores">Valores</a>
+      <a href="#ejemplos">Ejemplos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo Grande">
+    <h1>Ciborg347™ Landing Pages & Web Designs</h1>
+    <p>Diseñamos páginas de aterrizaje profesionales, modernas y optimizadas para cualquier negocio.</p>
+  </section>
+
+  <section id="valores">
+    <h2>Planes y Valores</h2>
+    <div class="grid-ejemplos">
+      <div class="ejemplo">
+        <h3>Plan Básico</h3>
+        <p>Landing simple y efectiva.</p>
+        <p><strong>$80.000 ARS</strong></p>
+      </div>
+      <div class="ejemplo">
+        <h3>Plan Pro</h3>
+        <p>Landing personalizada + integración redes.</p>
+        <p><strong>$150.000 ARS</strong></p>
+      </div>
+      <div class="ejemplo">
+        <h3>Plan Premium</h3>
+        <p>Diseño exclusivo + SEO + optimización total.</p>
+        <p><strong>$250.000 ARS</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ejemplos">
+    <h2>Ejemplos de Landings</h2>
+    <div class="grid-ejemplos">
+      <!-- Ejemplo Genérico -->
+      <div class="ejemplo">
+        <img src="https://via.placeholder.com/500x300/00ff99/000000?text=Ejemplo+1" alt="Ejemplo 1">
+        <p>Landing para negocio gastronómico con reservas online.</p>
+      </div>
+      <div class="ejemplo">
+        <img src="https://via.placeholder.com/500x300/00ff99/000000?text=Ejemplo+2" alt="Ejemplo 2">
+        <p>Landing para emprendimiento de moda con catálogo digital.</p>
+      </div>
+    </div>
+
+    <!-- Subcategoría Casinos -->
+    <div class="ejemplo-categoria" style="margin-top:40px;">
+      <h3 style="color:#00ff99; text-shadow:0 0 10px #00ff99, 0 0 20px #00ff99;">Landing Casinos</h3>
+      <div class="grid-ejemplos">
+        <div class="ejemplo">
+          <img src="https://iili.io/KHSBQZG.md.jpg" alt="Casino Landing 1">
+          <p>Landing para casino online #1</p>
+        </div>
+        <div class="ejemplo">
+          <img src="https://iili.io/KHSopFR.md.jpg" alt="Casino Landing 2">
+          <p>Landing para casino online #2</p>
+        </div>
+        <div class="ejemplo">
+          <img src="https://iili.io/KHSzLBa.md.jpg" alt="Casino Landing 3">
+          <p>Landing para casino online #3</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Consultanos para tu proyecto:</p>
+    <div class="social-icons">
       <a href="https://wa.me/541164499481" target="_blank"><i class="fab fa-whatsapp"></i></a>
       <a href="https://instagram.com/ciborg347" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="mailto:ciborg347@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
-  </header>
+  </section>
 
-  <!-- Contenido -->
-  <main>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Logo Ciborg347™">
-    <h2>Landing Pages & Web Designs</h2>
-    <p>
-      Creamos páginas de aterrizaje profesionales y personalizadas para cualquier necesidad: negocios, emprendimientos, marcas o servicios.  
-      Diseños rápidos, modernos y optimizados para convertir visitantes en clientes.
-    </p>
-  </main>
-
-  <!-- Footer -->
   <footer>
-    © 2025 Ciborg347™ - Todos los derechos reservados
+    © 2025 Ciborg347™ - Landing Pages & Web Designs. Todos los derechos reservados.
   </footer>
-
 </body>
 </html>
