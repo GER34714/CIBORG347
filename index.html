@@ -6,7 +6,7 @@
   <title>Ciborg347™ Landing Pages</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -30,7 +30,7 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       padding: 12px 40px;
       position: fixed;
@@ -40,10 +40,6 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    header img {
-      height: 70px;
-    }
-
     .socials {
       display: flex;
       gap: 20px;
@@ -51,11 +47,12 @@
 
     .socials a {
       font-size: 1.5rem;
-      transition: transform 0.2s;
+      transition: transform 0.2s, filter 0.2s;
     }
 
     .socials a:hover {
       transform: scale(1.2);
+      filter: drop-shadow(0 0 6px currentColor);
     }
 
     .socials .fa-whatsapp { color: #25D366; }
@@ -73,27 +70,30 @@
       padding: 120px 20px 40px;
     }
 
-    /* Logo/Título con efecto neón */
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 5rem;
-      color: #0ff;
-      text-shadow:
-        0 0 5px #0ff,
-        0 0 10px #0ff,
-        0 0 20px #0ff,
-        0 0 40px #0ff;
-      animation: neonPulse 2s infinite;
+    main img {
+      max-width: 350px;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeZoomIn 1.8s ease forwards, glowLogo 3s infinite alternate;
     }
 
-    @keyframes neonPulse {
-      0%, 100% { text-shadow: 0 0 5px #0ff, 0 0 20px #0ff, 0 0 40px #0ff; color: #0ff; }
-      50% { text-shadow: 0 0 10px #ff00ff, 0 0 30px #ff00ff, 0 0 60px #ff00ff; color: #ff00ff; }
+    /* Animaciones */
+    @keyframes fadeZoomIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes glowLogo {
+      from { filter: drop-shadow(0 0 10px #0ff); }
+      to { filter: drop-shadow(0 0 25px #ff00ff); }
     }
 
     h2 {
       margin-top: 10px;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: #ccc;
     }
@@ -122,7 +122,6 @@
 
   <!-- Barra superior -->
   <header>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Logo Ciborg347™">
     <div class="socials">
       <a href="https://wa.me/541164499481" target="_blank"><i class="fab fa-whatsapp"></i></a>
       <a href="https://instagram.com/ciborg347" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -132,7 +131,7 @@
 
   <!-- Contenido -->
   <main>
-    <h1>Ciborg347™</h1>
+    <img src="https://iili.io/KHOiff9.md.png" alt="Logo Ciborg347™">
     <h2>Landing Pages & Web Designs</h2>
     <p>
       Creamos páginas de aterrizaje profesionales y personalizadas para cualquier necesidad: negocios, emprendimientos, marcas o servicios.  
