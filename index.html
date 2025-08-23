@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciborg347™ Landing Pages & Web Designs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: #0a0a0a;
       color: #fff;
       text-align: center;
@@ -15,21 +16,28 @@
 
     /* Banner */
     header {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 25px;
+      background: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     header img {
-      height: 50px;
+      height: 70px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    header img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px #39ff14);
     }
 
     /* Redes arriba */
     .social-top {
       display: flex;
       gap: 15px;
+      margin-top: 10px;
     }
     .social-top a img {
       width: 28px;
@@ -42,12 +50,17 @@
 
     /* Logo central con neon */
     .logo {
-      margin: 60px 0 30px;
+      margin: 50px 0 30px;
     }
     .logo img {
-      width: 220px;
+      width: 280px;
+      max-width: 90%;
       filter: drop-shadow(0 0 15px #39ff14);
       animation: neonPulse 3s infinite alternate;
+      transition: transform 0.4s ease;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
     }
     @keyframes neonPulse {
       0% { filter: drop-shadow(0 0 10px #39ff14); }
@@ -60,7 +73,7 @@
     /* Secciones */
     section {
       padding: 60px 20px;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
     }
 
@@ -70,6 +83,11 @@
       color: #39ff14;
       text-transform: uppercase;
       letter-spacing: 2px;
+    }
+
+    h3 {
+      color: #00f7ff;
+      margin-bottom: 15px;
     }
 
     p {
@@ -105,6 +123,8 @@
       padding: 20px;
       border-radius: 12px;
       min-width: 220px;
+      flex: 1;
+      max-width: 300px;
       box-shadow: 0 0 10px rgba(0,255,128,0.3);
     }
     .price-card h3 {
@@ -114,6 +134,24 @@
     .price-card p {
       font-size: 1rem;
       color: #aaa;
+    }
+
+    /* Contacto */
+    .contact-links a {
+      display: inline-block;
+      margin: 10px 12px;
+      padding: 10px 18px;
+      text-decoration: underline;
+      color: #fff;
+      border: 1px solid #39ff14;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .contact-links a:hover {
+      background: #39ff14;
+      color: #000;
+      transform: scale(1.05);
     }
 
     /* Botón WhatsApp flotante */
@@ -140,6 +178,20 @@
       font-size: 0.9rem;
       color: #777;
       margin-top: 40px;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+      }
+      .social-top {
+        margin-top: 15px;
+      }
+      .pricing {
+        flex-direction: column;
+        gap: 20px;
+      }
     }
   </style>
 </head>
@@ -172,11 +224,21 @@
   <!-- Sección Ejemplos -->
   <section>
     <h2>Ejemplos</h2>
+
+    <!-- Subcategoría Casinos -->
     <h3>Landing Casinos</h3>
     <div class="examples">
       <img src="https://iili.io/KHSBQZG.md.jpg" alt="Casino Landing 1">
       <img src="https://iili.io/KHSopFR.md.jpg" alt="Casino Landing 2">
       <img src="https://iili.io/KHSzLBa.md.jpg" alt="Casino Landing 3">
+    </div>
+
+    <!-- Próximos ejemplos -->
+    <h3>Landing Minimalistas (Próximamente)</h3>
+    <div class="examples">
+      <p style="grid-column: 1/-1; color: #777; font-style: italic;">
+        Aquí vamos a mostrar ejemplos de landings minimalistas para un estilo más elegante y limpio.
+      </p>
     </div>
   </section>
 
@@ -186,7 +248,7 @@
     <div class="pricing">
       <div class="price-card">
         <h3>Básico</h3>
-        <p>Desde $50.000 ARS</p>
+        <p>Desde $80.000 ARS</p>
       </div>
       <div class="price-card">
         <h3>Profesional</h3>
@@ -202,11 +264,11 @@
   <!-- Contacto -->
   <section>
     <h2>Contacto</h2>
-    <p>
-      WhatsApp: <a href="https://wa.me/541164499481" target="_blank">+54 11 6449-9481</a><br>
-      Email: <a href="mailto:ciborg347@gmail.com">ciborg347@gmail.com</a><br>
-      Instagram: <a href="https://instagram.com/ciborg347" target="_blank">@ciborg347</a>
-    </p>
+    <div class="contact-links">
+      <a href="https://wa.me/541164499481" target="_blank">WhatsApp: +54 11 6449-9481</a>
+      <a href="mailto:ciborg347@gmail.com">Email: ciborg347@gmail.com</a>
+      <a href="https://instagram.com/ciborg347" target="_blank">Instagram: @ciborg347</a>
+    </div>
   </section>
 
   <!-- Botón flotante WhatsApp -->
@@ -220,3 +282,4 @@
 
 </body>
 </html>
+
