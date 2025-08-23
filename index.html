@@ -7,55 +7,71 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       background: #0a0a0a;
       color: #fff;
       text-align: center;
+      scroll-behavior: smooth;
     }
 
-    /* Banner */
-    header {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      padding: 14px 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
     }
-
-    header img {
-      height: 55px;
-      transition: transform 0.3s;
-    }
-    header img:hover {
-      transform: scale(1.1);
-    }
-
-    /* Redes arriba */
-    .social-top {
+    nav ul {
+      list-style: none;
       display: flex;
-      gap: 15px;
+      gap: 50px;
+      margin: 0;
+      padding: 0;
     }
-    .social-top a img {
-      width: 28px;
-      height: 28px;
-      transition: transform 0.3s;
+    nav ul li a {
+      position: relative;
+      text-decoration: none;
+      color: #39ff14;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
     }
-    .social-top a img:hover {
-      transform: scale(1.2);
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #39ff14;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+    nav ul li a:hover {
+      color: #00f7ff;
     }
 
-    /* Logo central con neon */
+    /* Logo central */
     .logo {
-      margin: 60px 0 30px;
+      margin: 120px 0 50px;
     }
     .logo img {
-      width: 260px;
-      transition: transform 0.3s;
+      width: 300px;
       filter: drop-shadow(0 0 15px #39ff14);
       animation: neonPulse 3s infinite alternate;
+      transition: transform 0.3s;
     }
     .logo img:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
     @keyframes neonPulse {
       0% { filter: drop-shadow(0 0 10px #39ff14); }
@@ -67,7 +83,7 @@
 
     /* Secciones */
     section {
-      padding: 60px 20px;
+      padding: 80px 20px;
       max-width: 1100px;
       margin: auto;
     }
@@ -110,18 +126,28 @@
     }
     .price-card {
       background: rgba(255,255,255,0.05);
-      padding: 20px;
+      padding: 25px;
       border-radius: 12px;
-      min-width: 220px;
+      min-width: 240px;
       box-shadow: 0 0 10px rgba(0,255,128,0.3);
+      transition: transform 0.3s;
+    }
+    .price-card:hover {
+      transform: scale(1.05);
     }
     .price-card h3 {
       margin-bottom: 10px;
       color: #00f7ff;
     }
-    .price-card p {
-      font-size: 1rem;
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       color: #aaa;
+      text-align: left;
+    }
+    .price-card ul li {
+      margin: 8px 0;
     }
 
     /* Botón WhatsApp flotante */
@@ -142,6 +168,30 @@
       transform: scale(1.1);
     }
 
+    /* Contacto */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .contact-links a {
+      text-decoration: underline;
+      color: #39ff14;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+    .contact-links a:hover {
+      color: #00f7ff;
+    }
+    .contact-links img {
+      width: 22px;
+      height: 22px;
+    }
+
     footer {
       background: rgba(255,255,255,0.05);
       padding: 20px;
@@ -149,34 +199,24 @@
       color: #777;
       margin-top: 40px;
     }
-
-    .contact-icons a {
-      text-decoration: none;
-      color: #39ff14;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-    .contact-icons a:hover {
-      text-decoration: underline;
-    }
-    .contact-icons img {
-      width: 20px;
-      vertical-align: middle;
-      margin-right: 5px;
+    footer img {
+      width: 120px;
+      margin-top: 10px;
+      filter: drop-shadow(0 0 8px #39ff14);
     }
   </style>
 </head>
 <body>
 
-  <!-- Banner -->
-  <header>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo">
-    <div class="social-top">
-      <a href="https://wa.me/541164499481" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
-      <a href="https://instagram.com/ciborg347" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
-      <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail"></a>
-    </div>
-  </header>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#quienes" class="active">Quiénes Somos</a></li>
+      <li><a href="#ejemplos">Ejemplos</a></li>
+      <li><a href="#valores">Valores</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
 
   <!-- Logo central -->
   <div class="logo">
@@ -184,7 +224,7 @@
   </div>
 
   <!-- Sección Quiénes Somos -->
-  <section>
+  <section id="quienes">
     <h2>¿Quiénes Somos?</h2>
     <p>
       En <b>Ciborg347™</b> nos especializamos en el diseño y desarrollo de <b>Landing Pages y Web Designs</b> 
@@ -193,7 +233,7 @@
   </section>
 
   <!-- Sección Ejemplos -->
-  <section>
+  <section id="ejemplos">
     <h2>Ejemplos</h2>
     <h3>Landing Casinos</h3>
     <div class="examples">
@@ -204,42 +244,91 @@
   </section>
 
   <!-- Sección Valores -->
-  <section>
+  <section id="valores">
     <h2>Valores</h2>
     <div class="pricing">
       <div class="price-card">
         <h3>Básico</h3>
-        <p>Desde $80.000 ARS</p>
+        <p><b>Desde $80.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Diseño responsive</li>
+          <li>✔ Hasta 3 secciones</li>
+        </ul>
       </div>
       <div class="price-card">
         <h3>Profesional</h3>
-        <p>Desde $120.000 ARS</p>
+        <p><b>Desde $120.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Formularios de contacto</li>
+          <li>✔ Integración redes sociales</li>
+        </ul>
       </div>
       <div class="price-card">
         <h3>Premium</h3>
-        <p>Desde $250.000 ARS</p>
+        <p><b>Desde $250.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio propio</li>
+          <li>✔ Optimización SEO básica</li>
+          <li>✔ Soporte prioritario</li>
+        </ul>
       </div>
     </div>
   </section>
 
   <!-- Contacto -->
-  <section>
+  <section id="contacto">
     <h2>Contacto</h2>
-    <div class="contact-icons">
-      <a href="https://wa.me/541164499481" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"> WhatsApp</a><br>
-      <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail"> Email</a><br>
-      <a href="https://instagram.com/ciborg347" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"> Instagram</a>
+    <p>📩 Ponete en contacto con nosotros y llevá tu proyecto al siguiente nivel.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/541164499481?text=Hola,%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20por%20favor." target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> WhatsApp: +54 11 6449-9481
+      </a>
+      <a href="mailto:ciborg347@gmail.com">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> Email: ciborg347@gmail.com
+      </a>
+      <a href="https://instagram.com/ciborg347" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"> Instagram: @ciborg347
+      </a>
     </div>
   </section>
 
   <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+  <a href="https://wa.me/541164499481?text=Hola,%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n%20por%20favor." class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
+  <!-- Footer con logo pequeño -->
   <footer>
     © 2025 Ciborg347™ - Landing Pages & Web Designs
+    <br>
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
   </footer>
+
+  <!-- JS para navbar dinámico -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
