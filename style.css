@@ -1,0 +1,167 @@
+/* =======================
+   ESTILOS GENERALES
+======================= */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(-45deg, #0d0d0d, #1a1a40, #0d0d0d, #222);
+  background-size: 400% 400%;
+  animation: neonPulse 12s ease infinite;
+}
+
+/* Fondo animado */
+@keyframes neonPulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* =======================
+   HEADER
+======================= */
+header {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+header .logo {
+  max-width: 140px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.8em;
+  color: #00f7ff;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #0077ff;
+}
+
+header p {
+  font-size: 1.3em;
+  color: #ff00ff;
+  text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff0080;
+}
+
+/* =======================
+   SECCIONES
+======================= */
+section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #0ff;
+  text-shadow: 0 0 12px #0ff, 0 0 25px #00f;
+}
+
+p {
+  max-width: 800px;
+  margin: 0 auto 25px auto;
+  font-size: 1.1em;
+  color: #eee;
+  line-height: 1.6;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 14px 30px;
+  background: #00ff88;
+  border-radius: 40px;
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1em;
+  box-shadow: 0 0 15px #00ff88, 0 0 30px #00cc66;
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background: #00cc66;
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* =======================
+   REDES
+======================= */
+.redes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.redes a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.redes a:hover {
+  color: #00f7ff;
+}
+
+.redes img {
+  width: 28px;
+  height: 28px;
+  filter: invert(100%);
+}
+
+/* =======================
+   FOOTER
+======================= */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+/* =======================
+   WHATSAPP FLOTANTE
+======================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.whatsapp-float img {
+  width: 35px;
+  height: 35px;
+  filter: invert(100%);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.15);
+  background: #1ebe57;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 768px) {
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.6em; }
+  p { font-size: 1em; }
+  .cta { font-size: 1em; padding: 12px 20px; }
+}
