@@ -3,108 +3,330 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ciborg347™ - Landing Page</title>
-  <link rel="icon" href="https://iili.io/KHOiff9.md.png" type="image/png">
+  <title>Ciborg347™ Landing Pages & Web Designs</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       background: #0a0a0a;
       color: #fff;
-    }
-
-    header {
-      background: #111;
       text-align: center;
-      padding: 40px 20px;
+      scroll-behavior: smooth;
     }
 
-    header img {
-      max-width: 200px;
-      filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 30px #ff00ff);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-top: 20px;
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-
-    /* Botón flotante WhatsApp ultra brillante */
-    .whatsapp-float {
+    /* NAVBAR */
+    nav {
       position: fixed;
-      width: 80px;
-      height: 80px;
-      bottom: 30px;
-      right: 30px;
-      background-color: transparent;
-      border-radius: 50%;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       justify-content: center;
       align-items: center;
-      animation: pulse 1.5s infinite;
+      padding: 14px 0;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 50px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li a {
+      position: relative;
+      text-decoration: none;
+      color: #39ff14;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #39ff14;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+    nav ul li a:hover {
+      color: #00f7ff;
+    }
+
+    /* Logo central */
+    .logo {
+      margin: 120px 0 50px;
+    }
+    .logo img {
+      width: 280px;
+      filter: drop-shadow(0 0 15px #39ff14);
+      animation: neonPulse 3s infinite alternate;
+      transition: transform 0.3s;
+    }
+    .logo img:hover {
+      transform: scale(1.08);
+    }
+    @keyframes neonPulse {
+      0% { filter: drop-shadow(0 0 10px #39ff14); }
+      25% { filter: drop-shadow(0 0 15px #00f7ff); }
+      50% { filter: drop-shadow(0 0 15px #ff00ff); }
+      75% { filter: drop-shadow(0 0 15px #8a2be2); }
+      100% { filter: drop-shadow(0 0 10px #39ff14); }
+    }
+
+    /* Secciones */
+    section {
+      padding: 80px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #39ff14;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Ejemplos grid */
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .examples img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .examples img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Valores */
+    .pricing {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .price-card {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 12px;
+      min-width: 240px;
+      box-shadow: 0 0 10px rgba(0,255,128,0.3);
+      transition: transform 0.3s;
+    }
+    .price-card:hover {
+      transform: scale(1.05);
+    }
+    .price-card h3 {
+      margin-bottom: 10px;
+      color: #00f7ff;
+    }
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #aaa;
+      text-align: left;
+    }
+    .price-card ul li {
+      margin: 8px 0;
+    }
+
+    /* Botón WhatsApp flotante */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       z-index: 999;
     }
-
     .whatsapp-float img {
-      width: 80px;
-      height: 80px;
-      filter: drop-shadow(0 0 20px #25d366) drop-shadow(0 0 40px #25d366) drop-shadow(0 0 60px #25d366);
-      transition: transform 0.3s ease, filter 0.3s ease;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      animation: neonPulse 2.5s infinite alternate;
+      transition: transform 0.3s;
+    }
+    .whatsapp-float img:hover {
+      transform: scale(1.1);
     }
 
-    .whatsapp-float:hover img {
-      transform: scale(1.25);
-      filter: drop-shadow(0 0 30px #25d366) drop-shadow(0 0 60px #25d366) drop-shadow(0 0 90px #25d366);
+    /* Contacto */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .contact-links a {
+      text-decoration: underline;
+      color: #39ff14;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+    .contact-links a:hover {
+      color: #00f7ff;
+    }
+    .contact-links img {
+      width: 22px;
+      height: 22px;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    footer {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <img src="https://iili.io/KHOiff9.md.png" alt="Logo Ciborg347">
-    <h1>Ciborg347™</h1>
-    <p>Diseño de Landing Pages Futuristas</p>
-  </header>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#quienes" class="active">Quiénes Somos</a></li>
+      <li><a href="#ejemplos">Ejemplos</a></li>
+      <li><a href="#valores">Valores</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
 
-  <section>
-    <h2>🚀 Diseños Modernos y Rápidos</h2>
-    <p>Creá tu página de aterrizaje con estilo profesional, velocidad y optimización para cualquier dispositivo.</p>
+  <!-- Logo central -->
+  <div class="logo">
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
+  </div>
+
+  <!-- Sección Quiénes Somos -->
+  <section id="quienes">
+    <h2>¿Quiénes Somos?</h2>
+    <p>
+      En <b>Ciborg347™</b> nos especializamos en el diseño y desarrollo de <b>Landing Pages y Web Designs</b> 
+      adaptados a las necesidades de cada cliente. Nuestra misión es crear sitios atractivos, rápidos, responsivos y con impacto profesional.
+    </p>
   </section>
 
-  <section>
-    <h2>💡 Innovación en Cada Detalle</h2>
-    <p>Utilizamos animaciones, efectos visuales y un diseño minimalista que impacta a tus clientes.</p>
+  <!-- Sección Ejemplos -->
+  <section id="ejemplos">
+    <h2>Ejemplos</h2>
+    <h3>Landing Casinos</h3>
+    <div class="examples">
+      <img src="https://iili.io/KHSBQZG.md.jpg" alt="Casino Landing 1">
+      <img src="https://iili.io/KHSopFR.md.jpg" alt="Casino Landing 2">
+      <img src="https://iili.io/KHSzLBa.md.jpg" alt="Casino Landing 3">
+    </div>
   </section>
 
-  <footer>
-    <p>⚠️ Jugar compulsivamente es perjudicial para la salud. +18</p>
-    <p>© 2025 Ciborg347™. Todos los derechos reservados.</p>
-  </footer>
+  <!-- Sección Valores -->
+  <section id="valores">
+    <h2>Valores</h2>
+    <div class="pricing">
+      <div class="price-card">
+        <h3>Básico</h3>
+        <p><b>Desde $80.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Diseño responsive</li>
+          <li>✔ Hasta 3 secciones</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>Profesional</h3>
+        <p><b>Desde $120.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio básico</li>
+          <li>✔ Formularios de contacto</li>
+          <li>✔ Integración redes sociales</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>Premium</h3>
+        <p><b>Desde $250.000 ARS</b></p>
+        <ul>
+          <li>✔ Dominio propio</li>
+          <li>✔ Optimización SEO básica</li>
+          <li>✔ Soporte prioritario</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>📩 Ponete en contacto con nosotros y llevá tu proyecto al siguiente nivel.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/541164499481?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20web.%20Gracias." target="_blank">
+        <img src="https://iili.io/KHZrZ11.md.png" alt="WhatsApp"> WhatsApp: +54 11 6449-9481
+      </a>
+      <a href="mailto:ciborg347@gmail.com">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> Email: ciborg347@gmail.com
+      </a>
+      <a href="https://instagram.com/ciborg347" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"> Instagram: @ciborg347
+      </a>
+    </div>
+  </section>
 
   <!-- Botón flotante WhatsApp -->
-  <a href="https://wa.me/541164499481?text=Hola..." class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/541164499481?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20web.%20Gracias." class="whatsapp-float" target="_blank">
     <img src="https://iili.io/KHZrZ11.md.png" alt="WhatsApp">
   </a>
+
+  <!-- Logo final chico -->
+  <div class="logo" style="margin:50px 0;">
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™" style="width:140px;">
+  </div>
+
+  <footer>
+    © 2025 Ciborg347™ - Landing Pages & Web Designs
+  </footer>
+
+  <!-- JS para navbar dinámico -->
+  <script>
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
