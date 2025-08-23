@@ -1,150 +1,73 @@
-/* Fondo animado con efecto neon */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  color: #fff;
-  background: linear-gradient(-45deg, #0d0d0d, #1a1a40, #0d0d0d, #222);
-  background-size: 400% 400%;
-  animation: neonPulse 12s ease infinite;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciborg347™ | Landing Pages & Web Designs</title>
+  <meta name="description" content="Landing Pages profesionales y optimizadas para cualquier negocio. Diseños rápidos, modernos y adaptados a lo que tu marca necesita.">
+  <meta name="author" content="Ciborg347™">
 
-@keyframes neonPulse {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  <!-- Open Graph -->
+  <meta property="og:title" content="Ciborg347™ | Landing Pages & Web Designs">
+  <meta property="og:description" content="Landing Pages a medida, rápidas y optimizadas para tu negocio.">
+  <meta property="og:image" content="https://iili.io/KHOiff9.md.png">
+  <meta property="og:url" content="https://tudominio.com">
+  <meta property="og:type" content="website">
 
-header {
-  text-align: center;
-  padding: 60px 20px;
-}
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png">
 
-header img {
-  max-width: 140px;
-  margin-bottom: 15px;
-}
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™ Logo" class="logo">
+    <h1>Ciborg347™</h1>
+    <p>Landing Pages & Web Designs</p>
+  </header>
 
-h1 {
-  font-size: 2.8em;
-  color: #00f7ff;
-  text-shadow: 0 0 10px #00f7ff, 0 0 20px #0077ff;
-}
+  <!-- INTRO -->
+  <main>
+    <section id="intro">
+      <h2>🚀 Creamos tu Landing Page a medida</h2>
+      <p>
+        En <strong>Ciborg347™</strong> diseñamos Landing Pages rápidas, modernas y optimizadas.  
+        Nos adaptamos a lo que cada cliente necesita: negocios, marcas personales, servicios o startups.  
+        Convertí tus visitas en clientes con una web profesional y de alto impacto.
+      </p>
+      <a href="mailto:ciborg347@gmail.com" class="cta">📩 Pedí tu presupuesto</a>
+    </section>
 
-header p {
-  font-size: 1.3em;
-  color: #ff00ff;
-  text-shadow: 0 0 8px #ff00ff, 0 0 15px #ff0080;
-}
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>📱 Conectemos</h2>
+      <div class="redes">
+        <a href="https://wa.me/541164499481" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+          <span>+54 11 6449-9481</span>
+        </a>
+        <a href="mailto:ciborg347@gmail.com" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg" alt="Email">
+          <span>ciborg347@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/ciborg347" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+          <span>@ciborg347</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
-section {
-  padding: 80px 20px;
-  text-align: center;
-}
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Ciborg347™ - Landing Pages & Web Designs
+  </footer>
 
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #0ff;
-  text-shadow: 0 0 12px #0ff, 0 0 25px #00f;
-}
-
-p {
-  max-width: 800px;
-  margin: 0 auto 25px auto;
-  font-size: 1.1em;
-  color: #eee;
-  line-height: 1.6;
-}
-
-.cta {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 14px 30px;
-  background: #00ff88;
-  border-radius: 40px;
-  color: #111;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1.1em;
-  box-shadow: 0 0 15px #00ff88, 0 0 30px #00cc66;
-  transition: all 0.3s ease;
-}
-
-.cta:hover {
-  background: #00cc66;
-  color: #fff;
-  transform: scale(1.08);
-}
-
-/* Redes */
-.redes {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.redes a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 1.1em;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.redes a:hover {
-  color: #00f7ff;
-}
-
-.redes img {
-  width: 28px;
-  height: 28px;
-  filter: invert(100%);
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 25px;
-  font-size: 0.9em;
-  color: #aaa;
-}
-
-/* Botón flotante WhatsApp */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25d366;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.whatsapp-float img {
-  width: 35px;
-  height: 35px;
-  filter: invert(100%);
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.15);
-  background: #1ebe57;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.6em; }
-  p { font-size: 1em; }
-  .cta { font-size: 1em; padding: 12px 20px; }
-}
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
+  <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+  </a>
+</body>
+</html>
