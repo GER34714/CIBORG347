@@ -60,6 +60,42 @@
       color: #00f7ff;
     }
 
+    /* Botón hamburguesa */
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #39ff14;
+      position: fixed;
+      top: 12px;
+      right: 20px;
+      z-index: 1100;
+      user-select: none;
+    }
+
+    /* Responsive navbar */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: rgba(0,0,0,0.95);
+        position: fixed;
+        top: 60px;
+        right: 0;
+        width: 220px;
+        padding: 20px;
+        gap: 20px;
+        border-left: 2px solid #39ff14;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      }
+      nav ul.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
     /* Logo central */
     .logo {
       margin: 120px 0 50px;
@@ -158,8 +194,8 @@
       z-index: 999;
     }
     .whatsapp-float img {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       border-radius: 50%;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
       transition: transform 0.3s;
@@ -213,9 +249,12 @@
 </head>
 <body>
 
+  <!-- Botón hamburguesa -->
+  <div class="menu-toggle" id="menu-toggle">☰</div>
+
   <!-- Navbar -->
   <nav>
-    <ul>
+    <ul id="nav-links">
       <li><a href="#quienes" class="active">Quiénes Somos</a></li>
       <li><a href="#ejemplos">Ejemplos</a></li>
       <li><a href="#valores">Valores</a></li>
@@ -307,21 +346,23 @@
   <!-- Botón flotante WhatsApp -->
   <a href="https://wa.me/541164499481?text=%C2%A1Hola!%20Estoy%20interesado%20en%20sus%20servicios%20de%20dise%C3%B1o%20web%20%F0%9F%9A%80%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n%2C%20por%20favor%3F" 
      class="whatsapp-float" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    <img src="https://iili.io/KHZVvlS.png" alt="WhatsApp">
   </a>
 
   <footer>
     © 2025 Ciborg347™ - Landing Pages & Web Designs
   </footer>
 
-  <!-- JS para navbar dinámico -->
+  <!-- JS para navbar dinámico + hamburguesa -->
   <script>
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll("nav ul li a");
+    const toggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-links");
 
+    // Scrollspy
     window.addEventListener("scroll", () => {
       let current = "";
-
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 150;
         if (pageYOffset >= sectionTop) {
@@ -334,6 +375,18 @@
         if (link.getAttribute("href") === "#" + current) {
           link.classList.add("active");
         }
+      });
+    });
+
+    // Toggle menú hamburguesa
+    toggle.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
+    });
+
+    // Cerrar menú al hacer click en link
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("show");
       });
     });
   </script>
