@@ -177,19 +177,20 @@ p{font-size:1.1rem;line-height:1.6;color:#ccc;}
 /* WHATSAPP FLOTANTE */
 .whatsapp-float {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 60px; /* 🔼 Subido para no tapar el texto del footer */
+  right: 22px;
   z-index: 999;
 }
 .whatsapp-float img {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+  box-shadow: 0 0 10px rgba(0,255,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .whatsapp-float img:hover {
-  transform: scale(1.1);
+  transform: scale(1.12);
+  box-shadow: 0 0 20px rgba(0,255,0,0.8);
 }
 
 /* FOOTER */
@@ -202,17 +203,19 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
     top:60px;
     right:10px;
     flex-direction:column;
-    gap:20px;
+    gap:15px;
     display:none;
-    background:transparent;
+    width:75%;
+    text-align:right;
+    background:rgba(0,0,0,0.9);
+    padding:20px 15px;
+    border-radius:12px;
   }
   nav ul.active{display:flex;}
   nav ul li a{
     color:#39ff14;
-    text-shadow:0 0 8px #39ff14;
-    background:rgba(0,0,0,0.25);
-    padding:5px 12px;
-    border-radius:8px;
+    font-size:1rem;
+    text-shadow:0 0 6px #39ff14;
   }
   .hamburger{display:flex;}
   .examples{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;}
@@ -283,9 +286,9 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
   </div>
 </section>
 
-<!-- ✅ BOTÓN WHATSAPP FLOTANTE -->
+<!-- ✅ BOTÓN WHATSAPP FLOTANTE SOLO LOGO (AJUSTADO ARRIBA) -->
 <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Estoy%20interesado%20en%20una%20Landing%20Page%20🚀" class="whatsapp-float" target="_blank">
-  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
@@ -304,6 +307,7 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 <script>
 const navMenu=document.getElementById("nav-links");
 function toggleMenu(){navMenu.classList.toggle("active");}
+
 const galleryItems=document.querySelectorAll(".gallery img");
 let currentIndex=0;
 galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
