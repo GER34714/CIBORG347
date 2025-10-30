@@ -23,7 +23,6 @@
       scroll-behavior: smooth;
     }
 
-    /* NAVBAR */
     nav {
       position: fixed;
       top: 0;
@@ -82,7 +81,6 @@
       transition: 0.3s;
     }
 
-    /* LOGO */
     .logo {
       margin: 120px 0 50px;
     }
@@ -180,7 +178,27 @@
 
     .project a:hover { color: #00f7ff; }
 
-    /* LIGHTBOX */
+    .more-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 25px;
+      border: 2px solid #39ff14;
+      border-radius: 30px;
+      color: #39ff14;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(57,255,20,0.4);
+    }
+
+    .more-btn:hover {
+      background: #39ff14;
+      color: #000;
+      box-shadow: 0 0 20px #39ff14;
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX / GALERÍA */
     .lightbox {
       display: none;
       position: fixed;
@@ -288,48 +306,22 @@
   <section id="ejemplos">
     <h2>Ejemplos de Landings</h2>
 
-    <!-- CASINOS -->
     <h3>🎰 Casinos</h3>
-    <div class="examples gallery">
+    <div class="examples" id="gallery">
       <div class="project">
         <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPygQXS.jpg" alt="Facu Casino" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™">
+        <img src="https://iili.io/KPygQXS.jpg" alt="Facu Casino" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™" onclick="openGallery(0)">
         <a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a>
       </div>
       <div class="project">
         <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPyrMj2.jpg" alt="Dragon Casino" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™">
+        <img src="https://iili.io/KPyrMj2.jpg" alt="Dragon Casino" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™" onclick="openGallery(1)">
         <a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a>
       </div>
       <div class="project">
         <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPyDVHP.jpg" alt="Dynasty Bet" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™">
+        <img src="https://iili.io/KPyDVHP.jpg" alt="Dynasty Bet" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™" onclick="openGallery(2)">
         <a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a>
-      </div>
-    </div>
-
-    <!-- BARBERÍAS -->
-    <h3>💈 Barberías</h3>
-    <div class="examples gallery">
-      <div class="project">
-        <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPyvEcx.jpg" alt="Barber 99" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99">
-        <a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a>
-      </div>
-      <div class="project">
-        <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPyUCn1.jpg" alt="Barber Shop Rodri" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri">
-        <a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a>
-      </div>
-    </div>
-
-    <!-- ESTÉTICA -->
-    <h3>💅 Estética & Uñas</h3>
-    <div class="examples gallery">
-      <div class="project">
-        <div class="preview-label">Vista previa</div>
-        <img src="https://iili.io/KPyCnHu.jpg" alt="Adda Nails" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails">
-        <a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a>
       </div>
     </div>
   </section>
@@ -376,12 +368,8 @@
   </div>
 
   <script>
-    const galleryItems = document.querySelectorAll(".gallery img");
+    const galleryItems = document.querySelectorAll("#gallery img");
     let currentIndex = 0;
-
-    galleryItems.forEach((img, index) => {
-      img.addEventListener("click", () => openGallery(index));
-    });
 
     function openGallery(index) {
       currentIndex = index;
