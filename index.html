@@ -39,12 +39,23 @@ nav ul li a::after{
 }
 nav ul li a:hover::after,nav ul li a.active::after{width:100%;}
 nav ul li a:hover{color:#00f7ff;}
-.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;}
-.hamburger div{width:25px;height:3px;background:#39ff14;transition:.3s;}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #39ff14;
+  transition: 0.3s;
+}
 
 /* LOGO */
 .logo{margin:120px 0 50px;}
-.logo img{width:280px;filter:drop-shadow(0 0 15px #39ff14);
+.logo img{width:260px;filter:drop-shadow(0 0 15px #39ff14);
   animation:neonPulse 3s infinite alternate;transition:.3s;}
 .logo img:hover{transform:scale(1.08);}
 @keyframes neonPulse{
@@ -62,70 +73,147 @@ h3{color:#00f7ff;margin-bottom:15px;}
 p{font-size:1.1rem;line-height:1.6;color:#ccc;}
 
 /* GALERÍA */
-.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:20px;margin-top:20px;}
-.project{background:rgba(255,255,255,0.05);border-radius:10px;
-  box-shadow:0 0 10px rgba(0,255,128,0.3);padding:10px;position:relative;transition:.3s;}
+.examples{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:18px;
+  margin-top:20px;
+}
+.project{
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  box-shadow:0 0 10px rgba(0,255,128,0.3);
+  padding:10px;
+  transition:.3s;
+  position:relative;
+}
 .project:hover{transform:scale(1.05);}
-
 .preview-label{
-  position:absolute;top:-15px;left:0;right:0;
-  font-size:.7rem;text-transform:uppercase;
+  position:absolute;top:-12px;left:0;right:0;
+  font-size:.7rem;
   color:rgba(57,255,20,0.7);
   text-shadow:0 0 6px rgba(57,255,20,0.6);
   font-weight:bold;
   pointer-events:none;
 }
-
 .project img{
-  width:100%;height:90px;object-fit:contain;
+  width:100%;
+  height:110px;
+  object-fit:contain;
   background:rgba(0,0,0,0.6);
-  border-radius:8px;border:2px solid #39ff14;
-  cursor:pointer;transition:.3s;
+  border-radius:8px;
+  border:2px solid #39ff14;
+  cursor:pointer;
+  transition:.3s;
 }
-.project img:hover{transform:scale(1.1);box-shadow:0 0 20px #39ff14;}
-.project a{display:block;margin-top:8px;color:#39ff14;text-decoration:none;font-size:.9rem;font-weight:bold;}
+.project img:hover{transform:scale(1.08);box-shadow:0 0 20px #39ff14;}
+.project a{
+  display:block;
+  margin-top:8px;
+  color:#39ff14;
+  text-decoration:none;
+  font-size:.85rem;
+  font-weight:bold;
+}
 .project a:hover{color:#00f7ff;}
 
 /* LIGHTBOX */
 .lightbox{
-  display:none;position:fixed;z-index:2000;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.9);align-items:center;justify-content:center;flex-direction:column;
+  display:none;
+  position:fixed;
+  z-index:2000;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.85);
+  align-items:center;justify-content:center;flex-direction:column;
+  backdrop-filter:blur(8px);
 }
 .lightbox-content{
-  background:rgba(15,15,15,0.9);
-  padding:20px 30px;border-radius:16px;
-  box-shadow:0 0 25px #39ff14;
-  max-width:450px;
+  background:rgba(20,20,20,0.9);
+  padding:20px 25px;
+  border-radius:14px;
+  box-shadow:0 0 20px #39ff14;
+  max-width:380px;
   text-align:center;
-  animation:fadeIn .4s ease;
+  animation:fadeZoom .35s ease;
 }
 .lightbox-content img{
-  width:100%;max-height:300px;object-fit:contain;
-  border:2px solid #39ff14;border-radius:10px;box-shadow:0 0 15px #39ff14;
+  width:100%;
+  max-height:240px;
+  object-fit:contain;
+  border:2px solid #39ff14;
+  border-radius:10px;
+  box-shadow:0 0 10px #39ff14;
 }
 .lightbox .caption{margin-top:10px;color:#39ff14;font-weight:bold;}
 .lightbox .view-btn{
   margin-top:10px;display:inline-block;
   background:#39ff14;color:#000;
-  padding:8px 20px;border-radius:25px;text-decoration:none;font-weight:bold;
+  padding:8px 18px;border-radius:25px;text-decoration:none;font-weight:bold;
   box-shadow:0 0 10px #39ff14;transition:.3s;
 }
 .lightbox .view-btn:hover{background:#00f7ff;box-shadow:0 0 20px #00f7ff;}
 .nav-btn{
   position:absolute;top:50%;transform:translateY(-50%);
-  font-size:2rem;color:#39ff14;cursor:pointer;user-select:none;
+  font-size:1.8rem;color:#39ff14;cursor:pointer;user-select:none;
   padding:10px;transition:.3s;
 }
 .nav-btn:hover{color:#00f7ff;}
 .prev{left:20px;} .next{right:20px;}
-@keyframes fadeIn{from{opacity:0;transform:scale(.8);}to{opacity:1;transform:scale(1);}}
+@keyframes fadeZoom{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+
+/* CONTACTO */
+.contact-links {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-items:center;
+  margin-top:20px;
+}
+.contact-links a{
+  text-decoration:none;
+  color:#39ff14;
+  font-size:1rem;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:.3s;
+}
+.contact-links a:hover{color:#00f7ff;}
+.contact-links img{
+  width:20px;
+  height:20px;
+  filter:drop-shadow(0 0 5px #39ff14);
+}
 
 /* FOOTER */
 footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777;margin-top:40px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav ul{
+    position:absolute;
+    top:60px;
+    right:0;
+    background:rgba(0,0,0,0.95);
+    flex-direction:column;
+    gap:20px;
+    width:200px;
+    padding:20px;
+    display:none;
+    border-left:2px solid #39ff14;
+    box-shadow:-2px 0 10px rgba(57,255,20,0.2);
+  }
+  nav ul.active{display:flex;}
+  .hamburger{display:flex;}
+  .examples{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;}
+  .project img{height:90px;}
+  .logo img{width:220px;}
+}
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav>
   <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <ul id="nav-links">
@@ -136,13 +224,16 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
   </ul>
 </nav>
 
+<!-- LOGO -->
 <div class="logo"><img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™"></div>
 
+<!-- QUIÉNES SOMOS -->
 <section id="quienes">
   <h2>¿Quiénes Somos?</h2>
   <p>En <b>Ciborg347™</b> transformamos ideas en experiencias digitales ⚡. Diseñamos <b>Landing Pages</b> potentes, rápidas y con estética única — creadas para captar, convencer y convertir 🚀.</p>
 </section>
 
+<!-- EJEMPLOS -->
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
 
@@ -165,18 +256,20 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
   </div>
 </section>
 
+<!-- PRESUPUESTO -->
 <section id="valores">
   <h2>Presupuesto Personalizado</h2>
   <p>💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también. No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.<br><br>🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.<br><br>💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.<br><br>⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.</p>
 </section>
 
+<!-- CONTACTO -->
 <section id="contacto">
   <h2>Contacto</h2>
   <p>📩 Pedí tu presupuesto personalizado hoy mismo</p>
   <div class="contact-links">
-    <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20mi%20presupuesto%20personalizado%20💻" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp: +54 11 6449-9481</a>
-    <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"> Email: ciborg347@gmail.com</a>
-    <a href="https://instagram.com/ciborg347" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram: @ciborg347</a>
+    <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20mi%20presupuesto%20personalizado%20💻" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a>
+    <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"> Email</a>
+    <a href="https://instagram.com/ciborg347" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram</a>
   </div>
 </section>
 
@@ -194,6 +287,9 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 </div>
 
 <script>
+const navMenu=document.getElementById("nav-links");
+function toggleMenu(){navMenu.classList.toggle("active");}
+
 const galleryItems=document.querySelectorAll(".gallery img");
 let currentIndex=0;
 galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
