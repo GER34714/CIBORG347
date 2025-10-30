@@ -63,9 +63,7 @@ nav ul li a:hover::after,
 nav ul li a.active::after {
   width: 100%;
 }
-nav ul li a:hover {
-  color: #00f7ff;
-}
+nav ul li a:hover { color: #00f7ff; }
 .hamburger {
   display: none;
   flex-direction: column;
@@ -89,9 +87,7 @@ nav ul li a:hover {
   animation: neonPulse 3s infinite alternate;
   transition: 0.3s;
 }
-.logo img:hover {
-  transform: scale(1.08);
-}
+.logo img:hover { transform: scale(1.08); }
 @keyframes neonPulse {
   0% { filter: drop-shadow(0 0 10px #39ff14); }
   25% { filter: drop-shadow(0 0 15px #00f7ff); }
@@ -101,11 +97,7 @@ nav ul li a:hover {
 }
 
 /* SECCIONES */
-section {
-  padding: 80px 20px;
-  max-width: 1100px;
-  margin: auto;
-}
+section { padding: 80px 20px; max-width: 1100px; margin: auto; }
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
@@ -113,20 +105,11 @@ h2 {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
-h3 {
-  color: #00f7ff;
-  margin-bottom: 15px;
-}
-p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ccc;
-}
+h3 { color: #00f7ff; margin-bottom: 15px; }
+p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
 /* LIKE BUTTON */
-.like-section {
-  margin-top: 30px;
-}
+.like-section { margin-top: 30px; }
 .like-btn {
   display: inline-flex;
   align-items: center;
@@ -203,6 +186,65 @@ p {
   font-weight: bold;
 }
 .project a:hover { color: #00f7ff; }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox-content {
+  background: rgba(15,15,15,0.9);
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px #39ff14;
+  max-width: 420px;
+  text-align: center;
+  animation: fadeIn .4s ease;
+}
+.lightbox-content img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border: 2px solid #39ff14;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #39ff14;
+}
+.lightbox .caption { margin-top: 10px; color: #39ff14; font-weight: bold; }
+.lightbox .view-btn {
+  margin-top: 10px;
+  display: inline-block;
+  background: #39ff14;
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 10px #39ff14;
+  transition: .3s;
+}
+.lightbox .view-btn:hover { background: #00f7ff; box-shadow: 0 0 20px #00f7ff; }
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #39ff14;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  transition: .3s;
+}
+.nav-btn:hover { color: #00f7ff; }
+.prev { left: 20px; }
+.next { right: 20px; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 
 /* CONTACTO */
 .contact-links {
@@ -299,34 +341,27 @@ footer {
 <section id="quienes">
   <h2>¿Quiénes Somos?</h2>
   <p>En <b>Ciborg347™</b> transformamos ideas en experiencias digitales ⚡. Diseñamos <b>Landing Pages</b> potentes, rápidas y con estética única — creadas para captar, convencer y convertir 🚀.</p>
-
-  <div class="like-section">
-    <button class="like-btn" id="likeButton">
-      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Me gusta">
-      <span id="likeCount">1.247</span> Me gusta
-    </button>
-  </div>
 </section>
 
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
 
   <h3>🎰 Casinos</h3>
-  <div class="examples">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
   </div>
 
   <h3>💈 Barberías</h3>
-  <div class="examples">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
   </div>
 
   <h3>💅 Estética & Uñas</h3>
-  <div class="examples">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
   </div>
 </section>
 
@@ -350,40 +385,43 @@ footer {
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span class="nav-btn prev" onclick="changeSlide(-1)">❮</span>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="">
+    <div class="caption" id="lightbox-title"></div>
+    <a id="lightbox-link" class="view-btn" href="#" target="_blank">Ver landing completa</a>
+  </div>
+  <span class="nav-btn next" onclick="changeSlide(1)">❯</span>
+</div>
+
 <script>
 const navMenu = document.getElementById("nav-links");
 const navLinks = navMenu.querySelectorAll("a");
+function toggleMenu() { navMenu.classList.toggle("active"); }
+navLinks.forEach(link => link.addEventListener("click", () => navMenu.classList.remove("active")));
 
-function toggleMenu() {
-  navMenu.classList.toggle("active");
+// ---- LIGHTBOX ----
+const galleryItems = document.querySelectorAll(".gallery img");
+let currentIndex = 0;
+galleryItems.forEach((img, i) => { img.addEventListener("click", () => openGallery(i)); });
+function openGallery(i) {
+  currentIndex = i;
+  const img = galleryItems[i];
+  document.getElementById("lightbox-img").src = img.src;
+  document.getElementById("lightbox-title").textContent = img.dataset.title;
+  const link = document.getElementById("lightbox-link");
+  link.href = img.dataset.link;
+  link.textContent = "Ver landing completa (" + img.dataset.title + ")";
+  document.getElementById("lightbox").style.display = "flex";
 }
-
-// ✅ Se cierra automáticamente al tocar una opción
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    navMenu.classList.remove("active");
-  });
-});
-
-// ---- SISTEMA DE ME GUSTA ----
-const likeCount = document.getElementById("likeCount");
-const storedLikes = localStorage.getItem("ciborgLikes");
-const storedDate = localStorage.getItem("ciborgLikesDate");
-let likes = storedLikes ? parseInt(storedLikes) : 1247;
-
-const today = new Date().toDateString();
-if (storedDate !== today) {
-  const dailyIncrease = Math.floor(Math.random() * 8) + 3;
-  likes += dailyIncrease;
-  localStorage.setItem("ciborgLikes", likes);
-  localStorage.setItem("ciborgLikesDate", today);
+function changeSlide(step) {
+  currentIndex = (currentIndex + step + galleryItems.length) % galleryItems.length;
+  openGallery(currentIndex);
 }
-likeCount.textContent = likes.toLocaleString("es-AR");
-
-document.getElementById("likeButton").addEventListener("click", () => {
-  likes++;
-  likeCount.textContent = likes.toLocaleString("es-AR");
-  localStorage.setItem("ciborgLikes", likes);
+document.getElementById("lightbox").addEventListener("click", (e) => {
+  if (e.target.id === "lightbox") document.getElementById("lightbox").style.display = "none";
 });
 </script>
 </body>
