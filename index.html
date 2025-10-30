@@ -93,21 +93,11 @@ nav ul li a:hover {
   transform: scale(1.08);
 }
 @keyframes neonPulse {
-  0% {
-    filter: drop-shadow(0 0 10px #39ff14);
-  }
-  25% {
-    filter: drop-shadow(0 0 15px #00f7ff);
-  }
-  50% {
-    filter: drop-shadow(0 0 15px #ff00ff);
-  }
-  75% {
-    filter: drop-shadow(0 0 15px #8a2be2);
-  }
-  100% {
-    filter: drop-shadow(0 0 10px #39ff14);
-  }
+  0% { filter: drop-shadow(0 0 10px #39ff14); }
+  25% { filter: drop-shadow(0 0 15px #00f7ff); }
+  50% { filter: drop-shadow(0 0 15px #ff00ff); }
+  75% { filter: drop-shadow(0 0 15px #8a2be2); }
+  100% { filter: drop-shadow(0 0 10px #39ff14); }
 }
 
 /* SECCIONES */
@@ -171,24 +161,22 @@ p {
   margin-top: 20px;
 }
 .project {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
+  box-shadow: 0 0 10px rgba(0,255,128,0.3);
   padding: 10px;
   transition: 0.3s;
   position: relative;
 }
-.project:hover {
-  transform: scale(1.05);
-}
+.project:hover { transform: scale(1.05); }
 .preview-label {
   position: absolute;
   top: -12px;
   left: 0;
   right: 0;
   font-size: 0.7rem;
-  color: rgba(57, 255, 20, 0.7);
-  text-shadow: 0 0 6px rgba(57, 255, 20, 0.6);
+  color: rgba(57,255,20,0.7);
+  text-shadow: 0 0 6px rgba(57,255,20,0.6);
   font-weight: bold;
   pointer-events: none;
 }
@@ -196,7 +184,7 @@ p {
   width: 100%;
   height: 110px;
   object-fit: contain;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   border-radius: 8px;
   border: 2px solid #39ff14;
   cursor: pointer;
@@ -214,9 +202,7 @@ p {
   font-size: 0.85rem;
   font-weight: bold;
 }
-.project a:hover {
-  color: #00f7ff;
-}
+.project a:hover { color: #00f7ff; }
 
 /* CONTACTO */
 .contact-links {
@@ -235,9 +221,7 @@ p {
   gap: 8px;
   transition: 0.3s;
 }
-.contact-links a:hover {
-  color: #00f7ff;
-}
+.contact-links a:hover { color: #00f7ff; }
 .contact-links img {
   width: 20px;
   height: 20px;
@@ -255,48 +239,44 @@ p {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0,255,0,0.5);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .whatsapp-float img:hover {
   transform: scale(1.12);
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+  box-shadow: 0 0 20px rgba(0,255,0,0.8);
 }
 
 /* FOOTER */
 footer {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255,255,255,0.05);
   padding: 20px;
   font-size: 0.9rem;
   color: #777;
   margin-top: 40px;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE MENU (IZQUIERDA) */
 @media (max-width: 768px) {
   nav ul {
     position: absolute;
     top: 60px;
-    right: 10px;
+    left: 10px;
     flex-direction: column;
     gap: 18px;
     display: none;
     width: 70%;
-    text-align: right;
+    text-align: left;
     background: transparent;
     padding: 20px 15px;
   }
-  nav ul.active {
-    display: flex;
-  }
+  nav ul.active { display: flex; }
   nav ul li a {
     color: #39ff14;
     font-size: 1rem;
     text-shadow: 0 0 8px #39ff14;
   }
-  .hamburger {
-    display: flex;
-  }
+  .hamburger { display: flex; }
 }
 </style>
 </head>
@@ -372,9 +352,18 @@ footer {
 
 <script>
 const navMenu = document.getElementById("nav-links");
+const navLinks = navMenu.querySelectorAll("a");
+
 function toggleMenu() {
   navMenu.classList.toggle("active");
 }
+
+// ✅ Se cierra automáticamente al tocar una opción
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+  });
+});
 
 // ---- SISTEMA DE ME GUSTA ----
 const likeCount = document.getElementById("likeCount");
