@@ -194,16 +194,21 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
     position:absolute;
     top:60px;
     right:0;
-    background:rgba(0,0,0,0.95);
     flex-direction:column;
     gap:20px;
-    width:200px;
-    padding:20px;
+    width:auto;
+    padding:10px 20px;
     display:none;
-    border-left:2px solid #39ff14;
-    box-shadow:-2px 0 10px rgba(57,255,20,0.2);
+    background:transparent; /* ✅ sin fondo */
+    backdrop-filter:blur(0px);
   }
-  nav ul.active{display:flex;}
+  nav ul.active{
+    display:flex;
+  }
+  nav ul li a{
+    color:#39ff14;
+    text-shadow:0 0 8px #39ff14;
+  }
   .hamburger{display:flex;}
   .examples{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;}
   .project img{height:90px;}
@@ -236,23 +241,11 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 <!-- EJEMPLOS -->
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
-
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
-  </div>
-
-  <h3>💈 Barberías</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
-  </div>
-
-  <h3>💅 Estética & Uñas</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
   </div>
 </section>
 
@@ -289,7 +282,6 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 <script>
 const navMenu=document.getElementById("nav-links");
 function toggleMenu(){navMenu.classList.toggle("active");}
-
 const galleryItems=document.querySelectorAll(".gallery img");
 let currentIndex=0;
 galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
