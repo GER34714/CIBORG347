@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciborg347™ | Landing Pages & Web Designs</title>
-
   <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png">
 
   <!-- META -->
@@ -24,6 +23,7 @@
       scroll-behavior: smooth;
     }
 
+    /* Navbar */
     nav {
       position: fixed;
       top: 0;
@@ -36,7 +36,6 @@
       z-index: 1000;
       backdrop-filter: blur(6px);
     }
-
     nav ul {
       list-style: none;
       display: flex;
@@ -44,7 +43,6 @@
       margin: 0;
       padding: 0;
     }
-
     nav ul li a {
       position: relative;
       text-decoration: none;
@@ -53,7 +51,6 @@
       font-size: 1.1rem;
       transition: color 0.3s;
     }
-
     nav ul li a::after {
       content: "";
       position: absolute;
@@ -64,7 +61,6 @@
       background: #39ff14;
       transition: width 0.3s ease;
     }
-
     nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
     nav ul li a:hover { color: #00f7ff; }
 
@@ -117,7 +113,7 @@
     h3 { color: #00f7ff; margin-bottom: 15px; }
     p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
-    /* GALERÍA */
+    /* Galería */
     .examples {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -128,22 +124,26 @@
     .project {
       background: rgba(255,255,255,0.05);
       border-radius: 10px;
-      overflow: hidden;
       transition: transform 0.3s;
       box-shadow: 0 0 10px rgba(0,255,128,0.3);
       padding: 10px;
     }
-
     .project:hover { transform: scale(1.05); }
 
     .project img {
-      width: 90px;
+      width: 100%;
       height: 90px;
-      object-fit: cover;
+      object-fit: contain;
+      background: rgba(0,0,0,0.6);
       border-radius: 8px;
       border: 2px solid #39ff14;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
-
+    .project img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #39ff14;
+    }
     .project a {
       display: block;
       margin-top: 8px;
@@ -155,7 +155,6 @@
     }
     .project a:hover { color: #00f7ff; }
 
-    /* BOTÓN VER MÁS */
     .more-btn {
       display: inline-block;
       margin-top: 25px;
@@ -164,12 +163,10 @@
       border-radius: 30px;
       color: #39ff14;
       font-weight: bold;
-      letter-spacing: 1px;
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 10px rgba(57,255,20,0.4);
     }
-
     .more-btn:hover {
       background: #39ff14;
       color: #000;
@@ -177,7 +174,33 @@
       transform: scale(1.05);
     }
 
-    /* CONTACTO */
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border: 3px solid #39ff14;
+      border-radius: 12px;
+      box-shadow: 0 0 25px #39ff14;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Contacto */
     .contact-links {
       display: flex;
       flex-direction: column;
@@ -246,7 +269,7 @@
     <ul id="nav-links">
       <li><a href="#quienes" class="active">Quiénes Somos</a></li>
       <li><a href="#ejemplos">Ejemplos</a></li>
-      <li><a href="#valores">Por Qué Elegirnos</a></li>
+      <li><a href="#valores">Presupuesto</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
@@ -272,49 +295,65 @@
 
     <h3>🎰 Casinos</h3>
     <div class="examples">
-      <div class="project"><img src="https://iili.io/KPygQXS.jpg"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
-      <div class="project"><img src="https://iili.io/KPyrMj2.jpg"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
-      <div class="project"><img src="https://iili.io/KPyDVHP.jpg"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
+      <div class="project">
+        <img src="https://iili.io/KPygQXS.jpg" alt="Facu Casino" onclick="openLightbox(this.src)">
+        <a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a>
+      </div>
+      <div class="project">
+        <img src="https://iili.io/KPyrMj2.jpg" alt="Dragon Casino" onclick="openLightbox(this.src)">
+        <a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a>
+      </div>
+      <div class="project">
+        <img src="https://iili.io/KPyDVHP.jpg" alt="Dynasty Bet" onclick="openLightbox(this.src)">
+        <a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a>
+      </div>
     </div>
     <a href="#" class="more-btn">Ver más ejemplos 🎲</a>
 
     <h3>💈 Barberías</h3>
     <div class="examples">
-      <div class="project"><img src="https://iili.io/KPyvEcx.jpg"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-      <div class="project"><img src="https://iili.io/KPyUCn1.jpg"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
+      <div class="project">
+        <img src="https://iili.io/KPyvEcx.jpg" alt="Barber 99" onclick="openLightbox(this.src)">
+        <a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a>
+      </div>
+      <div class="project">
+        <img src="https://iili.io/KPyUCn1.jpg" alt="Barber Shop Rodri" onclick="openLightbox(this.src)">
+        <a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a>
+      </div>
     </div>
     <a href="#" class="more-btn">Ver más barberías 💈</a>
 
     <h3>💅 Estética & Uñas</h3>
     <div class="examples">
-      <div class="project"><img src="https://iili.io/KPyCnHu.jpg"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
+      <div class="project">
+        <img src="https://iili.io/KPyCnHu.jpg" alt="Adda Nails" onclick="openLightbox(this.src)">
+        <a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a>
+      </div>
     </div>
     <a href="#" class="more-btn">Ver más estilos 💅</a>
   </section>
 
-  <!-- POR QUÉ ELEGIRNOS -->
+  <!-- PRESUPUESTO -->
   <section id="valores">
-    <h2>Por Qué Elegirnos</h2>
+    <h2>Presupuesto Personalizado</h2>
     <p>
-      💡 En <b>Ciborg347™</b> no vendemos solo páginas: creamos presencia digital.  
-      Cada proyecto tiene su identidad, pensada para destacar y generar resultados.  
-      Optimizamos rendimiento, velocidad y estética — para que tu marca brille día y noche.  
+      💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también.  
+      No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.  
       <br><br>
-      🚀 Diseño moderno, responsive y con esencia real.  
-      🔗 Integraciones inteligentes (WhatsApp, redes, formularios).  
-      ⚙️ Hosting y soporte incluidos.  
+      🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.  
       <br><br>
-      <b>Tu marca merece una web que venda y represente lo que sos.</b>  
-      Contactanos y hacé despegar tu presencia online hoy mismo. 💥
+      💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.  
+      <br><br>
+      ⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.
     </p>
   </section>
 
   <!-- CONTACTO -->
   <section id="contacto">
     <h2>Contacto</h2>
-    <p>📩 Hablemos sobre tu próxima Landing Page</p>
+    <p>📩 Pedí tu presupuesto personalizado hoy mismo</p>
     <div class="contact-links">
-      <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20info%20sobre%20sus%20Landing%20Pages%20💻" target="_blank">
+      <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20mi%20presupuesto%20personalizado%20💻" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp: +54 11 6449-9481
       </a>
       <a href="mailto:ciborg347@gmail.com">
@@ -327,11 +366,16 @@
   </section>
 
   <!-- WhatsApp flotante -->
-  <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Estoy%20interesado%20en%20una%20Landing%20Page%20🚀" class="whatsapp-float" target="_blank">
+  <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20mi%20presupuesto%20personalizado%20🚀" class="whatsapp-float" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
   </a>
 
   <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Vista previa">
+  </div>
 
   <script>
     const sections = document.querySelectorAll("section");
@@ -352,6 +396,18 @@
 
     function toggleMenu() {
       navMenu.classList.toggle("active");
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      const lightbox = document.getElementById("lightbox");
+      const img = document.getElementById("lightbox-img");
+      img.src = src;
+      lightbox.style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
     }
   </script>
 </body>
