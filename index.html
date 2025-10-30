@@ -39,19 +39,8 @@ nav ul li a::after{
 }
 nav ul li a:hover::after,nav ul li a.active::after{width:100%;}
 nav ul li a:hover{color:#00f7ff;}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background: #39ff14;
-  transition: 0.3s;
-}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;}
+.hamburger div{width:25px;height:3px;background:#39ff14;transition:.3s;}
 
 /* LOGO */
 .logo{margin:120px 0 50px;}
@@ -193,21 +182,20 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
   nav ul{
     position:absolute;
     top:60px;
-    right:0;
+    right:10px;
     flex-direction:column;
     gap:20px;
-    width:auto;
-    padding:10px 20px;
     display:none;
-    background:transparent; /* ✅ sin fondo */
-    backdrop-filter:blur(0px);
+    background:transparent; /* ✅ SIN fondo */
+    backdrop-filter:none;
   }
-  nav ul.active{
-    display:flex;
-  }
+  nav ul.active{display:flex;}
   nav ul li a{
     color:#39ff14;
     text-shadow:0 0 8px #39ff14;
+    background:rgba(0,0,0,0.25);
+    padding:5px 12px;
+    border-radius:8px;
   }
   .hamburger{display:flex;}
   .examples{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:15px;}
@@ -218,7 +206,6 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav>
   <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <ul id="nav-links">
@@ -229,33 +216,45 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
   </ul>
 </nav>
 
-<!-- LOGO -->
 <div class="logo"><img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™"></div>
 
-<!-- QUIÉNES SOMOS -->
 <section id="quienes">
   <h2>¿Quiénes Somos?</h2>
   <p>En <b>Ciborg347™</b> transformamos ideas en experiencias digitales ⚡. Diseñamos <b>Landing Pages</b> potentes, rápidas y con estética única — creadas para captar, convencer y convertir 🚀.</p>
 </section>
 
-<!-- EJEMPLOS -->
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
+
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
   </div>
+
+  <h3>💈 Barberías</h3>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
+  </div>
+
+  <h3>💅 Estética & Uñas</h3>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
+  </div>
+
+  <h3>🛍️ Tiendas & Catálogos</h3>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KUX7UEQ.jpg" data-link="https://tienda-demo.onrender.com/" data-title="Tienda Demo"><a href="https://tienda-demo.onrender.com/" target="_blank">Tienda Demo</a></div>
+  </div>
 </section>
 
-<!-- PRESUPUESTO -->
 <section id="valores">
   <h2>Presupuesto Personalizado</h2>
   <p>💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también. No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.<br><br>🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.<br><br>💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.<br><br>⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.</p>
 </section>
 
-<!-- CONTACTO -->
 <section id="contacto">
   <h2>Contacto</h2>
   <p>📩 Pedí tu presupuesto personalizado hoy mismo</p>
@@ -268,7 +267,6 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
 
-<!-- LIGHTBOX -->
 <div id="lightbox" class="lightbox">
   <span class="nav-btn prev" onclick="changeSlide(-1)">❮</span>
   <div class="lightbox-content">
@@ -282,6 +280,7 @@ footer{background:rgba(255,255,255,0.05);padding:20px;font-size:.9rem;color:#777
 <script>
 const navMenu=document.getElementById("nav-links");
 function toggleMenu(){navMenu.classList.toggle("active");}
+
 const galleryItems=document.querySelectorAll(".gallery img");
 let currentIndex=0;
 galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
