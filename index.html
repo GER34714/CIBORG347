@@ -1,45 +1,340 @@
-<!-- 🔥 Testimonios Flotantes -->
-<div class="testimonios-flotantes">
-  <div class="burbuja">⭐ “Excelente diseño, me trajo muchos clientes nuevos!” — <b>Facu Casino™</b></div>
-  <div class="burbuja">💈 “La gente entra, ve los cortes y pide turno al toque!” — <b>Barber 99</b></div>
-  <div class="burbuja">💅 “Mis clientas aman cómo se ve la página 💖” — <b>Adda Nails</b></div>
-  <div class="burbuja">🎰 “Rápida, atractiva y sin fallas. Ciborg347 la rompió 🔥” — <b>Dragon Casino™</b></div>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ciborg347™ | Landing Pages & Web Designs</title>
 
-<style>
-.testimonios-flotantes {
-  position: fixed;
-  bottom: 10%;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-  z-index: 100;
-}
+  <link rel="icon" type="image/png" href="https://iili.io/KHOiff9.md.png">
 
-.burbuja {
-  position: absolute;
-  background: rgba(0, 255, 128, 0.12);
-  border: 1px solid rgba(0, 255, 128, 0.4);
-  border-radius: 20px;
-  padding: 8px 16px;
-  color: #fff;
-  font-size: 0.9rem;
-  animation: flotar 12s linear infinite;
-  white-space: nowrap;
-  text-shadow: 0 0 6px #00ff88;
-  backdrop-filter: blur(4px);
-}
+  <meta property="og:title" content="Ciborg347™ | Landing Pages & Web Designs">
+  <meta property="og:description" content="Landing Pages que venden. Diseño moderno, responsive y con impacto. 🚀">
+  <meta property="og:image" content="https://iili.io/KHOiff9.md.png">
+  <meta property="og:type" content="website">
 
-@keyframes flotar {
-  0% { transform: translateX(-100%) translateY(0); opacity: 0; }
-  10% { opacity: 1; }
-  50% { transform: translateX(100vw) translateY(-30px); opacity: 1; }
-  90% { opacity: 0.7; }
-  100% { transform: translateX(110vw) translateY(-50px); opacity: 0; }
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      text-align: center;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
-.burbuja:nth-child(1) { top: 20%; animation-delay: 0s; }
-.burbuja:nth-child(2) { top: 40%; animation-delay: 4s; }
-.burbuja:nth-child(3) { top: 60%; animation-delay: 8s; }
-.burbuja:nth-child(4) { top: 80%; animation-delay: 12s; }
-</style>
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 50px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      position: relative;
+      text-decoration: none;
+      color: #39ff14;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: #39ff14;
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after { width: 100%; }
+    nav ul li a:hover { color: #00f7ff; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger div { width: 25px; height: 3px; background: #39ff14; }
+
+    .logo { margin: 120px 0 50px; }
+    .logo img {
+      width: 260px;
+      filter: drop-shadow(0 0 15px #39ff14);
+      animation: neonPulse 3s infinite alternate;
+      transition: transform 0.3s;
+    }
+    .logo img:hover { transform: scale(1.08); }
+
+    @keyframes neonPulse {
+      0% { filter: drop-shadow(0 0 10px #39ff14); }
+      50% { filter: drop-shadow(0 0 20px #00f7ff); }
+      100% { filter: drop-shadow(0 0 10px #39ff14); }
+    }
+
+    section {
+      padding: 90px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+      color: #39ff14;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: underline;
+      animation: neonPulse 2.5s infinite alternate;
+    }
+
+    h3 { color: #00f7ff; margin: 40px 0 15px; text-decoration: underline; }
+    p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+
+    /* PLANES PERSONALIZADOS */
+    .planes {
+      background: rgba(255,255,255,0.03);
+      padding: 60px 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,255,128,0.15);
+      margin-top: 40px;
+    }
+
+    .planes h3 {
+      color: #00f7ff;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .planes p {
+      color: #ccc;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto 20px;
+    }
+
+    .planes a {
+      display: inline-block;
+      background: linear-gradient(90deg, #39ff14, #00f7ff);
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.3s;
+      box-shadow: 0 0 15px rgba(0,255,128,0.5);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(0,255,128,0.4); transform: scale(1); }
+      100% { box-shadow: 0 0 25px rgba(0,255,255,0.9); transform: scale(1.05); }
+    }
+
+    .planes a:hover { transform: scale(1.08); }
+
+    /* Sección Me gusta */
+    .like-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .like-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,255,128,0.15);
+      border: 1px solid rgba(0,255,128,0.3);
+      color: #39ff14;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,255,128,0.2);
+    }
+
+    .like-button:hover {
+      background: rgba(0,255,128,0.3);
+      transform: scale(1.05);
+    }
+
+    .like-count {
+      font-size: 1rem;
+      color: #00f7ff;
+    }
+
+    .like-text {
+      color: #00f7ff;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      animation: fadeIn 3s ease infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .testimonios-flotantes {
+      position: fixed;
+      bottom: 10%;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 500;
+    }
+
+    .burbuja {
+      position: absolute;
+      background: rgba(0, 255, 128, 0.1);
+      border: 1px solid rgba(0, 255, 128, 0.3);
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: #fff;
+      font-size: 0.9rem;
+      animation: flotar 14s linear infinite;
+      white-space: nowrap;
+      text-shadow: 0 0 6px #00ff88;
+      backdrop-filter: blur(4px);
+    }
+
+    @keyframes flotar {
+      0% { transform: translateX(-100%) translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      50% { transform: translateX(100vw) translateY(-20px); opacity: 1; }
+      90% { opacity: 0.7; }
+      100% { transform: translateX(110vw) translateY(-40px); opacity: 0; }
+    }
+
+    footer {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div><div></div><div></div>
+    </div>
+    <ul id="nav-links">
+      <li><a href="#quienes" class="active">Quiénes Somos</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="logo">
+    <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
+  </div>
+
+  <section id="quienes">
+    <h2>¿Quiénes Somos?</h2>
+    <p>
+      En <b>Ciborg347™</b> creamos <b>Landing Pages que venden</b>.  
+      Sitios rápidos, atractivos y con impacto real.  
+      Cada proyecto se adapta a tu marca con un diseño único y profesional.
+    </p>
+  </section>
+
+  <section id="planes">
+    <div class="planes">
+      <h3>⚙️ Planes Personalizados</h3>
+      <p>Sabemos que cada marca tiene su propio estilo y objetivos.  
+      Por eso armamos cada landing de forma personalizada, según tu presupuesto, rubro y público.  
+      Escribinos y te pasamos una propuesta a medida, sin compromiso. 💬</p>
+      <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Quiero%20info%20sobre%20una%20Landing%20Page%20personalizada%20🚀" target="_blank">💬 Pedir presupuesto personalizado</a>
+    </div>
+
+    <div class="like-section">
+      <div class="like-button" onclick="sumarLike()">
+        👍 <span>Me gusta</span>
+        <span class="like-count" id="likeCount">1247</span>
+      </div>
+      <div class="like-text" id="likeText">💚 Ya nos eligieron <b>1.247 personas</b> para crear sus landings</div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>📲 ¿Querés tu propia Landing Page?  
+    Escribinos y arrancá hoy mismo a vender con estilo digital.</p>
+    <a href="https://wa.me/541164499481?text=Hola%20Ciborg347!%20Estoy%20interesado%20en%20una%20Landing%20Page%20💻" target="_blank" class="planes a">💬 Contactar ahora</a>
+  </section>
+
+  <div class="testimonios-flotantes"></div>
+
+  <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
+
+  <script>
+    const contenedor = document.querySelector('.testimonios-flotantes');
+    const testimonios = [
+      "⭐ “Excelente diseño, me trajo muchos clientes nuevos!” — Facu Casino™",
+      "💈 “La gente entra, ve los cortes y pide turno al toque!” — Barber 99",
+      "💅 “Mis clientas aman cómo se ve la página 💖” — Adda Nails",
+      "🎰 “Rápida, atractiva y sin fallas. Ciborg347 la rompió 🔥” — Dragon Casino™",
+      "👑 “Diseño profesional y soporte 24hs. Recomendadísimo!” — Dinasty Bet™",
+      "🚀 “Vendí más en una semana que en un mes gracias a la landing!” — Barber Shop Rodri"
+    ];
+    function crearBurbuja() {
+      const div = document.createElement('div');
+      div.className = 'burbuja';
+      div.style.top = Math.random() * 80 + '%';
+      div.style.animationDuration = 12 + Math.random() * 6 + 's';
+      div.innerText = testimonios[Math.floor(Math.random() * testimonios.length)];
+      contenedor.appendChild(div);
+      setTimeout(() => div.remove(), 16000);
+    }
+    setInterval(crearBurbuja, 4000);
+
+    // ❤️ Botón Me gusta con crecimiento y texto dinámico
+    let likes = localStorage.getItem('likes') ? parseInt(localStorage.getItem('likes')) : 1247;
+    const likeCount = document.getElementById('likeCount');
+    const likeText = document.getElementById('likeText');
+    likeCount.textContent = likes;
+    likeText.innerHTML = `💚 Ya nos eligieron <b>${likes.toLocaleString('es-AR')}</b> personas para crear sus landings`;
+
+    function sumarLike() {
+      if (!localStorage.getItem('liked')) {
+        likes++;
+        localStorage.setItem('likes', likes);
+        localStorage.setItem('liked', 'true');
+        actualizarLikes();
+      } else {
+        alert('¡Ya diste tu me gusta! 💚');
+      }
+    }
+
+    function actualizarLikes() {
+      likeCount.textContent = likes;
+      likeText.innerHTML = `💚 Ya nos eligieron <b>${likes.toLocaleString('es-AR')}</b> personas para crear sus landings`;
+    }
+
+    // Crecimiento automático cada 12 horas
+    setInterval(() => {
+      likes++;
+      localStorage.setItem('likes', likes);
+      actualizarLikes();
+    }, 1000 * 60 * 60 * 12);
+  </script>
+</body>
+</html>
