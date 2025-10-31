@@ -108,34 +108,6 @@ h2 {
 h3 { color: #00f7ff; margin-bottom: 15px; }
 p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
-/* LIKE BUTTON */
-.like-section { margin-top: 30px; }
-.like-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(57, 255, 20, 0.1);
-  border: 2px solid #39ff14;
-  border-radius: 30px;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: #39ff14;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
-}
-.like-btn:hover {
-  background: #39ff14;
-  color: #000;
-  box-shadow: 0 0 20px #39ff14;
-  transform: scale(1.05);
-}
-.like-btn img {
-  width: 22px;
-  height: 22px;
-  filter: drop-shadow(0 0 4px #39ff14);
-}
-
 /* GALERÍA */
 .examples {
   display: grid;
@@ -187,87 +159,30 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 }
 .project a:hover { color: #00f7ff; }
 
-/* LIGHTBOX */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.lightbox-content {
-  background: rgba(15,15,15,0.9);
-  padding: 20px 30px;
-  border-radius: 16px;
-  box-shadow: 0 0 25px #39ff14;
-  max-width: 420px;
-  text-align: center;
-  animation: fadeIn .4s ease;
-}
-.lightbox-content img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border: 2px solid #39ff14;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #39ff14;
-}
-.lightbox .caption { margin-top: 10px; color: #39ff14; font-weight: bold; }
-.lightbox .view-btn {
-  margin-top: 10px;
-  display: inline-block;
-  background: #39ff14;
-  color: #000;
-  padding: 8px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 0 10px #39ff14;
-  transition: .3s;
-}
-.lightbox .view-btn:hover { background: #00f7ff; box-shadow: 0 0 20px #00f7ff; }
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: #39ff14;
-  cursor: pointer;
-  user-select: none;
-  padding: 10px;
-  transition: .3s;
-}
-.nav-btn:hover { color: #00f7ff; }
-.prev { left: 20px; }
-.next { right: 20px; }
-@keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
-
 /* CONTACTO */
 .contact-links {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 .contact-links a {
   text-decoration: none;
   color: #39ff14;
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   transition: 0.3s;
+  font-weight: bold;
 }
-.contact-links a:hover { color: #00f7ff; }
+.contact-links a:hover { color: #00f7ff; transform: scale(1.05); }
 .contact-links img {
-  width: 20px;
-  height: 20px;
-  filter: drop-shadow(0 0 5px #39ff14);
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 6px #39ff14);
+  transition: 0.3s;
 }
 
 /* WHATSAPP FLOTANTE */
@@ -297,29 +212,6 @@ footer {
   color: #777;
   margin-top: 40px;
 }
-
-/* RESPONSIVE MENU */
-@media (max-width: 768px) {
-  nav ul {
-    position: absolute;
-    top: 60px;
-    left: 10px;
-    flex-direction: column;
-    gap: 18px;
-    display: none;
-    width: 70%;
-    text-align: left;
-    background: transparent;
-    padding: 20px 15px;
-  }
-  nav ul.active { display: flex; }
-  nav ul li a {
-    color: #39ff14;
-    font-size: 1rem;
-    text-shadow: 0 0 8px #39ff14;
-  }
-  .hamburger { display: flex; }
-}
 </style>
 </head>
 <body>
@@ -345,43 +237,29 @@ footer {
 
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
-
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
-
-    <!-- 🔥 NUEVAS LANDINGS AGREGADAS -->
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KigNdVS.jpg" data-link="https://giraygana-fortunaplay.onrender.com/" data-title="Gira y Gana™"><a href="https://giraygana-fortunaplay.onrender.com/" target="_blank">Gira y Gana™</a></div>
-
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/Kigv3Ij.jpg" data-link="https://ganamostodosjuntos.onrender.com/" data-title="Fortuna Play™"><a href="https://ganamostodosjuntos.onrender.com/" target="_blank">Fortuna Play™</a></div>
-
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KiggTcN.jpg" data-link="https://lions-casino.onrender.com/" data-title="Lions Casino™"><a href="https://lions-casino.onrender.com/" target="_blank">Lions Casino™</a></div>
-  </div>
-
-  <h3>💈 Barberías</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
-  </div>
-
-  <h3>💅 Estética & Uñas</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
   </div>
 </section>
 
 <section id="valores">
   <h2>Presupuesto Personalizado</h2>
-  <p>💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también. No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.<br><br>🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.<br><br>💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.<br><br>⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.</p>
+  <p>💼 En <b>Ciborg347™</b> cada cliente es único. Creamos tu web a medida, pensada según tu negocio, tu estilo y tu público. 🚀</p>
 </section>
 
+<!-- ✅ CONTACTO CON MENSAJES AUTOMÁTICOS -->
 <section id="contacto">
   <h2>Contacto</h2>
   <div class="contact-links">
-    <a href="https://wa.me/541164499481" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a>
-    <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"> Email</a>
+    <a href="https://wa.me/541164499481?text=¡Hola!%20Vi%20tu%20web%20Ciborg347™%20y%20quiero%20una%20landing%20personalizada%20💻🚀" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp"> WhatsApp
+    </a>
+    <a href="mailto:ciborg347@gmail.com?subject=Consulta%20Landing%20Page%20Ciborg347™&body=Hola!%20Vi%20tu%20web%20Ciborg347™%20y%20me%20gustaría%20una%20landing%20personalizada.%20Contame%20más%20detalles%20🚀">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"> Email
+    </a>
   </div>
 </section>
 
@@ -391,44 +269,9 @@ footer {
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
 
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox">
-  <span class="nav-btn prev" onclick="changeSlide(-1)">❮</span>
-  <div class="lightbox-content">
-    <img id="lightbox-img" src="">
-    <div class="caption" id="lightbox-title"></div>
-    <a id="lightbox-link" class="view-btn" href="#" target="_blank">Ver landing completa</a>
-  </div>
-  <span class="nav-btn next" onclick="changeSlide(1)">❯</span>
-</div>
-
 <script>
 const navMenu = document.getElementById("nav-links");
-const navLinks = navMenu.querySelectorAll("a");
 function toggleMenu() { navMenu.classList.toggle("active"); }
-navLinks.forEach(link => link.addEventListener("click", () => navMenu.classList.remove("active")));
-
-// ---- LIGHTBOX ----
-const galleryItems = document.querySelectorAll(".gallery img");
-let currentIndex = 0;
-galleryItems.forEach((img, i) => { img.addEventListener("click", () => openGallery(i)); });
-function openGallery(i) {
-  currentIndex = i;
-  const img = galleryItems[i];
-  document.getElementById("lightbox-img").src = img.src;
-  document.getElementById("lightbox-title").textContent = img.dataset.title;
-  const link = document.getElementById("lightbox-link");
-  link.href = img.dataset.link;
-  link.textContent = "Ver landing completa (" + img.dataset.title + ")";
-  document.getElementById("lightbox").style.display = "flex";
-}
-function changeSlide(step) {
-  currentIndex = (currentIndex + step + galleryItems.length) % galleryItems.length;
-  openGallery(currentIndex);
-}
-document.getElementById("lightbox").addEventListener("click", (e) => {
-  if (e.target.id === "lightbox") document.getElementById("lightbox").style.display = "none";
-});
 </script>
 </body>
 </html>
