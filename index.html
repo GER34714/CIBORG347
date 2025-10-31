@@ -15,7 +15,7 @@
 body {
   margin: 0;
   font-family: 'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
-  background: linear-gradient(135deg, #020202, #0a0a1a, #050505);
+  background: linear-gradient(135deg, #050505, #0a0a1a, #101020);
   background-size: 400% 400%;
   animation: bgMove 12s ease infinite;
   color: #00eaff;
@@ -33,7 +33,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,13 +70,13 @@ nav ul li a:hover::after,
 nav ul li a.active::after { width: 100%; }
 nav ul li a:hover { color: #ffd700; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.hamburger div { width: 25px; height: 3px; background: #00eaff; transition: 0.3s; }
+.hamburger div { width: 25px; height: 3px; background: #ff00ff; transition: 0.3s; }
 
 /* LOGO */
 .logo { margin: 120px 0 50px; }
 .logo img {
   width: 260px;
-  filter: drop-shadow(0 0 15px #00eaff);
+  filter: drop-shadow(0 0 15px #ff00ff);
   animation: neonCycle 4s infinite alternate;
 }
 @keyframes neonCycle {
@@ -93,36 +93,14 @@ h2 {
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700, #00ff99);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: hueFlow 6s linear infinite;
 }
 @keyframes hueFlow { 0% { filter: hue-rotate(0deg);} 100% { filter: hue-rotate(360deg);} }
-h3 { color: #00eaff; margin-bottom: 15px; }
-p { font-size: 1.1rem; line-height: 1.6; color: #cceeff; }
-
-/* BOTON LIKE */
-.like-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(0,234,255,0.1);
-  border: 2px solid #00eaff;
-  border-radius: 30px;
-  padding: 10px 20px;
-  cursor: pointer;
-  color: #00eaff;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 0 12px rgba(0,234,255,0.3);
-}
-.like-btn:hover {
-  background: linear-gradient(90deg,#00eaff,#ff00ff,#ffd700);
-  color: #000;
-  box-shadow: 0 0 25px #00eaff;
-  transform: scale(1.05);
-}
+h3 { color: #ffd700; margin-bottom: 15px; }
+p { font-size: 1.1rem; line-height: 1.6; color: #d2e8ff; }
 
 /* GALERÍA */
 .examples {
@@ -133,26 +111,38 @@ p { font-size: 1.1rem; line-height: 1.6; color: #cceeff; }
 }
 .project {
   background: rgba(255,255,255,0.05);
-  border: 2px solid #00eaff;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff00ff, #00eaff, #ffd700, #00ff99) 1;
   border-radius: 10px;
-  box-shadow: 0 0 12px rgba(0,234,255,0.3);
+  box-shadow: 0 0 15px rgba(255,255,255,0.05);
   transition: 0.3s;
   position: relative;
 }
-.project:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,215,0,0.6); }
+.project:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255,215,0,0.4);
+}
 .preview-label {
   position: absolute;
   top: -12px; left: 0; right: 0;
   font-size: 0.7rem;
-  color: #00eaff;
-  text-shadow: 0 0 6px #00eaff;
+  background: linear-gradient(90deg, #ff00ff, #ffd700, #00eaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: bold;
 }
 .project img {
   width: 100%; height: 110px; object-fit: contain;
   border-radius: 8px;
-  border: 2px solid #00eaff;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ffd700, #ff00ff, #00ff99) 1;
   background: rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.project img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255,215,0,0.4);
 }
 .project a {
   display: block; margin-top: 8px;
@@ -161,6 +151,73 @@ p { font-size: 1.1rem; line-height: 1.6; color: #cceeff; }
   font-weight: bold;
 }
 .project a:hover { color: #ffd700; }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.lightbox-content {
+  background: rgba(20,20,25,0.95);
+  padding: 20px 30px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff00ff, #00eaff, #ffd700) 1;
+  box-shadow: 0 0 25px rgba(255,255,255,0.2);
+  max-width: 420px;
+  text-align: center;
+  animation: fadeIn .4s ease;
+}
+.lightbox-content img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #00eaff, #ff00ff, #ffd700) 1;
+}
+.lightbox .caption {
+  margin-top: 10px;
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+.lightbox .view-btn {
+  margin-top: 10px;
+  display: inline-block;
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  transition: .3s;
+}
+.lightbox .view-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,255,255,0.4); }
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #ffd700;
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+  transition: .3s;
+}
+.nav-btn:hover { color: #00eaff; }
+.prev { left: 20px; }
+.next { right: 20px; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 
 /* CONTACTO */
 .contact-links {
@@ -173,18 +230,18 @@ p { font-size: 1.1rem; line-height: 1.6; color: #cceeff; }
   transition: 0.3s;
 }
 .contact-links a:hover { color: #ffd700; }
-.contact-links img { width: 20px; height: 20px; filter: drop-shadow(0 0 5px #00eaff); }
+.contact-links img { width: 20px; height: 20px; filter: drop-shadow(0 0 5px #ff00ff); }
 
 /* WHATSAPP */
 .whatsapp-float { position: fixed; bottom: 60px; right: 22px; z-index: 999; }
 .whatsapp-float img {
   width: 64px; height: 64px; border-radius: 50%;
-  box-shadow: 0 0 10px #00eaff;
+  box-shadow: 0 0 10px rgba(255,215,0,0.4);
   transition: 0.3s;
 }
 .whatsapp-float img:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 20px #ffd700;
+  box-shadow: 0 0 25px rgba(255,215,0,0.8);
 }
 
 /* FOOTER */
@@ -234,20 +291,20 @@ footer {
 
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
   </div>
 
   <h3>💈 Barberías</h3>
   <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
   </div>
 
   <h3>💅 Estética & Uñas</h3>
   <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
   </div>
 </section>
 
@@ -271,10 +328,42 @@ footer {
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span class="nav-btn prev" onclick="changeSlide(-1)">❮</span>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="">
+    <div class="caption" id="lightbox-title"></div>
+    <a id="lightbox-link" class="view-btn" href="#" target="_blank">Ver landing completa</a>
+  </div>
+  <span class="nav-btn next" onclick="changeSlide(1)">❯</span>
+</div>
+
 <script>
 const navMenu=document.getElementById("nav-links");
 function toggleMenu(){navMenu.classList.toggle("active");}
 navMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("active")));
+
+const galleryItems=document.querySelectorAll(".gallery img");
+let currentIndex=0;
+galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
+function openGallery(i){
+  currentIndex=i;
+  const img=galleryItems[i];
+  document.getElementById("lightbox-img").src=img.src;
+  document.getElementById("lightbox-title").textContent=img.dataset.title;
+  const link=document.getElementById("lightbox-link");
+  link.href=img.dataset.link;
+  link.textContent="Ver landing completa ("+img.dataset.title+")";
+  document.getElementById("lightbox").style.display="flex";
+}
+function changeSlide(step){
+  currentIndex=(currentIndex+step+galleryItems.length)%galleryItems.length;
+  openGallery(currentIndex);
+}
+document.getElementById("lightbox").addEventListener("click",(e)=>{
+  if(e.target.id==="lightbox")document.getElementById("lightbox").style.display="none";
+});
 </script>
 </body>
 </html>
