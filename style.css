@@ -29,6 +29,7 @@ nav ul {
   margin: 0;
   padding: 0;
 }
+
 nav ul li a {
   text-decoration: none;
   color: #39ff14;
@@ -37,6 +38,7 @@ nav ul li a {
   position: relative;
   transition: color 0.3s;
 }
+
 nav ul li a::after {
   content: "";
   position: absolute;
@@ -47,8 +49,10 @@ nav ul li a::after {
   background: #39ff14;
   transition: width 0.3s;
 }
+
 nav ul li a:hover::after,
 nav ul li a.active::after { width: 100%; }
+
 nav ul li a:hover { color: #00f7ff; }
 
 .hamburger {
@@ -57,6 +61,7 @@ nav ul li a:hover { color: #00f7ff; }
   cursor: pointer;
   gap: 5px;
 }
+
 .hamburger div {
   width: 25px;
   height: 3px;
@@ -68,12 +73,14 @@ nav ul li a:hover { color: #00f7ff; }
 .logo {
   margin: 120px 0 50px;
 }
+
 .logo img {
   width: 260px;
   filter: drop-shadow(0 0 15px #39ff14);
   animation: neonPulse 3s infinite alternate;
   transition: 0.3s;
 }
+
 .logo img:hover { transform: scale(1.08); }
 
 @keyframes neonPulse {
@@ -85,10 +92,29 @@ nav ul li a:hover { color: #00f7ff; }
 }
 
 /* Secciones */
-section { padding: 80px 20px; max-width: 1100px; margin: auto; }
-h2 { font-size: 2rem; color: #39ff14; text-transform: uppercase; letter-spacing: 2px; }
-h3 { color: #00f7ff; margin-bottom: 15px; }
-p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+section {
+  padding: 80px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #39ff14;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h3 {
+  color: #00f7ff;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccc;
+}
 
 /* Galería */
 .examples {
@@ -97,6 +123,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   gap: 18px;
   margin-top: 20px;
 }
+
 .project {
   background: rgba(255,255,255,0.05);
   border-radius: 10px;
@@ -105,7 +132,9 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   transition: 0.3s;
   position: relative;
 }
+
 .project:hover { transform: scale(1.05); }
+
 .preview-label {
   position: absolute;
   top: -12px;
@@ -117,6 +146,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   font-weight: bold;
   pointer-events: none;
 }
+
 .project img {
   width: 100%;
   height: 110px;
@@ -127,10 +157,12 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   cursor: pointer;
   transition: 0.3s;
 }
+
 .project img:hover {
   transform: scale(1.08);
   box-shadow: 0 0 20px #39ff14;
 }
+
 .project a {
   display: block;
   margin-top: 8px;
@@ -139,7 +171,44 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   font-size: 0.85rem;
   font-weight: bold;
 }
+
 .project a:hover { color: #00f7ff; }
+
+/* 🔧 Contacto */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.contact-links a {
+  text-decoration: none;
+  color: #39ff14;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.contact-links a:hover {
+  color: #00f7ff;
+}
+
+.contact-links img {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 5px #39ff14);
+  transition: transform 0.3s;
+}
+
+.contact-links img:hover {
+  transform: scale(1.1);
+}
 
 /* WhatsApp flotante */
 .whatsapp-float {
@@ -148,6 +217,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   right: 22px;
   z-index: 999;
 }
+
 .whatsapp-float img {
   width: 64px;
   height: 64px;
@@ -155,6 +225,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   box-shadow: 0 0 10px rgba(0,255,0,0.5);
   transition: 0.3s;
 }
+
 .whatsapp-float img:hover {
   transform: scale(1.12);
   box-shadow: 0 0 20px rgba(0,255,0,0.8);
@@ -183,11 +254,19 @@ footer {
     background: transparent;
     padding: 20px 15px;
   }
+
   nav ul.active { display: flex; }
+
   nav ul li a {
     color: #39ff14;
     font-size: 1rem;
     text-shadow: 0 0 8px #39ff14;
   }
+
   .hamburger { display: flex; }
+
+  /* Ajuste contacto móvil */
+  .contact-links a {
+    font-size: 0.9rem;
+  }
 }
