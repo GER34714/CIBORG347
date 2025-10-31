@@ -60,13 +60,27 @@ nav ul li a::after {
   transition: width 0.3s;
 }
 nav ul li a:hover::after,
-nav ul li a.active::after { width: 100%; }
+nav ul li a.active::after {
+  width: 100%;
+}
 nav ul li a:hover { color: #00f7ff; }
-.hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-.hamburger div { width: 25px; height: 3px; background: #39ff14; transition: 0.3s; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #39ff14;
+  transition: 0.3s;
+}
 
 /* LOGO */
-.logo { margin: 120px 0 50px; }
+.logo {
+  margin: 120px 0 50px;
+}
 .logo img {
   width: 260px;
   filter: drop-shadow(0 0 15px #39ff14);
@@ -82,19 +96,17 @@ nav ul li a:hover { color: #00f7ff; }
   100% { filter: drop-shadow(0 0 10px #39ff14); }
 }
 
-/* CONTADOR DE ME GUSTA */
-.likes-counter {
-  font-size: 1.1rem;
-  font-weight: bold;
+/* SECCIONES */
+section { padding: 80px 20px; max-width: 1100px; margin: auto; }
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
   color: #39ff14;
-  text-shadow: 0 0 10px #39ff14;
-  margin-top: 90px;
-  animation: pulseGlow 2s infinite alternate;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
-@keyframes pulseGlow {
-  0% { text-shadow: 0 0 8px #39ff14; }
-  100% { text-shadow: 0 0 16px #00f7ff; }
-}
+h3 { color: #00f7ff; margin-bottom: 15px; }
+p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
 /* GALERÍA */
 .examples {
@@ -137,8 +149,17 @@ nav ul li a:hover { color: #00f7ff; }
   transform: scale(1.08);
   box-shadow: 0 0 20px #39ff14;
 }
+.project a {
+  display: block;
+  margin-top: 8px;
+  color: #39ff14;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.project a:hover { color: #00f7ff; }
 
-/* LIGHTBOX mini */
+/* LIGHTBOX (mini) */
 .lightbox {
   display: none;
   position: fixed;
@@ -167,7 +188,12 @@ nav ul li a:hover { color: #00f7ff; }
   border-radius: 10px;
   box-shadow: 0 0 10px #39ff14;
 }
-.lightbox .caption { margin-top: 8px; color: #39ff14; font-weight: bold; font-size: 0.9rem; }
+.lightbox .caption {
+  margin-top: 8px;
+  color: #39ff14;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
 .lightbox .view-btn {
   margin-top: 10px;
   display: inline-block;
@@ -185,6 +211,7 @@ nav ul li a:hover { color: #00f7ff; }
   background: #00f7ff;
   box-shadow: 0 0 15px #00f7ff;
 }
+@keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 
 /* WHATSAPP FLOTANTE */
 .whatsapp-float {
@@ -241,9 +268,6 @@ nav ul li a:hover { color: #00f7ff; }
   </ul>
 </nav>
 
-<!-- CONTADOR DE ME GUSTA -->
-<div class="likes-counter" id="likes">❤️ 1.247 Me gusta</div>
-
 <div class="logo">
   <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
 </div>
@@ -257,22 +281,10 @@ nav ul li a:hover { color: #00f7ff; }
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"></div>
   </div>
-
-  <h3>💈 Barberías</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"></div>
-  </div>
-
-  <h3>💅 Estética & Uñas</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"></div>
-  </div>
 </section>
 
-<!-- BOTÓN WHATSAPP PERSONALIZADO -->
 <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
-  <img src="https://iili.io/KivF8Hg.png" alt="WhatsApp">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
@@ -287,8 +299,8 @@ nav ul li a:hover { color: #00f7ff; }
 </div>
 
 <script>
-const navMenu=document.getElementById("nav-links");
-const navLinks=navMenu.querySelectorAll("a");
+const navMenu = document.getElementById("nav-links");
+const navLinks = navMenu.querySelectorAll("a");
 function toggleMenu(){navMenu.classList.toggle("active");}
 navLinks.forEach(link=>link.addEventListener("click",()=>navMenu.classList.remove("active")));
 
@@ -306,14 +318,6 @@ galleryItems.forEach((img)=>{
 document.getElementById("lightbox").addEventListener("click",(e)=>{
   if(e.target.id==="lightbox")document.getElementById("lightbox").style.display="none";
 });
-
-/* CONTADOR DE ME GUSTA */
-let baseLikes = 1247;
-const startDate = new Date("2025-01-01");
-const today = new Date();
-const daysPassed = Math.floor((today - startDate) / (1000*60*60*24));
-const totalLikes = baseLikes + daysPassed * Math.floor(Math.random()*4+2);
-document.getElementById("likes").textContent = `❤️ ${totalLikes.toLocaleString('es-ES')} Me gusta`;
 </script>
 </body>
 </html>
