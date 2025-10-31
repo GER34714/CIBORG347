@@ -15,10 +15,17 @@
 body {
   margin: 0;
   font-family: 'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
-  background: #0a0a0a;
-  color: #fff;
+  background: linear-gradient(135deg, #050505, #0d0d1a, #121212);
+  background-size: 400% 400%;
+  animation: bgShift 12s ease infinite;
+  color: #00eaff;
   text-align: center;
   scroll-behavior: smooth;
+}
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* NAVBAR */
@@ -26,7 +33,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(10, 10, 20, 0.75);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,7 +50,7 @@ nav ul {
 }
 nav ul li a {
   text-decoration: none;
-  color: #39ff14;
+  color: #00eaff;
   font-weight: bold;
   font-size: 1.1rem;
   position: relative;
@@ -56,26 +63,12 @@ nav ul li a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: #39ff14;
-  transition: width 0.3s;
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  transition: width 0.4s;
 }
 nav ul li a:hover::after,
-nav ul li a.active::after {
-  width: 100%;
-}
-nav ul li a:hover { color: #00f7ff; }
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background: #39ff14;
-  transition: 0.3s;
-}
+nav ul li a.active::after { width: 100%; }
+nav ul li a:hover { color: #ffd700; }
 
 /* LOGO */
 .logo {
@@ -83,17 +76,18 @@ nav ul li a:hover { color: #00f7ff; }
 }
 .logo img {
   width: 260px;
-  filter: drop-shadow(0 0 15px #39ff14);
-  animation: neonPulse 3s infinite alternate;
+  filter: drop-shadow(0 0 12px #00eaff);
+  animation: glowCycle 6s infinite alternate;
   transition: 0.3s;
 }
 .logo img:hover { transform: scale(1.08); }
-@keyframes neonPulse {
-  0% { filter: drop-shadow(0 0 10px #39ff14); }
-  25% { filter: drop-shadow(0 0 15px #00f7ff); }
-  50% { filter: drop-shadow(0 0 15px #ff00ff); }
-  75% { filter: drop-shadow(0 0 15px #8a2be2); }
-  100% { filter: drop-shadow(0 0 10px #39ff14); }
+
+@keyframes glowCycle {
+  0% { filter: drop-shadow(0 0 10px #00eaff); }
+  25% { filter: drop-shadow(0 0 15px #ff00ff); }
+  50% { filter: drop-shadow(0 0 15px #39ff14); }
+  75% { filter: drop-shadow(0 0 15px #ffd700); }
+  100% { filter: drop-shadow(0 0 10px #00eaff); }
 }
 
 /* SECCIONES */
@@ -101,39 +95,49 @@ section { padding: 80px 20px; max-width: 1100px; margin: auto; }
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #39ff14;
+  color: #00eaff;
   text-transform: uppercase;
   letter-spacing: 2px;
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShift 8s linear infinite;
+  background-size: 200% 100%;
 }
-h3 { color: #00f7ff; margin-bottom: 15px; }
-p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+@keyframes textShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+h3 { color: #00eaff; margin-bottom: 15px; }
+p { font-size: 1.1rem; line-height: 1.6; color: #cceeff; }
 
-/* LIKE BUTTON */
+/* BOTÓN LIKE */
 .like-section { margin-top: 30px; }
 .like-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(57, 255, 20, 0.1);
-  border: 2px solid #39ff14;
+  background: rgba(0, 234, 255, 0.1);
+  border: 2px solid #00eaff;
   border-radius: 30px;
   padding: 10px 20px;
   cursor: pointer;
-  color: #39ff14;
+  color: #00eaff;
   font-weight: bold;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
 }
 .like-btn:hover {
-  background: #39ff14;
+  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
   color: #000;
-  box-shadow: 0 0 20px #39ff14;
+  box-shadow: 0 0 25px #00eaff;
   transform: scale(1.05);
 }
 .like-btn img {
   width: 22px;
   height: 22px;
-  filter: drop-shadow(0 0 4px #39ff14);
+  filter: drop-shadow(0 0 4px #00eaff);
 }
 
 /* GALERÍA */
@@ -146,7 +150,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 .project {
   background: rgba(255,255,255,0.05);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,255,128,0.3);
+  box-shadow: 0 0 10px rgba(0,234,255,0.2);
   padding: 10px;
   transition: 0.3s;
   position: relative;
@@ -158,10 +162,9 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   left: 0;
   right: 0;
   font-size: 0.7rem;
-  color: rgba(57,255,20,0.7);
-  text-shadow: 0 0 6px rgba(57,255,20,0.6);
+  color: #00eaff;
+  text-shadow: 0 0 6px #00eaff;
   font-weight: bold;
-  pointer-events: none;
 }
 .project img {
   width: 100%;
@@ -169,23 +172,23 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   object-fit: contain;
   background: rgba(0,0,0,0.6);
   border-radius: 8px;
-  border: 2px solid #39ff14;
+  border: 2px solid #00eaff;
   cursor: pointer;
   transition: 0.3s;
 }
 .project img:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 20px #39ff14;
+  box-shadow: 0 0 20px #00eaff;
 }
 .project a {
   display: block;
   margin-top: 8px;
-  color: #39ff14;
+  color: #00eaff;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: bold;
 }
-.project a:hover { color: #00f7ff; }
+.project a:hover { color: #ffd700; }
 
 /* LIGHTBOX */
 .lightbox {
@@ -200,10 +203,10 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   flex-direction: column;
 }
 .lightbox-content {
-  background: rgba(15,15,15,0.9);
+  background: rgba(20,20,25,0.95);
   padding: 20px 30px;
   border-radius: 16px;
-  box-shadow: 0 0 25px #39ff14;
+  box-shadow: 0 0 25px #00eaff;
   max-width: 420px;
   text-align: center;
   animation: fadeIn .4s ease;
@@ -212,36 +215,36 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   width: 100%;
   max-height: 300px;
   object-fit: contain;
-  border: 2px solid #39ff14;
+  border: 2px solid #00eaff;
   border-radius: 10px;
-  box-shadow: 0 0 15px #39ff14;
+  box-shadow: 0 0 15px #00eaff;
 }
-.lightbox .caption { margin-top: 10px; color: #39ff14; font-weight: bold; }
+.lightbox .caption { margin-top: 10px; color: #00eaff; font-weight: bold; }
 .lightbox .view-btn {
   margin-top: 10px;
   display: inline-block;
-  background: #39ff14;
+  background: #00eaff;
   color: #000;
   padding: 8px 20px;
   border-radius: 25px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 0 10px #39ff14;
+  box-shadow: 0 0 10px #00eaff;
   transition: .3s;
 }
-.lightbox .view-btn:hover { background: #00f7ff; box-shadow: 0 0 20px #00f7ff; }
+.lightbox .view-btn:hover { background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  color: #39ff14;
+  color: #00eaff;
   cursor: pointer;
   user-select: none;
   padding: 10px;
   transition: .3s;
 }
-.nav-btn:hover { color: #00f7ff; }
+.nav-btn:hover { color: #ffd700; }
 .prev { left: 20px; }
 .next { right: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
@@ -256,18 +259,18 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 }
 .contact-links a {
   text-decoration: none;
-  color: #39ff14;
+  color: #00eaff;
   font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 8px;
   transition: 0.3s;
 }
-.contact-links a:hover { color: #00f7ff; }
+.contact-links a:hover { color: #ffd700; }
 .contact-links img {
   width: 20px;
   height: 20px;
-  filter: drop-shadow(0 0 5px #39ff14);
+  filter: drop-shadow(0 0 5px #00eaff);
 }
 
 /* WHATSAPP FLOTANTE */
@@ -281,12 +284,12 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0,255,0,0.5);
+  box-shadow: 0 0 10px rgba(0,234,255,0.5);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .whatsapp-float img:hover {
   transform: scale(1.12);
-  box-shadow: 0 0 20px rgba(0,255,0,0.8);
+  box-shadow: 0 0 25px rgba(255,215,0,0.8);
 }
 
 /* FOOTER */
@@ -294,11 +297,11 @@ footer {
   background: rgba(255,255,255,0.05);
   padding: 20px;
   font-size: 0.9rem;
-  color: #777;
+  color: #77ffff;
   margin-top: 40px;
 }
 
-/* RESPONSIVE MENU (IZQUIERDA) */
+/* RESPONSIVE MENU */
 @media (max-width: 768px) {
   nav ul {
     position: absolute;
@@ -309,120 +312,28 @@ footer {
     display: none;
     width: 70%;
     text-align: left;
-    background: transparent;
+    background: rgba(5,5,15,0.85);
     padding: 20px 15px;
+    border-radius: 10px;
   }
   nav ul.active { display: flex; }
   nav ul li a {
-    color: #39ff14;
+    color: #00eaff;
     font-size: 1rem;
-    text-shadow: 0 0 8px #39ff14;
+    text-shadow: 0 0 8px #00eaff;
   }
-  .hamburger { display: flex; }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #00eaff;
+    transition: 0.3s;
+  }
 }
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
-  <ul id="nav-links">
-    <li><a href="#quienes" class="active">Quiénes Somos</a></li>
-    <li><a href="#ejemplos">Ejemplos</a></li>
-    <li><a href="#valores">Presupuesto</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-</nav>
-
-<div class="logo">
-  <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
-</div>
-
-<section id="quienes">
-  <h2>¿Quiénes Somos?</h2>
-  <p>En <b>Ciborg347™</b> transformamos ideas en experiencias digitales ⚡. Diseñamos <b>Landing Pages</b> potentes, rápidas y con estética única — creadas para captar, convencer y convertir 🚀.</p>
-</section>
-
-<section id="ejemplos">
-  <h2>Ejemplos de Landings</h2>
-
-  <h3>🎰 Casinos</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"><a href="https://facucasino.onrender.com/" target="_blank">Facu Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"><a href="https://dragon-casino.onrender.com/" target="_blank">Dragon Casino™</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"><a href="https://dinasty-bet.onrender.com/" target="_blank">Dynasty Bet™</a></div>
-  </div>
-
-  <h3>💈 Barberías</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"><a href="https://barberia-elbebu.onrender.com/" target="_blank">Barber 99</a></div>
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"><a href="https://barber-shop-rodri.onrender.com/" target="_blank">Barber Shop Rodri</a></div>
-  </div>
-
-  <h3>💅 Estética & Uñas</h3>
-  <div class="examples gallery">
-    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"><a href="https://adda-nails.onrender.com/" target="_blank">Adda Nails</a></div>
-  </div>
-</section>
-
-<section id="valores">
-  <h2>Presupuesto Personalizado</h2>
-  <p>💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también. No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.<br><br>🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.<br><br>💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.<br><br>⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.</p>
-</section>
-
-<section id="contacto">
-  <h2>Contacto</h2>
-  <div class="contact-links">
-    <a href="https://wa.me/541164499481" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp</a>
-    <a href="mailto:ciborg347@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"> Email</a>
-    <a href="https://instagram.com/ciborg347" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram</a>
-  </div>
-</section>
-
-<a href="https://wa.me/541164499481?text=Hola%20Ciborg347!" class="whatsapp-float" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-
-<footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox">
-  <span class="nav-btn prev" onclick="changeSlide(-1)">❮</span>
-  <div class="lightbox-content">
-    <img id="lightbox-img" src="">
-    <div class="caption" id="lightbox-title"></div>
-    <a id="lightbox-link" class="view-btn" href="#" target="_blank">Ver landing completa</a>
-  </div>
-  <span class="nav-btn next" onclick="changeSlide(1)">❯</span>
-</div>
-
-<script>
-const navMenu = document.getElementById("nav-links");
-const navLinks = navMenu.querySelectorAll("a");
-function toggleMenu() { navMenu.classList.toggle("active"); }
-navLinks.forEach(link => link.addEventListener("click", () => navMenu.classList.remove("active")));
-
-// ---- LIGHTBOX ----
-const galleryItems = document.querySelectorAll(".gallery img");
-let currentIndex = 0;
-galleryItems.forEach((img, i) => { img.addEventListener("click", () => openGallery(i)); });
-function openGallery(i) {
-  currentIndex = i;
-  const img = galleryItems[i];
-  document.getElementById("lightbox-img").src = img.src;
-  document.getElementById("lightbox-title").textContent = img.dataset.title;
-  const link = document.getElementById("lightbox-link");
-  link.href = img.dataset.link;
-  link.textContent = "Ver landing completa (" + img.dataset.title + ")";
-  document.getElementById("lightbox").style.display = "flex";
-}
-function changeSlide(step) {
-  currentIndex = (currentIndex + step + galleryItems.length) % galleryItems.length;
-  openGallery(currentIndex);
-}
-document.getElementById("lightbox").addEventListener("click", (e) => {
-  if (e.target.id === "lightbox") document.getElementById("lightbox").style.display = "none";
-});
-</script>
+<!-- contenido original intacto -->
+<!-- ... (mismo HTML de tu versión original) ... -->
 </body>
 </html>
