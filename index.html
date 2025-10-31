@@ -15,17 +15,10 @@
 body {
   margin: 0;
   font-family: 'Franklin Gothic Medium','Arial Narrow',Arial,sans-serif;
-  background: linear-gradient(135deg, #050505, #0a0a1a, #101020);
-  background-size: 400% 400%;
-  animation: bgMove 12s ease infinite;
-  color: #00eaff;
+  background: #0a0a0a;
+  color: #fff;
   text-align: center;
   scroll-behavior: smooth;
-}
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 /* NAVBAR */
@@ -33,7 +26,7 @@ nav {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,7 +43,7 @@ nav ul {
 }
 nav ul li a {
   text-decoration: none;
-  color: #00eaff;
+  color: #39ff14;
   font-weight: bold;
   font-size: 1.1rem;
   position: relative;
@@ -63,94 +56,136 @@ nav ul li a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
-  transition: width 0.4s;
+  background: #39ff14;
+  transition: width 0.3s;
 }
 nav ul li a:hover::after,
-nav ul li a.active::after { width: 100%; }
-nav ul li a:hover { color: #ffd700; }
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.hamburger div { width: 25px; height: 3px; background: #ff00ff; transition: 0.3s; }
+nav ul li a.active::after {
+  width: 100%;
+}
+nav ul li a:hover { color: #00f7ff; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background: #39ff14;
+  transition: 0.3s;
+}
 
 /* LOGO */
-.logo { margin: 120px 0 50px; }
+.logo {
+  margin: 120px 0 50px;
+}
 .logo img {
   width: 260px;
-  filter: drop-shadow(0 0 15px #ff00ff);
-  animation: neonCycle 4s infinite alternate;
+  filter: drop-shadow(0 0 15px #39ff14);
+  animation: neonPulse 3s infinite alternate;
+  transition: 0.3s;
 }
-@keyframes neonCycle {
-  0% { filter: drop-shadow(0 0 10px #00eaff); }
-  25% { filter: drop-shadow(0 0 15px #ff00ff); }
-  50% { filter: drop-shadow(0 0 15px #ffd700); }
-  75% { filter: drop-shadow(0 0 15px #00ff99); }
-  100% { filter: drop-shadow(0 0 10px #00eaff); }
+.logo img:hover { transform: scale(1.08); }
+@keyframes neonPulse {
+  0% { filter: drop-shadow(0 0 10px #39ff14); }
+  25% { filter: drop-shadow(0 0 15px #00f7ff); }
+  50% { filter: drop-shadow(0 0 15px #ff00ff); }
+  75% { filter: drop-shadow(0 0 15px #8a2be2); }
+  100% { filter: drop-shadow(0 0 10px #39ff14); }
 }
 
-/* TITULOS */
+/* SECCIONES */
+section { padding: 80px 20px; max-width: 1100px; margin: auto; }
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
+  color: #39ff14;
   text-transform: uppercase;
   letter-spacing: 2px;
-  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700, #00ff99);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: hueFlow 6s linear infinite;
 }
-@keyframes hueFlow { 0% { filter: hue-rotate(0deg);} 100% { filter: hue-rotate(360deg);} }
-h3 { color: #ffd700; margin-bottom: 15px; }
-p { font-size: 1.1rem; line-height: 1.6; color: #d2e8ff; }
+h3 { color: #00f7ff; margin-bottom: 15px; }
+p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
+
+/* LIKE BUTTON */
+.like-section { margin-top: 30px; }
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(57, 255, 20, 0.1);
+  border: 2px solid #39ff14;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #39ff14;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+.like-btn:hover {
+  background: #39ff14;
+  color: #000;
+  box-shadow: 0 0 20px #39ff14;
+  transform: scale(1.05);
+}
+.like-btn img {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 4px #39ff14);
+}
 
 /* GALERÍA */
 .examples {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 18px;
   margin-top: 20px;
 }
 .project {
   background: rgba(255,255,255,0.05);
-  border: 2px solid transparent;
-  border-image: linear-gradient(45deg, #ff00ff, #00eaff, #ffd700, #00ff99) 1;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  box-shadow: 0 0 10px rgba(0,255,128,0.3);
+  padding: 10px;
   transition: 0.3s;
   position: relative;
 }
-.project:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255,215,0,0.4);
-}
+.project:hover { transform: scale(1.05); }
 .preview-label {
   position: absolute;
-  top: -12px; left: 0; right: 0;
+  top: -12px;
+  left: 0;
+  right: 0;
   font-size: 0.7rem;
-  background: linear-gradient(90deg, #ff00ff, #ffd700, #00eaff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: rgba(57,255,20,0.7);
+  text-shadow: 0 0 6px rgba(57,255,20,0.6);
   font-weight: bold;
+  pointer-events: none;
 }
 .project img {
-  width: 100%; height: 110px; object-fit: contain;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  border-image: linear-gradient(45deg, #ffd700, #ff00ff, #00ff99) 1;
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
   background: rgba(0,0,0,0.6);
+  border-radius: 8px;
+  border: 2px solid #39ff14;
   cursor: pointer;
   transition: 0.3s;
 }
 .project img:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(255,215,0,0.4);
+  box-shadow: 0 0 20px #39ff14;
 }
 .project a {
-  display: block; margin-top: 8px;
-  color: #00eaff;
+  display: block;
+  margin-top: 8px;
+  color: #39ff14;
   text-decoration: none;
+  font-size: 0.85rem;
   font-weight: bold;
 }
-.project a:hover { color: #ffd700; }
+.project a:hover { color: #00f7ff; }
 
 /* LIGHTBOX */
 .lightbox {
@@ -165,12 +200,10 @@ p { font-size: 1.1rem; line-height: 1.6; color: #d2e8ff; }
   flex-direction: column;
 }
 .lightbox-content {
-  background: rgba(20,20,25,0.95);
+  background: rgba(15,15,15,0.9);
   padding: 20px 30px;
   border-radius: 16px;
-  border: 2px solid transparent;
-  border-image: linear-gradient(45deg, #ff00ff, #00eaff, #ffd700) 1;
-  box-shadow: 0 0 25px rgba(255,255,255,0.2);
+  box-shadow: 0 0 25px #39ff14;
   max-width: 420px;
   text-align: center;
   animation: fadeIn .4s ease;
@@ -179,69 +212,81 @@ p { font-size: 1.1rem; line-height: 1.6; color: #d2e8ff; }
   width: 100%;
   max-height: 300px;
   object-fit: contain;
+  border: 2px solid #39ff14;
   border-radius: 10px;
-  border: 2px solid transparent;
-  border-image: linear-gradient(45deg, #00eaff, #ff00ff, #ffd700) 1;
+  box-shadow: 0 0 15px #39ff14;
 }
-.lightbox .caption {
-  margin-top: 10px;
-  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-}
+.lightbox .caption { margin-top: 10px; color: #39ff14; font-weight: bold; }
 .lightbox .view-btn {
   margin-top: 10px;
   display: inline-block;
-  background: linear-gradient(90deg, #00eaff, #ff00ff, #ffd700);
+  background: #39ff14;
   color: #000;
   padding: 8px 20px;
   border-radius: 25px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  box-shadow: 0 0 10px #39ff14;
   transition: .3s;
 }
-.lightbox .view-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255,255,255,0.4); }
+.lightbox .view-btn:hover { background: #00f7ff; box-shadow: 0 0 20px #00f7ff; }
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  color: #ffd700;
+  color: #39ff14;
   cursor: pointer;
   user-select: none;
   padding: 10px;
   transition: .3s;
 }
-.nav-btn:hover { color: #00eaff; }
+.nav-btn:hover { color: #00f7ff; }
 .prev { left: 20px; }
 .next { right: 20px; }
 @keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 
 /* CONTACTO */
 .contact-links {
-  display: flex; flex-direction: column;
-  gap: 10px; align-items: center; margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
 }
 .contact-links a {
-  text-decoration: none; color: #00eaff;
-  font-size: 1rem; display: flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  color: #39ff14;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   transition: 0.3s;
 }
-.contact-links a:hover { color: #ffd700; }
-.contact-links img { width: 20px; height: 20px; filter: drop-shadow(0 0 5px #ff00ff); }
+.contact-links a:hover { color: #00f7ff; }
+.contact-links img {
+  width: 20px;
+  height: 20px;
+  filter: drop-shadow(0 0 5px #39ff14);
+}
 
-/* WHATSAPP */
-.whatsapp-float { position: fixed; bottom: 60px; right: 22px; z-index: 999; }
+/* WHATSAPP FLOTANTE */
+.whatsapp-float {
+  position: fixed;
+  bottom: 60px;
+  right: 22px;
+  z-index: 999;
+}
 .whatsapp-float img {
-  width: 64px; height: 64px; border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255,215,0,0.4);
-  transition: 0.3s;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,255,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .whatsapp-float img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(255,215,0,0.8);
+  transform: scale(1.12);
+  box-shadow: 0 0 20px rgba(0,255,0,0.8);
 }
 
 /* FOOTER */
@@ -249,24 +294,36 @@ footer {
   background: rgba(255,255,255,0.05);
   padding: 20px;
   font-size: 0.9rem;
-  color: #77ffff;
+  color: #777;
   margin-top: 40px;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav ul{
-    position:absolute;top:60px;left:10px;flex-direction:column;
-    gap:18px;display:none;width:70%;background:rgba(5,5,15,0.9);
-    border-radius:10px;padding:20px 15px;
+/* RESPONSIVE MENU (IZQUIERDA) */
+@media (max-width: 768px) {
+  nav ul {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    flex-direction: column;
+    gap: 18px;
+    display: none;
+    width: 70%;
+    text-align: left;
+    background: transparent;
+    padding: 20px 15px;
   }
-  nav ul.active{display:flex;}
-  .hamburger{display:flex;}
+  nav ul.active { display: flex; }
+  nav ul li a {
+    color: #39ff14;
+    font-size: 1rem;
+    text-shadow: 0 0 8px #39ff14;
+  }
+  .hamburger { display: flex; }
 }
 </style>
 </head>
-
 <body>
+
 <nav>
   <div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
   <ul id="nav-links">
@@ -310,7 +367,7 @@ footer {
 
 <section id="valores">
   <h2>Presupuesto Personalizado</h2>
-  <p>💼 En <b>Ciborg347™</b> cada cliente es único. Diseñamos webs a medida con estrategia, estética y resultados reales 🚀.</p>
+  <p>💼 En <b>Ciborg347™</b> cada cliente es único, y su proyecto también. No usamos plantillas vacías ni precios estándar: <b>creamos tu web a medida</b>, pensada según tu negocio, tu estilo y tu público.<br><br>🚀 Vos contanos qué querés lograr, nosotros te enviamos una propuesta profesional, clara y sin vueltas.<br><br>💬 <b>Pedí tu presupuesto personalizado</b> y descubrí lo que una web bien hecha puede hacer por tu marca.<br><br>⚡ <b>Ciborg347™</b> — donde el diseño y la estrategia se combinan para generar resultados reales.</p>
 </section>
 
 <section id="contacto">
@@ -322,7 +379,7 @@ footer {
   </div>
 </section>
 
-<a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/541164499481?text=Hola%20Ciborg347!" class="whatsapp-float" target="_blank">
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
@@ -340,29 +397,31 @@ footer {
 </div>
 
 <script>
-const navMenu=document.getElementById("nav-links");
-function toggleMenu(){navMenu.classList.toggle("active");}
-navMenu.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navMenu.classList.remove("active")));
+const navMenu = document.getElementById("nav-links");
+const navLinks = navMenu.querySelectorAll("a");
+function toggleMenu() { navMenu.classList.toggle("active"); }
+navLinks.forEach(link => link.addEventListener("click", () => navMenu.classList.remove("active")));
 
-const galleryItems=document.querySelectorAll(".gallery img");
-let currentIndex=0;
-galleryItems.forEach((img,i)=>{img.addEventListener("click",()=>openGallery(i));});
-function openGallery(i){
-  currentIndex=i;
-  const img=galleryItems[i];
-  document.getElementById("lightbox-img").src=img.src;
-  document.getElementById("lightbox-title").textContent=img.dataset.title;
-  const link=document.getElementById("lightbox-link");
-  link.href=img.dataset.link;
-  link.textContent="Ver landing completa ("+img.dataset.title+")";
-  document.getElementById("lightbox").style.display="flex";
+// ---- LIGHTBOX ----
+const galleryItems = document.querySelectorAll(".gallery img");
+let currentIndex = 0;
+galleryItems.forEach((img, i) => { img.addEventListener("click", () => openGallery(i)); });
+function openGallery(i) {
+  currentIndex = i;
+  const img = galleryItems[i];
+  document.getElementById("lightbox-img").src = img.src;
+  document.getElementById("lightbox-title").textContent = img.dataset.title;
+  const link = document.getElementById("lightbox-link");
+  link.href = img.dataset.link;
+  link.textContent = "Ver landing completa (" + img.dataset.title + ")";
+  document.getElementById("lightbox").style.display = "flex";
 }
-function changeSlide(step){
-  currentIndex=(currentIndex+step+galleryItems.length)%galleryItems.length;
+function changeSlide(step) {
+  currentIndex = (currentIndex + step + galleryItems.length) % galleryItems.length;
   openGallery(currentIndex);
 }
-document.getElementById("lightbox").addEventListener("click",(e)=>{
-  if(e.target.id==="lightbox")document.getElementById("lightbox").style.display="none";
+document.getElementById("lightbox").addEventListener("click", (e) => {
+  if (e.target.id === "lightbox") document.getElementById("lightbox").style.display = "none";
 });
 </script>
 </body>
