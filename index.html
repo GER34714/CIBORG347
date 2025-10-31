@@ -82,6 +82,20 @@ nav ul li a:hover { color: #00f7ff; }
   100% { filter: drop-shadow(0 0 10px #39ff14); }
 }
 
+/* CONTADOR DE ME GUSTA */
+.likes-counter {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #39ff14;
+  text-shadow: 0 0 10px #39ff14;
+  margin-top: 90px;
+  animation: pulseGlow 2s infinite alternate;
+}
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 8px #39ff14; }
+  100% { text-shadow: 0 0 16px #00f7ff; }
+}
+
 /* GALERÍA */
 .examples {
   display: grid;
@@ -227,17 +241,32 @@ nav ul li a:hover { color: #00f7ff; }
   </ul>
 </nav>
 
+<!-- CONTADOR DE ME GUSTA -->
+<div class="likes-counter" id="likes">❤️ 1.247 Me gusta</div>
+
 <div class="logo">
   <img src="https://iili.io/KHOiff9.md.png" alt="Ciborg347™">
 </div>
 
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
+
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyrMj2.jpg" data-link="https://dragon-casino.onrender.com/" data-title="Dragon Casino™"></div>
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyDVHP.jpg" data-link="https://dinasty-bet.onrender.com/" data-title="Dynasty Bet™"></div>
+  </div>
+
+  <h3>💈 Barberías</h3>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyvEcx.jpg" data-link="https://barberia-elbebu.onrender.com/" data-title="Barber 99"></div>
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyUCn1.jpg" data-link="https://barber-shop-rodri.onrender.com/" data-title="Barber Shop Rodri"></div>
+  </div>
+
+  <h3>💅 Estética & Uñas</h3>
+  <div class="examples gallery">
+    <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPyCnHu.jpg" data-link="https://adda-nails.onrender.com/" data-title="Adda Nails"></div>
   </div>
 </section>
 
@@ -277,6 +306,14 @@ galleryItems.forEach((img)=>{
 document.getElementById("lightbox").addEventListener("click",(e)=>{
   if(e.target.id==="lightbox")document.getElementById("lightbox").style.display="none";
 });
+
+/* CONTADOR DE ME GUSTA */
+let baseLikes = 1247;
+const startDate = new Date("2025-01-01");
+const today = new Date();
+const daysPassed = Math.floor((today - startDate) / (1000*60*60*24));
+const totalLikes = baseLikes + daysPassed * Math.floor(Math.random()*4+2);
+document.getElementById("likes").textContent = `❤️ ${totalLikes.toLocaleString('es-ES')} Me gusta`;
 </script>
 </body>
 </html>
