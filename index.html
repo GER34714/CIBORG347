@@ -60,27 +60,13 @@ nav ul li a::after {
   transition: width 0.3s;
 }
 nav ul li a:hover::after,
-nav ul li a.active::after {
-  width: 100%;
-}
+nav ul li a.active::after { width: 100%; }
 nav ul li a:hover { color: #00f7ff; }
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background: #39ff14;
-  transition: 0.3s;
-}
+.hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+.hamburger div { width: 25px; height: 3px; background: #39ff14; transition: 0.3s; }
 
 /* LOGO */
-.logo {
-  margin: 120px 0 50px;
-}
+.logo { margin: 120px 0 50px; }
 .logo img {
   width: 260px;
   filter: drop-shadow(0 0 15px #39ff14);
@@ -95,18 +81,6 @@ nav ul li a:hover { color: #00f7ff; }
   75% { filter: drop-shadow(0 0 15px #8a2be2); }
   100% { filter: drop-shadow(0 0 10px #39ff14); }
 }
-
-/* SECCIONES */
-section { padding: 80px 20px; max-width: 1100px; margin: auto; }
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #39ff14;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-h3 { color: #00f7ff; margin-bottom: 15px; }
-p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
 /* GALERÍA */
 .examples {
@@ -149,17 +123,8 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   transform: scale(1.08);
   box-shadow: 0 0 20px #39ff14;
 }
-.project a {
-  display: block;
-  margin-top: 8px;
-  color: #39ff14;
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: bold;
-}
-.project a:hover { color: #00f7ff; }
 
-/* LIGHTBOX (mini) */
+/* LIGHTBOX mini */
 .lightbox {
   display: none;
   position: fixed;
@@ -188,12 +153,7 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   border-radius: 10px;
   box-shadow: 0 0 10px #39ff14;
 }
-.lightbox .caption {
-  margin-top: 8px;
-  color: #39ff14;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
+.lightbox .caption { margin-top: 8px; color: #39ff14; font-weight: bold; font-size: 0.9rem; }
 .lightbox .view-btn {
   margin-top: 10px;
   display: inline-block;
@@ -211,7 +171,6 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   background: #00f7ff;
   box-shadow: 0 0 15px #00f7ff;
 }
-@keyframes fadeIn { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
 
 /* WHATSAPP FLOTANTE */
 .whatsapp-float {
@@ -274,7 +233,6 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 
 <section id="ejemplos">
   <h2>Ejemplos de Landings</h2>
-
   <h3>🎰 Casinos</h3>
   <div class="examples gallery">
     <div class="project"><div class="preview-label">Vista previa</div><img src="https://iili.io/KPygQXS.jpg" data-link="https://facucasino.onrender.com/" data-title="Facu Casino™"></div>
@@ -283,8 +241,9 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
   </div>
 </section>
 
+<!-- BOTÓN WHATSAPP PERSONALIZADO -->
 <a href="https://wa.me/541164499481" class="whatsapp-float" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  <img src="https://iili.io/KivF8Hg.png" alt="WhatsApp">
 </a>
 
 <footer>© 2025 Ciborg347™ - Landing Pages & Web Designs</footer>
@@ -299,8 +258,8 @@ p { font-size: 1.1rem; line-height: 1.6; color: #ccc; }
 </div>
 
 <script>
-const navMenu = document.getElementById("nav-links");
-const navLinks = navMenu.querySelectorAll("a");
+const navMenu=document.getElementById("nav-links");
+const navLinks=navMenu.querySelectorAll("a");
 function toggleMenu(){navMenu.classList.toggle("active");}
 navLinks.forEach(link=>link.addEventListener("click",()=>navMenu.classList.remove("active")));
 
