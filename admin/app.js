@@ -3,7 +3,6 @@ if (window.CIBORG_CONFIG && window.supabase) {
   const SUPABASE_URL = window.CIBORG_CONFIG.SUPABASE_URL;
   const SUPABASE_KEY = window.CIBORG_CONFIG.SUPABASE_KEY;
   
-  // Reemplazar el supabase existente por uno con auth
   window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
     auth: {
       persistSession: true,
@@ -14,6 +13,7 @@ if (window.CIBORG_CONFIG && window.supabase) {
   
   console.log("✅ Supabase reinicializado con autenticacion");
 }
+
 /* =========================
    STATE
 ========================= */
@@ -41,6 +41,8 @@ let projectHistoryPaginator = null;
 let settingsHistoryPaginator = null;
 let plansPaginator = null;
 let approvedReviewsPaginator = null;
+let servicesPaginator = null;
+let guideLeadsPaginator = null;
 
 // Variables para reseñas
 let reviewsData = [];
@@ -53,38 +55,35 @@ let lastPendingCount = 0;
 let plansData = [];
 let editingPlanId = null;
 
-// Elementos DOM (declarados ANTES de usarlos)
+// Variables para marcas
+let brandsData = [];
+let editingBrandId = null;
+let brandsPaginator = null;
+
+// Variables para asistente
+let assistantQuestionsData = [];
+let editingAssistantQuestionId = null;
+let assistantQuestionsPaginator = null;
+let assistantResponsesData = [];
+let assistantResponsesPaginator = null;
+
+// Variables para casos de éxito
+let successStoriesData = [];
+let editingSuccessStoryId = null;
+let successStoriesPaginator = null;
+
+// ========== VARIABLES PARA SERVICIOS (CORREGIDAS) ==========
+let servicesData = [];
+let editingServiceId = null;
+let servicesPaginator = null;
+
+// Variables para leads del asistente
+let guideLeadsData = [];
+let guideLeadsPaginator = null;
+
+// Elementos DOM
 const navBtns = document.querySelectorAll(".navBtn");
 const viewPanels = document.querySelectorAll(".viewPanel");
-
-// ============================================
-// ELEMENTOS DOM QUE FALTABAN (PARA EVITAR ERRORES)
-// ============================================
-const backgroundImageUrlInput = document.getElementById("backgroundImageUrlInput") || { value: "", checked: false, style: {} };
-const userEmail = document.getElementById("userEmail") || { textContent: "" };
-
-// Elementos del formulario de settings
-const siteTitleInput = document.getElementById("siteTitleInput") || { value: "" };
-const siteTaglineInput = document.getElementById("siteTaglineInput") || { value: "" };
-const heroBadgeInput = document.getElementById("heroBadgeInput") || { value: "" };
-const heroTitleInput = document.getElementById("heroTitleInput") || { value: "" };
-const heroSubtitleInput = document.getElementById("heroSubtitleInput") || { value: "" };
-const heroCtaLabelInput = document.getElementById("heroCtaLabelInput") || { value: "" };
-const heroCtaUrlInput = document.getElementById("heroCtaUrlInput") || { value: "" };
-const logoUrlInput = document.getElementById("logoUrlInput") || { value: "" };
-const heroLogoUrlInput = document.getElementById("heroLogoUrlInput") || { value: "" };
-const footerLogoUrlInput = document.getElementById("footerLogoUrlInput") || { value: "" };
-const faviconUrlInput = document.getElementById("faviconUrlInput") || { value: "" };
-const heroImageUrlInput = document.getElementById("heroImageUrlInput") || { value: "" };
-const heroOverlayUrlInput = document.getElementById("heroOverlayUrlInput") || { value: "" };
-const heroVideoUrlInput = document.getElementById("heroVideoUrlInput") || { value: "" };
-const whatsappNumberInput = document.getElementById("whatsappNumberInput") || { value: "" };
-const emailContactInput = document.getElementById("emailContactInput") || { value: "" };
-const instagramUrlInput = document.getElementById("instagramUrlInput") || { value: "" };
-const facebookUrlInput = document.getElementById("facebookUrlInput") || { value: "" };
-const tiktokUrlInput = document.getElementById("tiktokUrlInput") || { value: "" };
-const useHeroVideoInput = document.getElementById("useHeroVideoInput") || { checked: false };
-const useBackgroundImageInput = document.getElementById("useBackgroundImageInput") || { checked: false };
 
 // Elementos de autenticación
 const authBox = document.getElementById("authBox");
@@ -95,6 +94,18 @@ const emailInput = document.getElementById("emailInput");
 const passInput = document.getElementById("passInput");
 const safeModeBtn = document.getElementById("safeModeBtn");
 const fastModeBtn = document.getElementById("fastModeBtn");
+const authMsg = document.getElementById("authMsg");
+
+// Elementos de estadísticas
+const statProjects = document.getElementById("statProjects");
+const statActive = document.getElementById("statActive");
+const statHighlight = document.getElementById("statHighlight");
+const statHome = document.getElementById("statHome");
+const statPortfolio = document.getElementById("statPortfolio");
+const statCategories = document.getElementById("statCategories");
+
+// Elementos de dashboard
+const dashboardRecentList = document.getElementById("dashboardRecentList");
 
 // Elementos de proyectos
 const projectsList = document.getElementById("projectsList");
@@ -181,17 +192,28 @@ const siteContentMsg = document.getElementById("siteContentMsg");
 const siteSettingsRefreshBtn = document.getElementById("siteSettingsRefreshBtn");
 const siteSettingsSaveBtn = document.getElementById("siteSettingsSaveBtn");
 const siteSettingsMsg = document.getElementById("siteSettingsMsg");
-
-// Elementos de estadísticas
-const statProjects = document.getElementById("statProjects");
-const statActive = document.getElementById("statActive");
-const statHighlight = document.getElementById("statHighlight");
-const statHome = document.getElementById("statHome");
-const statPortfolio = document.getElementById("statPortfolio");
-const statCategories = document.getElementById("statCategories");
-
-// Elementos de dashboard
-const dashboardRecentList = document.getElementById("dashboardRecentList");
+const siteTitleInput = document.getElementById("siteTitleInput") || { value: "" };
+const siteTaglineInput = document.getElementById("siteTaglineInput") || { value: "" };
+const heroBadgeInput = document.getElementById("heroBadgeInput") || { value: "" };
+const heroTitleInput = document.getElementById("heroTitleInput") || { value: "" };
+const heroSubtitleInput = document.getElementById("heroSubtitleInput") || { value: "" };
+const heroCtaLabelInput = document.getElementById("heroCtaLabelInput") || { value: "" };
+const heroCtaUrlInput = document.getElementById("heroCtaUrlInput") || { value: "" };
+const logoUrlInput = document.getElementById("logoUrlInput") || { value: "" };
+const heroLogoUrlInput = document.getElementById("heroLogoUrlInput") || { value: "" };
+const footerLogoUrlInput = document.getElementById("footerLogoUrlInput") || { value: "" };
+const faviconUrlInput = document.getElementById("faviconUrlInput") || { value: "" };
+const whatsappNumberInput = document.getElementById("whatsappNumberInput") || { value: "" };
+const emailContactInput = document.getElementById("emailContactInput") || { value: "" };
+const instagramUrlInput = document.getElementById("instagramUrlInput") || { value: "" };
+const facebookUrlInput = document.getElementById("facebookUrlInput") || { value: "" };
+const tiktokUrlInput = document.getElementById("tiktokUrlInput") || { value: "" };
+const useHeroVideoInput = document.getElementById("useHeroVideoInput") || { checked: false };
+const useBackgroundImageInput = document.getElementById("useBackgroundImageInput") || { checked: false };
+const backgroundImageUrlInput = document.getElementById("backgroundImageUrlInput") || { value: "" };
+const heroImageUrlInput = document.getElementById("heroImageUrlInput") || { value: "" };
+const heroOverlayUrlInput = document.getElementById("heroOverlayUrlInput") || { value: "" };
+const heroVideoUrlInput = document.getElementById("heroVideoUrlInput") || { value: "" };
 
 // Elementos de historial
 const projectHistoryList = document.getElementById("projectHistoryList");
@@ -200,6 +222,7 @@ const historyRefreshBtn = document.getElementById("historyRefreshBtn");
 
 // Elementos de reseñas
 const reviewsRefreshBtn = document.getElementById("reviewsRefreshBtn");
+const userEmail = document.getElementById("userEmail") || { textContent: "" };
 
 /* =========================
    HELPERS
@@ -218,6 +241,86 @@ function setCategoriesMsg(msg = "") { if (categoriesMsg) categoriesMsg.textConte
 function setFaqsMsg(msg = "") { if (faqsMsg) faqsMsg.textContent = msg; }
 function setSiteContentMsg(msg = "") { if (siteContentMsg) siteContentMsg.textContent = msg; }
 function setSiteSettingsMsg(msg = "") { if (siteSettingsMsg) siteSettingsMsg.textContent = msg; }
+function setBrandsMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("brandsMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setAssistantQuestionsMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("assistantQuestionsMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setAssistantResponsesMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("assistantResponsesMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setSuccessStoriesMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("successStoriesMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setServicesMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("servicesMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setGuideLeadsMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("guideLeadsMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setPlansMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("plansMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setFeaturedProjectsMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("featuredProjectsMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setHistoryMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("historyMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
+function setReviewsMsg(msg = "", isError = false) {
+  const msgEl = document.getElementById("reviewsPendingMsg");
+  if (!msgEl) return;
+  msgEl.textContent = msg;
+  msgEl.classList.remove("msg--success", "msg--error");
+  msgEl.classList.add(isError ? "msg--error" : "msg--success");
+  setTimeout(() => { if (msgEl.textContent === msg) { msgEl.textContent = ""; msgEl.classList.remove("msg--success", "msg--error"); } }, 4000);
+}
 
 function escapeHtml(s) {
   return String(s ?? "")
@@ -252,6 +355,15 @@ function switchView(view) {
   currentView = view;
   navBtns.forEach(btn => btn.classList.toggle("is-active", btn.dataset.view === view));
   viewPanels.forEach(panel => { panel.style.display = panel.dataset.panel === view ? "" : "none"; });
+  
+  if (view === "brands" && typeof loadBrandsAdmin === "function") loadBrandsAdmin();
+  if (view === "assistant-questions" && typeof loadAssistantQuestionsAdmin === "function") loadAssistantQuestionsAdmin();
+  if (view === "assistant-responses" && typeof loadAssistantResponsesAdmin === "function") loadAssistantResponsesAdmin();
+  if (view === "success-stories" && typeof loadSuccessStoriesAdmin === "function") loadSuccessStoriesAdmin();
+  if (view === "reviews-pending" && typeof loadPendingReviews === "function") loadPendingReviews();
+  if (view === "reviews-approved" && typeof loadApprovedReviews === "function") loadApprovedReviews();
+  if (view === "services" && typeof loadServicesAdmin === "function") loadServicesAdmin();
+  if (view === "guide-leads" && typeof loadGuideLeadsAdmin === "function") loadGuideLeadsAdmin();
 }
 
 function fillCategorySelects() {
@@ -380,23 +492,11 @@ async function getCurrentUserEmail() {
   return data?.user?.email || "";
 }
 
-function buildStorageFilePath(file) {
+function buildStorageFilePath(file, folder = "brands") {
   const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
-  const titleSlug = slugify(projectTitleInput?.value || "proyecto");
   const stamp = Date.now();
   const random = Math.random().toString(36).slice(2, 8);
-  return `projects/${titleSlug || "proyecto"}-${stamp}-${random}.${ext || "jpg"}`;
-}
-
-function showLoading(elementId, show = true) {
-  const element = document.getElementById(elementId);
-  if (!element) return;
-  
-  if (show && element.children.length === 0) {
-    element.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
-  } else if (!show && element.querySelector(".loading-skeleton")) {
-    element.innerHTML = "";
-  }
+  return `${folder}/${stamp}-${random}.${ext || "jpg"}`;
 }
 
 /* =========================
@@ -459,8 +559,8 @@ class Paginator {
     container.style.display = "flex";
     
     let html = `
-      <button class="pagination__first" ${this.currentPage === 1 ? "disabled" : ""} data-tooltip="Primera página">«</button>
-      <button class="pagination__prev" ${this.currentPage === 1 ? "disabled" : ""} data-tooltip="Página anterior">‹</button>
+      <button class="pagination__first" ${this.currentPage === 1 ? "disabled" : ""}>«</button>
+      <button class="pagination__prev" ${this.currentPage === 1 ? "disabled" : ""}>‹</button>
     `;
 
     let startPage = Math.max(1, this.currentPage - 2);
@@ -476,8 +576,8 @@ class Paginator {
     if (endPage < this.totalPages) html += `${endPage < this.totalPages - 1 ? '<span>...</span>' : ''}<button class="pagination__page" data-page="${this.totalPages}">${this.totalPages}</button>`;
     
     html += `
-      <button class="pagination__next" ${this.currentPage === this.totalPages ? "disabled" : ""} data-tooltip="Página siguiente">›</button>
-      <button class="pagination__last" ${this.currentPage === this.totalPages ? "disabled" : ""} data-tooltip="Última página">»</button>
+      <button class="pagination__next" ${this.currentPage === this.totalPages ? "disabled" : ""}>›</button>
+      <button class="pagination__last" ${this.currentPage === this.totalPages ? "disabled" : ""}>»</button>
       <span class="pagination__info">📊 ${this.items.length} items · Pág ${this.currentPage} de ${this.totalPages}</span>
       <select class="per-page-select">
         <option value="5" ${this.itemsPerPage === 5 ? "selected" : ""}>5 por página</option>
@@ -628,7 +728,7 @@ if (fastModeBtn) {
 }
 
 /* =========================
-   LOADERS
+   LOADERS PRINCIPALES
 ========================= */
 async function loadCategories() {
   const { data, error } = await sb.from("categories").select("*").order("order_index", { ascending: true });
@@ -649,8 +749,6 @@ async function loadTags() {
 }
 
 async function loadProjects() {
-  showLoading("projectsList", true);
-  
   const { data, error } = await sb
     .from("projects")
     .select("*")
@@ -660,7 +758,6 @@ async function loadProjects() {
 
   if (error) {
     setProjectsMsg(`No se pudieron cargar proyectos: ${error.message}`);
-    showLoading("projectsList", false);
     return;
   }
   
@@ -669,7 +766,6 @@ async function loadProjects() {
   updateDashboardStats();
   renderDashboardRecent();
   renderProjectsList();
-  showLoading("projectsList", false);
 }
 
 async function loadProjectTags() {
@@ -743,10 +839,19 @@ async function loadAll() {
     loadSiteContent(),
     loadSiteSettings(),
     loadHistory(),
+    loadPlansAdmin(),
+    loadBrandsAdmin(),
+    loadAssistantQuestionsAdmin(),
+    loadSuccessStoriesAdmin(),
+    loadApprovedReviews(),
+    loadServicesAdmin(),
+    loadGuideLeadsAdmin()
   ]);
-  if (document.getElementById("plansList")) await loadPlansAdmin();
-}/* =========================
-   RENDER (con paginación)
+  iniciarNotificaciones();
+}
+
+/* =========================
+   RENDER PRINCIPAL
 ========================= */
 function updateDashboardStats() {
   if (statProjects) statProjects.textContent = String(projectsData.length);
@@ -783,7 +888,7 @@ function renderDashboardRecent() {
           <div class="listCard__badges">${renderProjectBadges(project)}</div>
         </div>
         <div class="listCard__actions">
-          <button class="btn btn--ghost btn--small" type="button" data-edit-project="${project.id}" data-tooltip="Editar proyecto">✏️ Editar</button>
+          <button class="btn btn--ghost btn--small" type="button" data-edit-project="${project.id}">✏️ Editar</button>
         </div>
       </article>
     `).join("");
@@ -850,7 +955,7 @@ function renderProjectsListPage(projects) {
   }
 
   projectsList.innerHTML = projects.map(project => `
-    <article class="listCard" data-tooltip="📅 Última modificación: ${formatDate(project.updated_at)}">
+    <article class="listCard">
       <div class="listCard__thumb">
         <img src="${escapeHtml(project.image_url || "")}" alt="${escapeHtml(project.title)}" loading="lazy" />
       </div>
@@ -861,10 +966,10 @@ function renderProjectsListPage(projects) {
         <div class="listCard__badges">${renderProjectBadges(project)}</div>
       </div>
       <div class="listCard__actions">
-        <button class="btn btn--ghost btn--small" data-edit-project="${project.id}" data-tooltip="Editar proyecto">✏️</button>
-        <button class="btn btn--ghost btn--small" data-duplicate-project="${project.id}" data-tooltip="Duplicar proyecto">📋</button>
-        <button class="btn btn--ghost btn--small" data-toggle-project="${project.id}" data-tooltip="${project.active ? 'Desactivar' : 'Activar'}">${project.active ? "🔴" : "🟢"}</button>
-        <button class="btn btn--danger btn--small" data-delete-project="${project.id}" data-tooltip="Archivar proyecto">🗑️</button>
+        <button class="btn btn--ghost btn--small" data-edit-project="${project.id}">✏️</button>
+        <button class="btn btn--ghost btn--small" data-duplicate-project="${project.id}">📋</button>
+        <button class="btn btn--ghost btn--small" data-toggle-project="${project.id}">${project.active ? "🔴" : "🟢"}</button>
+        <button class="btn btn--danger btn--small" data-delete-project="${project.id}">🗑️</button>
       </div>
     </article>
   `).join("");
@@ -974,8 +1079,8 @@ function renderCategoriesList() {
           <div class="listCard__meta">${cat.active ? "🟢 Activa" : "🔴 Inactiva"} · 🔢 Orden: ${cat.order_index ?? 0}</div>
         </div>
         <div class="listCard__actions">
-          <button class="btn btn--ghost btn--small" type="button" data-edit-category="${cat.id}" data-tooltip="Editar categoría">✏️</button>
-          <button class="btn btn--ghost btn--small" type="button" data-toggle-category="${cat.id}" data-tooltip="${cat.active ? 'Desactivar' : 'Activar'}">${cat.active ? "🔴" : "🟢"}</button>
+          <button class="btn btn--ghost btn--small" type="button" data-edit-category="${cat.id}">✏️</button>
+          <button class="btn btn--ghost btn--small" type="button" data-toggle-category="${cat.id}">${cat.active ? "🔴" : "🟢"}</button>
         </div>
       </article>
     `).join("");
@@ -1039,8 +1144,8 @@ function renderFaqsList() {
           <div class="listCard__meta">${faq.active ? "🟢 Activa" : "🔴 Inactiva"} · 🔢 Orden: ${faq.order_index ?? 0}</div>
         </div>
         <div class="listCard__actions">
-          <button class="btn btn--ghost btn--small" type="button" data-edit-faq="${faq.id}" data-tooltip="Editar FAQ">✏️</button>
-          <button class="btn btn--ghost btn--small" type="button" data-toggle-faq="${faq.id}" data-tooltip="${faq.active ? 'Desactivar' : 'Activar'}">${faq.active ? "🔴" : "🟢"}</button>
+          <button class="btn btn--ghost btn--small" type="button" data-edit-faq="${faq.id}">✏️</button>
+          <button class="btn btn--ghost btn--small" type="button" data-toggle-faq="${faq.id}">${faq.active ? "🔴" : "🟢"}</button>
         </div>
       </article>
     `).join("");
@@ -1115,10 +1220,6 @@ function fillSiteSettingsForm() {
   if (heroLogoUrlInput) heroLogoUrlInput.value = s.hero_logo_url || "";
   if (footerLogoUrlInput) footerLogoUrlInput.value = s.footer_logo_url || "";
   if (faviconUrlInput) faviconUrlInput.value = s.favicon_url || "";
-  if (backgroundImageUrlInput) backgroundImageUrlInput.value = s.background_image_url || "";
-  if (heroImageUrlInput) heroImageUrlInput.value = s.hero_image_url || "";
-  if (heroOverlayUrlInput) heroOverlayUrlInput.value = s.hero_overlay_url || "";
-  if (heroVideoUrlInput) heroVideoUrlInput.value = s.hero_video_url || "";
   if (whatsappNumberInput) whatsappNumberInput.value = s.whatsapp_number || "";
   if (emailContactInput) emailContactInput.value = s.email_contact || "";
   if (instagramUrlInput) instagramUrlInput.value = s.instagram_url || "";
@@ -1170,7 +1271,7 @@ function renderProjectHistoryPage(items) {
             <div class="listCard__meta">👤 Por: ${escapeHtml(item.changed_by || "admin")}</div>
           </div>
           <div class="listCard__actions">
-            <button class="btn btn--ghost btn--small" data-restore-project-history="${item.id}" data-tooltip="Restaurar esta versión">↩️ Restaurar</button>
+            <button class="btn btn--ghost btn--small" data-restore-project-history="${item.id}">↩️ Restaurar</button>
           </div>
         </article>
       `;
@@ -1224,7 +1325,7 @@ function renderSettingsHistoryPage(items) {
           <div class="listCard__meta">👤 Por: ${escapeHtml(item.changed_by || "admin")}</div>
         </div>
         <div class="listCard__actions">
-          <button class="btn btn--ghost btn--small" data-restore-settings-history="${item.id}" data-tooltip="Restaurar esta configuración">↩️ Restaurar</button>
+          <button class="btn btn--ghost btn--small" data-restore-settings-history="${item.id}">↩️ Restaurar</button>
         </div>
       </article>
     `).join("");
@@ -1239,8 +1340,49 @@ function renderSettingsHistoryPage(items) {
 }
 
 /* =========================
-   HISTORIAL
+   FUNCIONES DE PROYECTOS (CRUD)
 ========================= */
+async function uploadImageToStorage() {
+  if (!projectImageFileInput || !projectUploadBtn || !projectUploadMsg) return;
+  setProjectUploadMsg("");
+
+  const file = projectImageFileInput.files?.[0];
+  if (!file) return setProjectUploadMsg("Seleccioná una imagen primero.", "error");
+  if (!file.type.startsWith("image/")) return setProjectUploadMsg("El archivo debe ser una imagen.", "error");
+  if (file.size > 8 * 1024 * 1024) return setProjectUploadMsg("La imagen supera 8MB.", "error");
+
+  projectUploadBtn.disabled = true;
+  setProjectUploadMsg("📤 Subiendo imagen...", "success");
+
+  try {
+    const filePath = buildStorageFilePath(file, "projects");
+
+    const { error: uploadError } = await sb
+      .storage
+      .from("project-images")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: false,
+        contentType: file.type,
+      });
+
+    if (uploadError) throw new Error(uploadError.message || "No se pudo subir la imagen.");
+
+    const { data: publicData } = sb.storage.from("project-images").getPublicUrl(filePath);
+    const publicUrl = publicData?.publicUrl || "";
+
+    if (!publicUrl) throw new Error("No se pudo obtener la URL pública.");
+
+    if (projectImageUrlInput) projectImageUrlInput.value = publicUrl;
+    if (projectPreviewImg) projectPreviewImg.src = publicUrl;
+    setProjectUploadMsg("✅ Imagen subida y URL completada.", "success");
+  } catch (error) {
+    setProjectUploadMsg(error instanceof Error ? error.message : "No se pudo subir la imagen.", "error");
+  } finally {
+    projectUploadBtn.disabled = false;
+  }
+}
+
 async function snapshotProject(project, actionType) {
   if (!project?.id) return;
   await sb.from("project_history").insert([{
@@ -1308,9 +1450,6 @@ async function restoreSettingsFromHistory(item) {
   await loadHistory();
 }
 
-/* =========================
-   TAGS
-========================= */
 async function upsertTagsAndBindings(projectId, names) {
   const cleaned = parseTagInput(names.join(", "));
   if (!projectId) return;
@@ -1346,57 +1485,83 @@ async function upsertTagsAndBindings(projectId, names) {
   }
 }
 
-/* =========================
-   UPLOAD STORAGE
-========================= */
-async function uploadImageToStorage() {
-  if (!projectImageFileInput || !projectUploadBtn || !projectUploadMsg) return;
-  setProjectUploadMsg("");
+async function duplicateProject(project) {
+  const ok = await confirmAction({ message: `📋 ¿Duplicar "${project.title}"?`, type: "generic" });
+  if (!ok) return;
 
-  const file = projectImageFileInput.files?.[0];
-  if (!file) return setProjectUploadMsg("Seleccioná una imagen primero.", "error");
-  if (!file.type.startsWith("image/")) return setProjectUploadMsg("El archivo debe ser una imagen.", "error");
-  if (file.size > 8 * 1024 * 1024) return setProjectUploadMsg("La imagen supera 8MB.", "error");
+  const clonePayload = {
+    image_url: project.image_url,
+    title: `${project.title} (copia)`,
+    demo_url: project.demo_url,
+    category_id: project.category_id,
+    solution_type: project.solution_type,
+    short_description: project.short_description,
+    full_description: project.full_description,
+    preview_type: project.preview_type,
+    order_index: project.order_index,
+    active: false,
+    highlight: false,
+    featured_home: false,
+    featured_portfolio: false,
+    status: "draft",
+    duplicated_from: project.id,
+    updated_at: new Date().toISOString(),
+  };
 
-  projectUploadBtn.disabled = true;
-  setProjectUploadMsg("📤 Subiendo imagen...", "success");
+  const { data, error } = await sb.from("projects").insert([clonePayload]).select("*").single();
+  if (error) return setProjectsMsg(`No se pudo duplicar: ${error.message}`);
 
-  try {
-    const filePath = buildStorageFilePath(file);
+  const tags = getProjectTags(project.id);
+  await upsertTagsAndBindings(data.id, tags.map(t => t.name));
+  await snapshotProject(data, "duplicate");
 
-    const { error: uploadError } = await sb
-      .storage
-      .from("project-images")
-      .upload(filePath, file, {
-        cacheControl: "3600",
-        upsert: false,
-        contentType: file.type,
-      });
-
-    if (uploadError) {
-      throw new Error(uploadError.message || "No se pudo subir la imagen.");
-    }
-
-    const { data: publicData } = sb.storage.from("project-images").getPublicUrl(filePath);
-    const publicUrl = publicData?.publicUrl || "";
-
-    if (!publicUrl) {
-      throw new Error("No se pudo obtener la URL pública.");
-    }
-
-    if (projectImageUrlInput) projectImageUrlInput.value = publicUrl;
-    if (projectPreviewImg) projectPreviewImg.src = publicUrl;
-    setProjectUploadMsg("✅ Imagen subida y URL completada.", "success");
-  } catch (error) {
-    setProjectUploadMsg(error instanceof Error ? error.message : "No se pudo subir la imagen.", "error");
-  } finally {
-    projectUploadBtn.disabled = false;
-  }
+  setProjectsMsg("✅ Proyecto duplicado.");
+  await loadTags();
+  await loadProjects();
+  await loadHistory();
 }
 
-/* =========================
-   PROJECTS CRUD
-========================= */
+async function toggleProjectActive(project) {
+  const ok = await confirmAction({ message: `¿Actualizar estado activo de "${project.title}"?`, type: "generic" });
+  if (!ok) return;
+
+  await snapshotProject(project, "status_change");
+  const { error } = await sb.from("projects").update({
+    active: !project.active,
+    updated_at: new Date().toISOString(),
+  }).eq("id", project.id);
+
+  if (error) return setProjectsMsg(`No se pudo actualizar el proyecto: ${error.message}`);
+  setProjectsMsg("✅ Proyecto actualizado.");
+  await loadProjects();
+  await loadHistory();
+}
+
+async function deleteProject(project) {
+  const ok = await confirmAction({
+    message: `📦 ¿Archivar "${project.title}"? No se borra físico, se oculta y queda restaurable.`,
+    type: "delete",
+    double: true,
+  });
+  if (!ok) return;
+
+  await snapshotProject(project, "delete");
+
+  const { error } = await sb.from("projects").update({
+    status: "archived",
+    active: false,
+    deleted_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  }).eq("id", project.id);
+
+  if (error) return setProjectsMsg(`No se pudo archivar el proyecto: ${error.message}`);
+  setProjectsMsg("📦 Proyecto archivado.");
+  await loadProjects();
+  await loadHistory();
+  resetProjectForm();
+  switchView("projects");
+}
+
 if (projectImageUrlInput) {
   projectImageUrlInput.addEventListener("input", () => {
     const value = safeUrl(projectImageUrlInput.value);
@@ -1551,85 +1716,8 @@ if (projectDeleteBtn) {
   });
 }
 
-async function toggleProjectActive(project) {
-  const ok = await confirmAction({ message: `¿Actualizar estado activo de "${project.title}"?`, type: "generic" });
-  if (!ok) return;
-
-  await snapshotProject(project, "status_change");
-  const { error } = await sb.from("projects").update({
-    active: !project.active,
-    updated_at: new Date().toISOString(),
-  }).eq("id", project.id);
-
-  if (error) return setProjectsMsg(`No se pudo actualizar el proyecto: ${error.message}`);
-  setProjectsMsg("✅ Proyecto actualizado.");
-  await loadProjects();
-  await loadHistory();
-}
-
-async function deleteProject(project) {
-  const ok = await confirmAction({
-    message: `📦 ¿Archivar "${project.title}"? No se borra físico, se oculta y queda restaurable.`,
-    type: "delete",
-    double: true,
-  });
-  if (!ok) return;
-
-  await snapshotProject(project, "delete");
-
-  const { error } = await sb.from("projects").update({
-    status: "archived",
-    active: false,
-    deleted_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  }).eq("id", project.id);
-
-  if (error) return setProjectsMsg(`No se pudo archivar el proyecto: ${error.message}`);
-  setProjectsMsg("📦 Proyecto archivado.");
-  await loadProjects();
-  await loadHistory();
-  resetProjectForm();
-  switchView("projects");
-}
-
-async function duplicateProject(project) {
-  const ok = await confirmAction({ message: `📋 ¿Duplicar "${project.title}"?`, type: "generic" });
-  if (!ok) return;
-
-  const clonePayload = {
-    image_url: project.image_url,
-    title: `${project.title} (copia)`,
-    demo_url: project.demo_url,
-    category_id: project.category_id,
-    solution_type: project.solution_type,
-    short_description: project.short_description,
-    full_description: project.full_description,
-    preview_type: project.preview_type,
-    order_index: project.order_index,
-    active: false,
-    highlight: false,
-    featured_home: false,
-    featured_portfolio: false,
-    status: "draft",
-    duplicated_from: project.id,
-    updated_at: new Date().toISOString(),
-  };
-
-  const { data, error } = await sb.from("projects").insert([clonePayload]).select("*").single();
-  if (error) return setProjectsMsg(`No se pudo duplicar: ${error.message}`);
-
-  const tags = getProjectTags(project.id);
-  await upsertTagsAndBindings(data.id, tags.map(t => t.name));
-  await snapshotProject(data, "duplicate");
-
-  setProjectsMsg("✅ Proyecto duplicado.");
-  await loadTags();
-  await loadProjects();
-  await loadHistory();
-}
-
 /* =========================
-   FILTERS
+   EVENT LISTENERS PROYECTOS
 ========================= */
 if (projectsRefreshBtn) projectsRefreshBtn.addEventListener("click", loadProjects);
 if (dashboardRefreshBtn) dashboardRefreshBtn.addEventListener("click", loadAll);
@@ -1641,7 +1729,7 @@ if (projectStatusFilter) projectStatusFilter.addEventListener("change", renderPr
 if (projectTagFilter) projectTagFilter.addEventListener("change", renderProjectsList);
 
 /* =========================
-   CATEGORIES CRUD
+   CATEGORÍAS CRUD
 ========================= */
 if (categoryNameInput) {
   categoryNameInput.addEventListener("input", () => {
@@ -1884,7 +1972,7 @@ navBtns.forEach(btn => {
 });
 
 /* =========================
-   REVIEWS (RESEÑAS) - MEJORADO
+   REVIEWS (RESEÑAS) - FUNCIONES COMPLETAS
 ========================= */
 
 async function loadPendingReviews() {
@@ -1900,19 +1988,14 @@ async function loadPendingReviews() {
       .eq("status", "pending")
       .order("created_at", { ascending: false });
 
-    if (error) {
-      console.error("Error loading reviews:", error);
-      setReviewsMsg(`❌ Error: ${error.message}`, true);
-      container.innerHTML = `<div class="emptyState">⚠️ Error al cargar reseñas. ¿La tabla 'reviews' existe?</div>`;
-      return;
-    }
+    if (error) throw error;
     
     reviewsData = data || [];
     updatePendingStats();
     renderPendingReviews();
   } catch (err) {
-    console.error("Exception loading reviews:", err);
-    container.innerHTML = `<div class="emptyState">⚠️ Error: ${err.message}</div>`;
+    console.error("Error loading reviews:", err);
+    container.innerHTML = `<div class="emptyState">⚠️ Error al cargar reseñas. ¿La tabla 'reviews' existe?</div>`;
   }
 }
 
@@ -1933,22 +2016,6 @@ function updatePendingStats() {
   }
 }
 
-function setReviewsMsg(msg, isError = false) {
-  const msgEl = document.getElementById("reviewsPendingMsg");
-  if (!msgEl) return;
-  
-  msgEl.textContent = msg;
-  msgEl.classList.remove("msg--success", "msg--error");
-  msgEl.classList.add(isError ? "msg--error" : "msg--success");
-  
-  setTimeout(() => {
-    if (msgEl.textContent === msg) {
-      msgEl.textContent = "";
-      msgEl.classList.remove("msg--success", "msg--error");
-    }
-  }, 4000);
-}
-
 function renderPendingReviews() {
   const container = document.getElementById("reviewsPendingList");
   if (!container) return;
@@ -1961,35 +2028,16 @@ function renderPendingReviews() {
   container.innerHTML = `
     <table class="reviews-table">
       <thead>
-        <tr>
-          <th>Usuario</th>
-          <th>Calificación</th>
-          <th>Reseña</th>
-          <th>Proyecto</th>
-          <th>Fecha</th>
-          <th>Acciones</th>
-        </tr>
+        <tr><th>Usuario</th><th>Calificación</th><th>Reseña</th><th>Proyecto</th><th>Fecha</th><th>Acciones</th></tr>
       </thead>
       <tbody>
         ${reviewsData.map(review => `
           <tr>
-            <td data-label="Usuario">
-              <strong>${escapeHtml(review.user_name || "Anónimo")}</strong>
-              ${review.user_email ? `<br/><small>${escapeHtml(review.user_email)}</small>` : ""}
-             </td>
-            <td data-label="Calificación">
-              ${"⭐".repeat(review.rating)} (${review.rating}/5)
-             </td>
-            <td data-label="Reseña">
-              ${review.title ? `<strong>${escapeHtml(review.title)}</strong><br/>` : ""}
-              ${escapeHtml((review.comment || "").substring(0, 200))}${(review.comment || "").length > 200 ? "..." : ""}
-             </td>
-            <td data-label="Proyecto">
-              ${review.project_id ? escapeHtml(review.project_title || `Proyecto ${review.project_id}`) : "Opinión general"}
-             </td>
-            <td data-label="Fecha">
-              <small>${formatDate(review.created_at)}</small>
-             </td>
+            <td data-label="Usuario"><strong>${escapeHtml(review.user_name || "Anónimo")}</strong>${review.user_email ? `<br/><small>${escapeHtml(review.user_email)}</small>` : ""}</td>
+            <td data-label="Calificación">${"⭐".repeat(review.rating)} (${review.rating}/5)</td>
+            <td data-label="Reseña">${review.title ? `<strong>${escapeHtml(review.title)}</strong><br/>` : ""}${escapeHtml((review.comment || "").substring(0, 200))}${(review.comment || "").length > 200 ? "..." : ""}</td>
+            <td data-label="Proyecto">${review.project_id ? escapeHtml(review.project_title || `Proyecto ${review.project_id}`) : "Opinión general"}</td>
+            <td data-label="Fecha"><small>${formatDate(review.created_at)}</small></td>
             <td data-label="Acciones" class="action-btns">
               <button class="btn btn--small btn--ghost" data-edit-review="${review.id}" style="border-color:var(--cyan);">✏️ Editar</button>
               <button class="btn btn--success btn--small" data-approve-review="${review.id}">✅ Aprobar</button>
@@ -2050,13 +2098,13 @@ async function approveReview(reviewId) {
   
   setReviewsMsg("✅ Reseña aprobada y publicada correctamente.");
   await loadPendingReviews();
-  if (typeof loadApprovedReviews === "function") await loadApprovedReviews();
+  await loadApprovedReviews();
   checkNewReviewsNotification();
 }
 
 async function rejectReview(reviewId) {
   const ok = await confirmAction({
-    message: "❌ ¿Rechazar esta reseña? Se eliminará permanentemente y no se podrá recuperar.",
+    message: "❌ ¿Rechazar esta reseña? Se eliminará permanentemente.",
     type: "delete",
     double: true,
   });
@@ -2076,105 +2124,87 @@ async function rejectReview(reviewId) {
   
   setReviewsMsg("❌ Reseña rechazada y eliminada.");
   await loadPendingReviews();
-  if (typeof loadApprovedReviews === "function") await loadApprovedReviews();
+  await loadApprovedReviews();
   checkNewReviewsNotification();
 }
 
-// NOTIFICACIONES VISUALES
-async function checkNewReviewsNotification() {
-  if (!sb || !currentUserEmail) return;
+function openEditModal(review) {
+  currentEditReviewId = review.id;
   
-  try {
-    const { data, error } = await sb
-      .from("reviews")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "pending");
-    
-    if (error) throw error;
-    
-    const currentCount = data?.length || 0;
-    
-    const pendingBadge = document.getElementById("pendingBadge");
-    if (pendingBadge) {
-      if (currentCount > 0) {
-        pendingBadge.textContent = currentCount;
-        pendingBadge.style.display = "inline-block";
-      } else {
-        pendingBadge.style.display = "none";
-      }
-    }
-    
-    if (currentCount > lastPendingCount && lastPendingCount > 0) {
-      mostrarNotificacion(`✨ Tienes ${currentCount - lastPendingCount} reseña(s) nueva(s) para moderar`);
-    }
-    
-    lastPendingCount = currentCount;
-    
-  } catch (err) {
-    console.error("Error checking reviews:", err);
-  }
-}
-
-function mostrarNotificacion(mensaje) {
-  const toast = document.createElement("div");
-  toast.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #00d4ff, #8b5cf6);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    font-weight: bold;
-    z-index: 9999;
-    animation: slideIn 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  `;
-  toast.textContent = `🔔 ${mensaje}`;
+  const editName = document.getElementById("editReviewName");
+  const editComment = document.getElementById("editReviewComment");
+  const editId = document.getElementById("editReviewId");
   
-  if (!document.querySelector("#notificationStyle")) {
-    const style = document.createElement("style");
-    style.id = "notificationStyle";
-    style.textContent = `
-      @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
+  if (editName) editName.value = review.user_name || "";
+  if (editComment) editComment.value = review.comment || "";
+  if (editId) editId.value = review.id;
   
-  document.body.appendChild(toast);
-  
-  toast.addEventListener("click", () => {
-    if (typeof switchView === "function") {
-      switchView("reviews-pending");
-    }
-    cerrarNotificacion(toast);
+  const stars = document.querySelectorAll("#editRatingStars span");
+  stars.forEach((star, idx) => {
+    star.style.color = idx < review.rating ? "#f5b042" : "#4a4a6a";
+    star.textContent = idx < review.rating ? "★" : "☆";
   });
   
-  setTimeout(() => cerrarNotificacion(toast), 8000);
+  window.currentEditRating = review.rating;
+  
+  stars.forEach(star => {
+    star.onclick = () => {
+      const rating = parseInt(star.dataset.rating);
+      window.currentEditRating = rating;
+      stars.forEach((s, i) => {
+        s.style.color = i < rating ? "#f5b042" : "#4a4a6a";
+        s.textContent = i < rating ? "★" : "☆";
+      });
+    };
+  });
+  
+  const modal = document.getElementById("editReviewModal");
+  if (modal) modal.style.display = "flex";
 }
 
-function cerrarNotificacion(toast) {
-  toast.style.animation = "slideOut 0.3s ease";
-  setTimeout(() => toast.remove(), 300);
+async function saveEditedReviewAndApprove() {
+  const reviewId = document.getElementById("editReviewId")?.value;
+  const newComment = document.getElementById("editReviewComment")?.value.trim();
+  const newRating = window.currentEditRating || 5;
+  
+  if (!newComment) {
+    setReviewsMsg("❌ El comentario no puede estar vacío", true);
+    return;
+  }
+  
+  const ok = await confirmAction({
+    message: "✅ ¿Aprobar esta reseña con los cambios realizados?",
+    type: "generic",
+  });
+  if (!ok) return;
+  
+  setReviewsMsg("⏳ Guardando cambios y aprobando...");
+  
+  const { error } = await sb
+    .from("reviews")
+    .update({
+      comment: newComment,
+      rating: newRating,
+      status: "approved",
+      approved_at: new Date().toISOString(),
+      approved_by: currentUserEmail,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", reviewId);
+  
+  if (error) {
+    setReviewsMsg(`❌ Error: ${error.message}`, true);
+    return;
+  }
+  
+  setReviewsMsg("✅ Reseña editada y aprobada correctamente.");
+  const modal = document.getElementById("editReviewModal");
+  if (modal) modal.style.display = "none";
+  
+  await loadPendingReviews();
+  await loadApprovedReviews();
 }
 
-function iniciarNotificaciones() {
-  if (notificationCheckInterval) clearInterval(notificationCheckInterval);
-  checkNewReviewsNotification();
-  notificationCheckInterval = setInterval(checkNewReviewsNotification, 15000);
-}
-
-// PANEL DE RESEÑAS APROBADAS
 async function loadApprovedReviews() {
   const container = document.getElementById("reviewsApprovedList");
   if (!container) return;
@@ -2257,14 +2287,7 @@ function renderApprovedReviewsPage(reviews) {
   
   container.innerHTML = `
     <table class="reviews-table">
-      <thead>
-        <tr>
-          <th>Usuario</th>
-          <th>Calificación</th>
-          <th>Reseña</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Usuario</th><th>Calificación</th><th>Reseña</th><th>Fecha</th></tr></thead>
       <tbody>
         ${reviews.map(review => `
           <tr>
@@ -2277,84 +2300,6 @@ function renderApprovedReviewsPage(reviews) {
       </tbody>
     </table>
   `;
-}
-
-// EDICIÓN DE RESEÑA
-function openEditModal(review) {
-  currentEditReviewId = review.id;
-  
-  const editName = document.getElementById("editReviewName");
-  const editComment = document.getElementById("editReviewComment");
-  const editId = document.getElementById("editReviewId");
-  
-  if (editName) editName.value = review.user_name || "";
-  if (editComment) editComment.value = review.comment || "";
-  if (editId) editId.value = review.id;
-  
-  const stars = document.querySelectorAll("#editRatingStars span");
-  stars.forEach((star, idx) => {
-    star.style.color = idx < review.rating ? "#f5b042" : "#4a4a6a";
-    star.textContent = idx < review.rating ? "★" : "☆";
-  });
-  
-  window.currentEditRating = review.rating;
-  
-  stars.forEach(star => {
-    star.onclick = () => {
-      const rating = parseInt(star.dataset.rating);
-      window.currentEditRating = rating;
-      stars.forEach((s, i) => {
-        s.style.color = i < rating ? "#f5b042" : "#4a4a6a";
-        s.textContent = i < rating ? "★" : "☆";
-      });
-    };
-  });
-  
-  const modal = document.getElementById("editReviewModal");
-  if (modal) modal.style.display = "flex";
-}
-
-async function saveEditedReviewAndApprove() {
-  const reviewId = document.getElementById("editReviewId")?.value;
-  const newComment = document.getElementById("editReviewComment")?.value.trim();
-  const newRating = window.currentEditRating || 5;
-  
-  if (!newComment) {
-    setReviewsMsg("❌ El comentario no puede estar vacío", true);
-    return;
-  }
-  
-  const ok = await confirmAction({
-    message: "✅ ¿Aprobar esta reseña con los cambios realizados?",
-    type: "generic",
-  });
-  if (!ok) return;
-  
-  setReviewsMsg("⏳ Guardando cambios y aprobando...");
-  
-  const { error } = await sb
-    .from("reviews")
-    .update({
-      comment: newComment,
-      rating: newRating,
-      status: "approved",
-      approved_at: new Date().toISOString(),
-      approved_by: currentUserEmail,
-      updated_at: new Date().toISOString(),
-    })
-    .eq("id", reviewId);
-  
-  if (error) {
-    setReviewsMsg(`❌ Error: ${error.message}`, true);
-    return;
-  }
-  
-  setReviewsMsg("✅ Reseña editada y aprobada correctamente.");
-  const modal = document.getElementById("editReviewModal");
-  if (modal) modal.style.display = "none";
-  
-  await loadPendingReviews();
-  await loadApprovedReviews();
 }
 
 function exportReviewsToCSV() {
@@ -2388,10 +2333,100 @@ function exportReviewsToCSV() {
   setReviewsMsg("✅ CSV exportado correctamente.");
 }
 
+async function checkNewReviewsNotification() {
+  if (!sb || !currentUserEmail) return;
+  
+  try {
+    const { count, error } = await sb
+      .from("reviews")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "pending");
+    
+    if (error) throw error;
+    
+    const currentCount = count || 0;
+    
+    const pendingBadge = document.getElementById("pendingBadge");
+    if (pendingBadge) {
+      if (currentCount > 0) {
+        pendingBadge.textContent = currentCount;
+        pendingBadge.style.display = "inline-block";
+      } else {
+        pendingBadge.style.display = "none";
+      }
+    }
+    
+    if (currentCount > lastPendingCount && lastPendingCount > 0) {
+      mostrarNotificacion(`✨ Tienes ${currentCount - lastPendingCount} reseña(s) nueva(s) para moderar`);
+    }
+    
+    lastPendingCount = currentCount;
+    
+  } catch (err) {
+    console.error("Error checking reviews:", err);
+  }
+}
+
+function mostrarNotificacion(mensaje) {
+  const toast = document.createElement("div");
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 9999;
+    animation: slideIn 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  `;
+  toast.textContent = `🔔 ${mensaje}`;
+  
+  if (!document.querySelector("#notificationStyle")) {
+    const style = document.createElement("style");
+    style.id = "notificationStyle";
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+  document.body.appendChild(toast);
+  
+  toast.addEventListener("click", () => {
+    switchView("reviews-pending");
+    cerrarNotificacion(toast);
+  });
+  
+  setTimeout(() => cerrarNotificacion(toast), 8000);
+}
+
+function cerrarNotificacion(toast) {
+  toast.style.animation = "slideOut 0.3s ease";
+  setTimeout(() => toast.remove(), 300);
+}
+
+function iniciarNotificaciones() {
+  if (notificationCheckInterval) clearInterval(notificationCheckInterval);
+  checkNewReviewsNotification();
+  notificationCheckInterval = setInterval(checkNewReviewsNotification, 15000);
+}
+
 /* =========================
    ADMINISTRACIÓN DE PLANES
 ========================= */
-
 async function loadPlansAdmin() {
   const container = document.getElementById("plansList");
   if (!container) return;
@@ -2462,9 +2497,9 @@ function renderPlansListPage(plans) {
         </div>
       </div>
       <div class="listCard__actions">
-        <button class="btn btn--ghost btn--small" data-edit-plan="${plan.id}" data-tooltip="Editar plan">✏️</button>
-        <button class="btn btn--ghost btn--small" data-duplicate-plan="${plan.id}" data-tooltip="Duplicar plan">📋</button>
-        <button class="btn btn--danger btn--small" data-delete-plan="${plan.id}" data-tooltip="Eliminar plan">🗑️</button>
+        <button class="btn btn--ghost btn--small" data-edit-plan="${plan.id}">✏️</button>
+        <button class="btn btn--ghost btn--small" data-duplicate-plan="${plan.id}">📋</button>
+        <button class="btn btn--danger btn--small" data-delete-plan="${plan.id}">🗑️</button>
       </div>
     </article>
   `).join("");
@@ -2485,19 +2520,19 @@ function openPlanModal(id = null) {
   const modal = document.getElementById("planModal");
   const title = document.getElementById("planModalTitle");
   
+  const planId = document.getElementById("planId");
+  const planName = document.getElementById("planName");
+  const planSlug = document.getElementById("planSlug");
+  const planDescription = document.getElementById("planDescription");
+  const planPrice = document.getElementById("planPrice");
+  const planIcon = document.getElementById("planIcon");
+  const planFeaturesInput = document.getElementById("planFeaturesInput");
+  const planCtaText = document.getElementById("planCtaText");
+  const planOrder = document.getElementById("planOrder");
+  const planActive = document.getElementById("planActive");
+  
   if (!id) {
     if (title) title.textContent = "📝 Nuevo Plan";
-    const planId = document.getElementById("planId");
-    const planName = document.getElementById("planName");
-    const planSlug = document.getElementById("planSlug");
-    const planDescription = document.getElementById("planDescription");
-    const planPrice = document.getElementById("planPrice");
-    const planIcon = document.getElementById("planIcon");
-    const planFeaturesInput = document.getElementById("planFeaturesInput");
-    const planCtaText = document.getElementById("planCtaText");
-    const planOrder = document.getElementById("planOrder");
-    const planActive = document.getElementById("planActive");
-    
     if (planId) planId.value = "";
     if (planName) planName.value = "";
     if (planSlug) planSlug.value = "";
@@ -2512,17 +2547,6 @@ function openPlanModal(id = null) {
     const plan = plansData.find(p => String(p.id) === String(id));
     if (!plan) return;
     if (title) title.textContent = `✏️ Editar: ${plan.name}`;
-    const planId = document.getElementById("planId");
-    const planName = document.getElementById("planName");
-    const planSlug = document.getElementById("planSlug");
-    const planDescription = document.getElementById("planDescription");
-    const planPrice = document.getElementById("planPrice");
-    const planIcon = document.getElementById("planIcon");
-    const planFeaturesInput = document.getElementById("planFeaturesInput");
-    const planCtaText = document.getElementById("planCtaText");
-    const planOrder = document.getElementById("planOrder");
-    const planActive = document.getElementById("planActive");
-    
     if (planId) planId.value = plan.id;
     if (planName) planName.value = plan.name || "";
     if (planSlug) planSlug.value = plan.slug || "";
@@ -2631,7 +2655,7 @@ async function deletePlan(id) {
   if (!plan) return;
   
   const ok = await confirmAction({
-    message: `⚠️ ¿Eliminar permanentemente el plan "${plan.name}"? Esta acción no se puede deshacer.`,
+    message: `⚠️ ¿Eliminar permanentemente el plan "${plan.name}"?`,
     type: "delete",
     double: true,
   });
@@ -2649,184 +2673,850 @@ async function deletePlan(id) {
   }
 }
 
-function setPlansMsg(msg, isError = false) {
-  const msgEl = document.getElementById("plansMsg");
-  if (!msgEl) return;
-  msgEl.textContent = msg;
-  msgEl.classList.remove("msg--success", "msg--error");
-  msgEl.classList.add(isError ? "msg--error" : "msg--success");
-  setTimeout(() => {
-    if (msgEl.textContent === msg) {
-      msgEl.textContent = "";
-      msgEl.classList.remove("msg--success", "msg--error");
-    }
-  }, 4000);
+/* =========================
+   ADMINISTRACIÓN DE MARCAS
+========================= */
+async function loadBrandsAdmin() {
+  const container = document.getElementById("brandsList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("trusted_brands")
+      .select("*")
+      .order("order_index", { ascending: true });
+    
+    if (error) throw error;
+    
+    brandsData = data || [];
+    renderBrandsList();
+  } catch (err) {
+    console.error("Error loading brands:", err);
+    container.innerHTML = `<div class="emptyState">⚠️ Error al cargar marcas: ${err.message}</div>`;
+  }
 }
 
-/* =========================
-   MENÚ HAMBURGUESA PARA ADMIN (VERSIÓN CORREGIDA)
-========================= */
-function initSidebarToggle() {
-  const toggleBtn = document.getElementById("sidebarToggleBtn");
-  const sidebar = document.querySelector(".sidebar");
+function renderBrandsList() {
+  const container = document.getElementById("brandsList");
+  if (!container) return;
   
-  if (!toggleBtn || !sidebar) {
-    console.warn("Botón o sidebar no encontrados");
+  if (!brandsData.length) {
+    container.innerHTML = `<div class="emptyState">🏷️ No hay marcas cargadas. Creá una nueva.</div>`;
+    if (brandsPaginator) brandsPaginator.updateItems([]);
     return;
   }
   
-  // Abrir/cerrar al hacer clic en el botón
-  toggleBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("open");
-  });
-  
-  // Cerrar al hacer clic fuera
-  document.addEventListener("click", (e) => {
-    if (window.innerWidth <= 980 && sidebar.classList.contains("open")) {
-      if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-        sidebar.classList.remove("open");
-      }
-    }
-  });
-  
-  // Cerrar al hacer clic en cualquier navBtn (en móvil)
-  document.querySelectorAll(".navBtn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (window.innerWidth <= 980) {
-        sidebar.classList.remove("open");
-      }
+  if (!brandsPaginator) {
+    brandsPaginator = new Paginator({
+      items: brandsData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderBrandsListPage(paginatedItems);
+      },
+      containerId: "brandsPagination",
     });
-  });
+  } else {
+    brandsPaginator.updateItems(brandsData);
+  }
   
-  // Cerrar automáticamente al redimensionar a desktop
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 980 && sidebar.classList.contains("open")) {
-      sidebar.classList.remove("open");
+  brandsPaginator.setPage(1);
+}
+
+function renderBrandsListPage(brands) {
+  const container = document.getElementById("brandsList");
+  if (!container) return;
+  
+  if (!brands.length) {
+    container.innerHTML = `<div class="emptyState">🏷️ No hay marcas para mostrar.</div>`;
+    return;
+  }
+  
+  container.innerHTML = brands.map(brand => `
+    <article class="listCard listCard--compact">
+      <div class="listCard__thumb">
+        <img src="${escapeHtml(brand.logo_url)}" alt="${escapeHtml(brand.name)}" style="width:60px; height:60px; object-fit:contain;" />
+      </div>
+      <div class="listCard__body">
+        <div class="listCard__title">🏷️ ${escapeHtml(brand.name)}</div>
+        <div class="listCard__meta">${brand.website_url ? `🔗 ${escapeHtml(brand.website_url)}` : 'Sin web'} · Orden: ${brand.order_index || 0}</div>
+        <div class="listCard__meta">${brand.active ? '🟢 Activo' : '🔴 Inactivo'}</div>
+      </div>
+      <div class="listCard__actions">
+        <button class="btn btn--ghost btn--small" data-edit-brand="${brand.id}">✏️</button>
+        <button class="btn btn--danger btn--small" data-delete-brand="${brand.id}">🗑️</button>
+      </div>
+    </article>
+  `).join("");
+  
+  container.querySelectorAll("[data-edit-brand]").forEach(btn => {
+    btn.addEventListener("click", () => openBrandModal(btn.getAttribute("data-edit-brand")));
+  });
+  container.querySelectorAll("[data-delete-brand]").forEach(btn => {
+    btn.addEventListener("click", () => deleteBrand(btn.getAttribute("data-delete-brand")));
+  });
+}
+
+function openBrandModal(id = null) {
+  editingBrandId = id;
+  const modal = document.getElementById("brandModal");
+  const title = document.getElementById("brandModalTitle");
+  
+  const brandId = document.getElementById("brandId");
+  const brandName = document.getElementById("brandName");
+  const brandLogoUrl = document.getElementById("brandLogoUrl");
+  const brandWebsite = document.getElementById("brandWebsite");
+  const brandOrder = document.getElementById("brandOrder");
+  const brandActive = document.getElementById("brandActive");
+  const brandLogoFile = document.getElementById("brandLogoFile");
+  
+  if (!id) {
+    if (title) title.textContent = "🏷️ Nueva Marca";
+    if (brandId) brandId.value = "";
+    if (brandName) brandName.value = "";
+    if (brandLogoUrl) brandLogoUrl.value = "";
+    if (brandWebsite) brandWebsite.value = "";
+    if (brandOrder) brandOrder.value = "0";
+    if (brandActive) brandActive.checked = true;
+    if (brandLogoFile) brandLogoFile.value = "";
+  } else {
+    const brand = brandsData.find(b => String(b.id) === String(id));
+    if (!brand) return;
+    if (title) title.textContent = `✏️ Editar: ${brand.name}`;
+    if (brandId) brandId.value = brand.id;
+    if (brandName) brandName.value = brand.name || "";
+    if (brandLogoUrl) brandLogoUrl.value = brand.logo_url || "";
+    if (brandWebsite) brandWebsite.value = brand.website_url || "";
+    if (brandOrder) brandOrder.value = brand.order_index || 0;
+    if (brandActive) brandActive.checked = brand.active !== false;
+    if (brandLogoFile) brandLogoFile.value = "";
+  }
+  
+  if (modal) modal.style.display = "flex";
+}
+
+async function uploadBrandLogo() {
+  const fileInput = document.getElementById("brandLogoFile");
+  const logoUrlInput = document.getElementById("brandLogoUrl");
+  if (!fileInput || !logoUrlInput) return;
+  
+  const file = fileInput.files?.[0];
+  if (!file) return;
+  
+  if (!file.type.startsWith("image/")) {
+    setBrandsMsg("❌ El archivo debe ser una imagen", true);
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    setBrandsMsg("❌ La imagen no debe superar 2MB", true);
+    return;
+  }
+  
+  setBrandsMsg("📤 Subiendo logo...");
+  
+  try {
+    const filePath = buildStorageFilePath(file, "brands");
+    const { error: uploadError } = await sb
+      .storage
+      .from("project-images")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: true,
+        contentType: file.type,
+      });
+    
+    if (uploadError) throw new Error(uploadError.message);
+    
+    const { data: publicData } = sb.storage.from("project-images").getPublicUrl(filePath);
+    const publicUrl = publicData?.publicUrl || "";
+    
+    if (!publicUrl) throw new Error("No se pudo obtener la URL pública");
+    
+    logoUrlInput.value = publicUrl;
+    setBrandsMsg("✅ Logo subido correctamente");
+  } catch (err) {
+    setBrandsMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function saveBrand() {
+  const id = document.getElementById("brandId")?.value;
+  const name = document.getElementById("brandName")?.value.trim();
+  const logo_url = document.getElementById("brandLogoUrl")?.value.trim();
+  const website_url = document.getElementById("brandWebsite")?.value.trim() || null;
+  const order_index = parseInt(document.getElementById("brandOrder")?.value) || 0;
+  const active = document.getElementById("brandActive")?.checked || false;
+  
+  if (!name) {
+    setBrandsMsg("❌ El nombre de la marca es obligatorio", true);
+    return;
+  }
+  if (!logo_url) {
+    setBrandsMsg("❌ La URL del logo es obligatoria", true);
+    return;
+  }
+  
+  const payload = { name, logo_url, website_url, order_index, active, updated_at: new Date().toISOString() };
+  
+  const ok = await confirmAction({
+    message: id ? `¿Guardar cambios en "${name}"?` : `¿Crear la marca "${name}"?`,
+    type: "generic",
+  });
+  if (!ok) return;
+  
+  setBrandsMsg("⏳ Guardando...");
+  
+  try {
+    if (id) {
+      const { error } = await sb.from("trusted_brands").update(payload).eq("id", id);
+      if (error) throw error;
+      setBrandsMsg("✅ Marca actualizada correctamente.");
+    } else {
+      const { error } = await sb.from("trusted_brands").insert([payload]);
+      if (error) throw error;
+      setBrandsMsg("✅ Marca creada correctamente.");
     }
-  });
+    
+    const modal = document.getElementById("brandModal");
+    if (modal) modal.style.display = "none";
+    await loadBrandsAdmin();
+  } catch (err) {
+    setBrandsMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function deleteBrand(id) {
+  const brand = brandsData.find(b => String(b.id) === String(id));
+  if (!brand) return;
   
-  console.log("✅ Menú hamburguesa inicializado correctamente");
+  const ok = await confirmAction({
+    message: `⚠️ ¿Eliminar la marca "${brand.name}"?`,
+    type: "delete",
+    double: true,
+  });
+  if (!ok) return;
+  
+  setBrandsMsg("⏳ Eliminando...");
+  
+  try {
+    const { error } = await sb.from("trusted_brands").delete().eq("id", id);
+    if (error) throw error;
+    setBrandsMsg("✅ Marca eliminada correctamente.");
+    await loadBrandsAdmin();
+  } catch (err) {
+    setBrandsMsg(`❌ Error al eliminar: ${err.message}`, true);
+  }
 }
 
 /* =========================
-   INTEGRACIÓN CON LOADALL Y SWITCHVIEW
+   ADMINISTRACIÓN DE PREGUNTAS DEL ASISTENTE
 ========================= */
-const originalLoadAll = window.loadAll;
-window.loadAll = async function() {
-  if (originalLoadAll) await originalLoadAll();
-  if (document.getElementById("plansList")) {
-    await loadPlansAdmin();
+async function loadAssistantQuestionsAdmin() {
+  const container = document.getElementById("assistantQuestionsList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("assistant_questions")
+      .select("*")
+      .order("order_index", { ascending: true });
+    
+    if (error) throw error;
+    
+    assistantQuestionsData = data || [];
+    renderAssistantQuestionsList();
+  } catch (err) {
+    console.error("Error loading assistant questions:", err);
+    container.innerHTML = `<div class="emptyState">❌ Error al cargar preguntas: ${err.message}</div>`;
   }
-  if (document.getElementById("reviewsApprovedList")) {
-    await loadApprovedReviews();
-  }
-  iniciarNotificaciones();
-};
+}
 
-const originalSwitchView = window.switchView;
-window.switchView = function(view) {
-  if (originalSwitchView) originalSwitchView(view);
-  if (view === "reviews-pending" && document.getElementById("reviewsPendingList")) {
-    setTimeout(() => loadPendingReviews(), 100);
+function renderAssistantQuestionsList() {
+  const container = document.getElementById("assistantQuestionsList");
+  if (!container) return;
+  
+  if (!assistantQuestionsData.length) {
+    container.innerHTML = `<div class="emptyState">❓ No hay preguntas cargadas. Creá una nueva.</div>`;
+    if (assistantQuestionsPaginator) assistantQuestionsPaginator.updateItems([]);
+    return;
   }
-  if (view === "reviews-approved" && document.getElementById("reviewsApprovedList")) {
-    setTimeout(() => loadApprovedReviews(), 100);
+  
+  if (!assistantQuestionsPaginator) {
+    assistantQuestionsPaginator = new Paginator({
+      items: assistantQuestionsData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderAssistantQuestionsListPage(paginatedItems);
+      },
+      containerId: "assistantQuestionsPagination",
+    });
+  } else {
+    assistantQuestionsPaginator.updateItems(assistantQuestionsData);
   }
-  if (view === "plans" && document.getElementById("plansList")) {
-    setTimeout(() => loadPlansAdmin(), 100);
+  
+  assistantQuestionsPaginator.setPage(1);
+}
+
+function renderAssistantQuestionsListPage(questions) {
+  const container = document.getElementById("assistantQuestionsList");
+  if (!container) return;
+  
+  if (!questions.length) {
+    container.innerHTML = `<div class="emptyState">❓ No hay preguntas para mostrar.</div>`;
+    return;
   }
-};
+  
+  container.innerHTML = questions.map(q => {
+    let optionsPreview = '';
+    if (q.question_type === 'options' && q.options) {
+      try {
+        const opts = JSON.parse(q.options);
+        optionsPreview = `<div class="listCard__meta">📋 Opciones: ${opts.slice(0, 3).join(', ')}${opts.length > 3 ? '...' : ''}</div>`;
+      } catch(e) {}
+    }
+    return `
+      <article class="listCard listCard--compact">
+        <div class="listCard__body">
+          <div class="listCard__title">❓ ${escapeHtml(q.question)}</div>
+          <div class="listCard__meta">📝 Tipo: ${q.question_type === 'options' ? 'Opciones múltiples' : 'Texto libre'}</div>
+          ${optionsPreview}
+          <div class="listCard__meta">🔢 Orden: ${q.order_index || 0} · ${q.active ? '🟢 Activa' : '🔴 Inactiva'} · ${q.required ? '⚠️ Requerida' : 'Opcional'}</div>
+        </div>
+        <div class="listCard__actions">
+          <button class="btn btn--ghost btn--small" data-edit-question="${q.id}">✏️</button>
+          <button class="btn btn--danger btn--small" data-delete-question="${q.id}">🗑️</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+  
+  container.querySelectorAll("[data-edit-question]").forEach(btn => {
+    btn.addEventListener("click", () => openAssistantQuestionModal(btn.getAttribute("data-edit-question")));
+  });
+  container.querySelectorAll("[data-delete-question]").forEach(btn => {
+    btn.addEventListener("click", () => deleteAssistantQuestion(btn.getAttribute("data-delete-question")));
+  });
+}
+
+function openAssistantQuestionModal(id = null) {
+  editingAssistantQuestionId = id;
+  const modal = document.getElementById("assistantQuestionModal");
+  const title = document.getElementById("assistantQuestionModalTitle");
+  
+  const questionId = document.getElementById("assistantQuestionId");
+  const questionText = document.getElementById("assistantQuestionText");
+  const questionType = document.getElementById("assistantQuestionType");
+  const optionsInput = document.getElementById("assistantOptionsInput");
+  const placeholder = document.getElementById("assistantPlaceholder");
+  const order = document.getElementById("assistantQuestionOrder");
+  const required = document.getElementById("assistantQuestionRequired");
+  const active = document.getElementById("assistantQuestionActive");
+  const optionsField = document.getElementById("assistantOptionsField");
+  const placeholderField = document.getElementById("assistantPlaceholderField");
+  
+  const toggleFields = () => {
+    if (questionType.value === 'options') {
+      if (optionsField) optionsField.style.display = "";
+      if (placeholderField) placeholderField.style.display = "none";
+    } else {
+      if (optionsField) optionsField.style.display = "none";
+      if (placeholderField) placeholderField.style.display = "";
+    }
+  };
+  
+  if (questionType) {
+    questionType.addEventListener("change", toggleFields);
+  }
+  
+  if (!id) {
+    if (title) title.textContent = "❓ Nueva Pregunta";
+    if (questionId) questionId.value = "";
+    if (questionText) questionText.value = "";
+    if (questionType) questionType.value = "options";
+    if (optionsInput) optionsInput.value = "";
+    if (placeholder) placeholder.value = "";
+    if (order) order.value = "0";
+    if (required) required.checked = true;
+    if (active) active.checked = true;
+    toggleFields();
+  } else {
+    const question = assistantQuestionsData.find(q => String(q.id) === String(id));
+    if (!question) return;
+    if (title) title.textContent = `✏️ Editar: ${question.question.substring(0, 50)}`;
+    if (questionId) questionId.value = question.id;
+    if (questionText) questionText.value = question.question || "";
+    if (questionType) questionType.value = question.question_type || "options";
+    if (optionsInput && question.options) {
+      try {
+        const opts = JSON.parse(question.options);
+        optionsInput.value = opts.join(", ");
+      } catch(e) { optionsInput.value = ""; }
+    }
+    if (placeholder) placeholder.value = question.placeholder || "";
+    if (order) order.value = question.order_index || 0;
+    if (required) required.checked = question.required !== false;
+    if (active) active.checked = question.active !== false;
+    toggleFields();
+  }
+  
+  if (modal) modal.style.display = "flex";
+}
+
+async function saveAssistantQuestion() {
+  const id = document.getElementById("assistantQuestionId")?.value;
+  const question = document.getElementById("assistantQuestionText")?.value.trim();
+  const question_type = document.getElementById("assistantQuestionType")?.value;
+  const optionsValue = document.getElementById("assistantOptionsInput")?.value;
+  const placeholder = document.getElementById("assistantPlaceholder")?.value.trim() || null;
+  const order_index = parseInt(document.getElementById("assistantQuestionOrder")?.value) || 0;
+  const required = document.getElementById("assistantQuestionRequired")?.checked || false;
+  const active = document.getElementById("assistantQuestionActive")?.checked || false;
+  
+  if (!question) {
+    setAssistantQuestionsMsg("❌ La pregunta es obligatoria", true);
+    return;
+  }
+  
+  let options = null;
+  if (question_type === 'options' && optionsValue) {
+    const opts = optionsValue.split(",").map(o => o.trim()).filter(Boolean);
+    if (opts.length === 0) {
+      setAssistantQuestionsMsg("❌ Debes ingresar al menos una opción", true);
+      return;
+    }
+    options = JSON.stringify(opts);
+  }
+  
+  const payload = { question, question_type, options, placeholder, order_index, required, active, updated_at: new Date().toISOString() };
+  
+  const ok = await confirmAction({
+    message: id ? `¿Guardar cambios en la pregunta?` : `¿Crear la pregunta?`,
+    type: "generic",
+  });
+  if (!ok) return;
+  
+  setAssistantQuestionsMsg("⏳ Guardando...");
+  
+  try {
+    if (id) {
+      const { error } = await sb.from("assistant_questions").update(payload).eq("id", id);
+      if (error) throw error;
+      setAssistantQuestionsMsg("✅ Pregunta actualizada correctamente.");
+    } else {
+      const { error } = await sb.from("assistant_questions").insert([payload]);
+      if (error) throw error;
+      setAssistantQuestionsMsg("✅ Pregunta creada correctamente.");
+    }
+    
+    const modal = document.getElementById("assistantQuestionModal");
+    if (modal) modal.style.display = "none";
+    await loadAssistantQuestionsAdmin();
+  } catch (err) {
+    setAssistantQuestionsMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function deleteAssistantQuestion(id) {
+  const question = assistantQuestionsData.find(q => String(q.id) === String(id));
+  if (!question) return;
+  
+  const ok = await confirmAction({
+    message: `⚠️ ¿Eliminar la pregunta "${question.question.substring(0, 50)}"?`,
+    type: "delete",
+    double: true,
+  });
+  if (!ok) return;
+  
+  setAssistantQuestionsMsg("⏳ Eliminando...");
+  
+  try {
+    const { error } = await sb.from("assistant_questions").delete().eq("id", id);
+    if (error) throw error;
+    setAssistantQuestionsMsg("✅ Pregunta eliminada correctamente.");
+    await loadAssistantQuestionsAdmin();
+  } catch (err) {
+    setAssistantQuestionsMsg(`❌ Error al eliminar: ${err.message}`, true);
+  }
+}
 
 /* =========================
-   EVENT LISTENERS EXTRA
+   RESPUESTAS DEL ASISTENTE
 ========================= */
-const reviewsApprovedRefreshBtn = document.getElementById("reviewsApprovedRefreshBtn");
-if (reviewsApprovedRefreshBtn) {
-  reviewsApprovedRefreshBtn.addEventListener("click", () => {
-    loadApprovedReviews();
-  });
+async function loadAssistantResponsesAdmin() {
+  const container = document.getElementById("assistantResponsesList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("assistant_responses")
+      .select("*, assistant_questions(question)")
+      .order("created_at", { ascending: false });
+    
+    if (error) throw error;
+    
+    assistantResponsesData = data || [];
+    renderAssistantResponsesList();
+  } catch (err) {
+    console.error("Error loading assistant responses:", err);
+    container.innerHTML = `<div class="emptyState">❌ Error al cargar respuestas: ${err.message}</div>`;
+  }
 }
 
-const exportReviewsBtn = document.getElementById("exportReviewsBtn");
-if (exportReviewsBtn) {
-  exportReviewsBtn.addEventListener("click", () => {
-    exportReviewsToCSV();
-  });
+function renderAssistantResponsesList() {
+  const container = document.getElementById("assistantResponsesList");
+  if (!container) return;
+  
+  if (!assistantResponsesData.length) {
+    container.innerHTML = `<div class="emptyState">📊 No hay respuestas de usuarios registradas.</div>`;
+    if (assistantResponsesPaginator) assistantResponsesPaginator.updateItems([]);
+    return;
+  }
+  
+  if (!assistantResponsesPaginator) {
+    assistantResponsesPaginator = new Paginator({
+      items: assistantResponsesData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderAssistantResponsesListPage(paginatedItems);
+      },
+      containerId: "assistantResponsesPagination",
+    });
+  } else {
+    assistantResponsesPaginator.updateItems(assistantResponsesData);
+  }
+  
+  assistantResponsesPaginator.setPage(1);
 }
 
-const approvedSearchInput = document.getElementById("approvedSearchInput");
-if (approvedSearchInput) {
-  approvedSearchInput.addEventListener("input", () => {
-    renderApprovedReviews();
-  });
+function renderAssistantResponsesListPage(responses) {
+  const container = document.getElementById("assistantResponsesList");
+  if (!container) return;
+  
+  if (!responses.length) {
+    container.innerHTML = `<div class="emptyState">📊 No hay respuestas para mostrar.</div>`;
+    return;
+  }
+  
+  container.innerHTML = responses.map(r => `
+    <article class="listCard listCard--compact">
+      <div class="listCard__body">
+        <div class="listCard__title">${escapeHtml(r.assistant_questions?.question || 'Pregunta eliminada')}</div>
+        <div class="listCard__meta">💬 Respuesta: <strong>${escapeHtml(r.answer)}</strong></div>
+        <div class="listCard__meta">📅 ${formatDate(r.created_at)} · 🆔 Sesión: ${escapeHtml(r.session_id?.substring(0, 8))}...</div>
+      </div>
+    </article>
+  `).join("");
 }
 
-const approvedRatingFilter = document.getElementById("approvedRatingFilter");
-if (approvedRatingFilter) {
-  approvedRatingFilter.addEventListener("change", () => {
-    renderApprovedReviews();
-  });
+function exportResponsesToCSV() {
+  if (!assistantResponsesData.length) {
+    setAssistantResponsesMsg("No hay respuestas para exportar.", true);
+    return;
+  }
+  
+  const headers = ["ID", "Sesión", "Pregunta", "Respuesta", "Fecha"];
+  const rows = assistantResponsesData.map(r => [
+    r.id,
+    r.session_id || "",
+    r.assistant_questions?.question || "Pregunta eliminada",
+    `"${(r.answer || "").replace(/"/g, '""')}"`,
+    r.created_at
+  ]);
+  
+  const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.setAttribute("download", `respuestas_asistente_${new Date().toISOString().split("T")[0]}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  setAssistantResponsesMsg("✅ CSV exportado correctamente.");
 }
 
-const approvedSortFilter = document.getElementById("approvedSortFilter");
-if (approvedSortFilter) {
-  approvedSortFilter.addEventListener("change", () => {
-    renderApprovedReviews();
-  });
+/* =========================
+   ADMINISTRACIÓN DE CASOS DE ÉXITO
+========================= */
+async function uploadSuccessStoryImage() {
+  const fileInput = document.getElementById("successStoryImageFile");
+  const imageUrlInput = document.getElementById("successStoryImageUrl");
+  if (!fileInput || !imageUrlInput) return;
+  
+  const file = fileInput.files?.[0];
+  if (!file) return;
+  
+  if (!file.type.startsWith("image/")) {
+    setSuccessStoriesMsg("❌ El archivo debe ser una imagen", true);
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    setSuccessStoriesMsg("❌ La imagen no debe superar 2MB", true);
+    return;
+  }
+  
+  setSuccessStoriesMsg("📤 Subiendo imagen...");
+  
+  try {
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+    const stamp = Date.now();
+    const random = Math.random().toString(36).slice(2, 8);
+    const filePath = `success-stories/${stamp}-${random}.${ext}`;
+    
+    const { error: uploadError } = await sb
+      .storage
+      .from("project-images")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: true,
+        contentType: file.type,
+      });
+    
+    if (uploadError) throw new Error(uploadError.message);
+    
+    const { data: publicData } = sb.storage.from("project-images").getPublicUrl(filePath);
+    const publicUrl = publicData?.publicUrl || "";
+    
+    if (!publicUrl) throw new Error("No se pudo obtener la URL pública");
+    
+    imageUrlInput.value = publicUrl;
+    setSuccessStoriesMsg("✅ Imagen subida correctamente");
+  } catch (err) {
+    setSuccessStoriesMsg(`❌ Error: ${err.message}`, true);
+  }
 }
 
-const saveEditReviewBtn = document.getElementById("saveEditReviewBtn");
-if (saveEditReviewBtn) {
-  saveEditReviewBtn.addEventListener("click", saveEditedReviewAndApprove);
+async function loadSuccessStoriesAdmin() {
+  const container = document.getElementById("successStoriesList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("success_stories")
+      .select("*")
+      .order("order_index", { ascending: true });
+    
+    if (error) throw error;
+    
+    successStoriesData = data || [];
+    renderSuccessStoriesList();
+  } catch (err) {
+    console.error("Error loading success stories:", err);
+    container.innerHTML = `<div class="emptyState">⚠️ Error al cargar casos de éxito: ${err.message}</div>`;
+  }
 }
 
-const cancelEditReviewBtn = document.getElementById("cancelEditReviewBtn");
-if (cancelEditReviewBtn) {
-  cancelEditReviewBtn.addEventListener("click", () => {
-    const modal = document.getElementById("editReviewModal");
-    if (modal) modal.style.display = "none";
-  });
+function renderSuccessStoriesList() {
+  const container = document.getElementById("successStoriesList");
+  if (!container) return;
+  
+  if (!successStoriesData.length) {
+    container.innerHTML = `<div class="emptyState">🏆 No hay casos de éxito cargados. Creá uno nuevo.</div>`;
+    if (successStoriesPaginator) successStoriesPaginator.updateItems([]);
+    return;
+  }
+  
+  if (!successStoriesPaginator) {
+    successStoriesPaginator = new Paginator({
+      items: successStoriesData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderSuccessStoriesListPage(paginatedItems);
+      },
+      containerId: "successStoriesPagination",
+    });
+  } else {
+    successStoriesPaginator.updateItems(successStoriesData);
+  }
+  
+  successStoriesPaginator.setPage(1);
 }
 
-const plansRefreshBtn = document.getElementById("plansRefreshBtn");
-if (plansRefreshBtn) {
-  plansRefreshBtn.addEventListener("click", () => loadPlansAdmin());
-}
-
-const plansNewBtn = document.getElementById("plansNewBtn");
-if (plansNewBtn) {
-  plansNewBtn.addEventListener("click", () => openPlanModal());
-}
-
-const planSaveBtn = document.getElementById("planSaveBtn");
-if (planSaveBtn) {
-  planSaveBtn.addEventListener("click", () => savePlan());
-}
-
-const planCancelBtn = document.getElementById("planCancelBtn");
-if (planCancelBtn) {
-  planCancelBtn.addEventListener("click", () => {
-    const modal = document.getElementById("planModal");
-    if (modal) modal.style.display = "none";
-  });
-}
-
-const planName = document.getElementById("planName");
-if (planName) {
-  planName.addEventListener("input", function() {
-    const slugInput = document.getElementById("planSlug");
-    if (slugInput && !slugInput.dataset.manuallyEdited) {
-      slugInput.value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function renderSuccessStoriesListPage(stories) {
+  const container = document.getElementById("successStoriesList");
+  if (!container) return;
+  
+  if (!stories.length) {
+    container.innerHTML = `<div class="emptyState">🏆 No hay casos de éxito para mostrar.</div>`;
+    return;
+  }
+  
+  container.innerHTML = stories.map(story => {
+    let resultsPreview = '';
+    if (story.results) {
+      try {
+        const results = typeof story.results === 'string' ? JSON.parse(story.results) : story.results;
+        resultsPreview = `<div class="listCard__meta">📊 Resultados: ${Object.entries(results).map(([k,v]) => `${k}: ${v}`).join(' · ')}</div>`;
+      } catch(e) {}
     }
+    return `
+      <article class="listCard listCard--compact">
+        <div class="listCard__thumb">
+          <img src="${escapeHtml(story.image_url || '')}" alt="${escapeHtml(story.title)}" style="width:80px; height:60px; object-fit:cover;" />
+        </div>
+        <div class="listCard__body">
+          <div class="listCard__title">🏆 ${escapeHtml(story.title)}</div>
+          <div class="listCard__meta">${escapeHtml(story.short_description?.substring(0, 100) || '')}${story.short_description?.length > 100 ? '...' : ''}</div>
+          ${resultsPreview}
+          <div class="listCard__meta">🔢 Orden: ${story.order_index || 0} · ${story.active ? '🟢 Activo' : '🔴 Inactivo'}</div>
+        </div>
+        <div class="listCard__actions">
+          <button class="btn btn--ghost btn--small" data-edit-story="${story.id}">✏️</button>
+          <button class="btn btn--danger btn--small" data-delete-story="${story.id}">🗑️</button>
+        </div>
+      </article>
+    `;
+  }).join("");
+  
+  container.querySelectorAll("[data-edit-story]").forEach(btn => {
+    btn.addEventListener("click", () => openSuccessStoryModal(btn.getAttribute("data-edit-story")));
+  });
+  container.querySelectorAll("[data-delete-story]").forEach(btn => {
+    btn.addEventListener("click", () => deleteSuccessStory(btn.getAttribute("data-delete-story")));
   });
 }
 
-const planSlug = document.getElementById("planSlug");
-if (planSlug) {
-  planSlug.addEventListener("input", function() {
-    this.dataset.manuallyEdited = "true";
+function openSuccessStoryModal(id = null) {
+  editingSuccessStoryId = id;
+  const modal = document.getElementById("successStoryModal");
+  const title = document.getElementById("successStoryModalTitle");
+  
+  const storyId = document.getElementById("successStoryId");
+  const storyTitle = document.getElementById("successStoryTitle");
+  const storyDescription = document.getElementById("successStoryDescription");
+  const storyImageUrl = document.getElementById("successStoryImageUrl");
+  const storyResults = document.getElementById("successStoryResults");
+  const storyDemoUrl = document.getElementById("successStoryDemoUrl");
+  const storyOrder = document.getElementById("successStoryOrder");
+  const storyActive = document.getElementById("successStoryActive");
+  const storyImageFile = document.getElementById("successStoryImageFile");
+  
+  if (!id) {
+    if (title) title.textContent = "🏆 Nuevo Caso de Éxito";
+    if (storyId) storyId.value = "";
+    if (storyTitle) storyTitle.value = "";
+    if (storyDescription) storyDescription.value = "";
+    if (storyImageUrl) storyImageUrl.value = "";
+    if (storyResults) storyResults.value = "";
+    if (storyDemoUrl) storyDemoUrl.value = "";
+    if (storyOrder) storyOrder.value = "0";
+    if (storyActive) storyActive.checked = true;
+    if (storyImageFile) storyImageFile.value = "";
+  } else {
+    const story = successStoriesData.find(s => String(s.id) === String(id));
+    if (!story) return;
+    if (title) title.textContent = `✏️ Editar: ${story.title}`;
+    if (storyId) storyId.value = story.id;
+    if (storyTitle) storyTitle.value = story.title || "";
+    if (storyDescription) storyDescription.value = story.short_description || "";
+    if (storyImageUrl) storyImageUrl.value = story.image_url || "";
+    if (storyResults) storyResults.value = typeof story.results === 'string' ? story.results : JSON.stringify(story.results || {}, null, 2);
+    if (storyDemoUrl) storyDemoUrl.value = story.demo_url || "";
+    if (storyOrder) storyOrder.value = story.order_index || 0;
+    if (storyActive) storyActive.checked = story.active !== false;
+    if (storyImageFile) storyImageFile.value = "";
+  }
+  
+  if (modal) modal.style.display = "flex";
+}
+
+async function saveSuccessStory() {
+  const id = document.getElementById("successStoryId")?.value;
+  const title = document.getElementById("successStoryTitle")?.value.trim();
+  const short_description = document.getElementById("successStoryDescription")?.value.trim();
+  const image_url = document.getElementById("successStoryImageUrl")?.value.trim();
+  let results = document.getElementById("successStoryResults")?.value.trim();
+  const demo_url = document.getElementById("successStoryDemoUrl")?.value.trim() || null;
+  const order_index = parseInt(document.getElementById("successStoryOrder")?.value) || 0;
+  const active = document.getElementById("successStoryActive")?.checked || false;
+  
+  if (!title) {
+    setSuccessStoriesMsg("❌ El título es obligatorio", true);
+    return;
+  }
+  
+  let parsedResults = {};
+  if (results) {
+    try {
+      parsedResults = typeof results === 'string' ? JSON.parse(results) : results;
+    } catch(e) {
+      setSuccessStoriesMsg("❌ El formato de resultados no es JSON válido", true);
+      return;
+    }
+  }
+  
+  const payload = { 
+    title, 
+    short_description, 
+    image_url, 
+    results: parsedResults, 
+    demo_url, 
+    order_index, 
+    active, 
+    updated_at: new Date().toISOString() 
+  };
+  
+  const ok = await confirmAction({
+    message: id ? `¿Guardar cambios en "${title}"?` : `¿Crear el caso de éxito "${title}"?`,
+    type: "generic",
   });
+  if (!ok) return;
+  
+  setSuccessStoriesMsg("⏳ Guardando...");
+  
+  try {
+    if (id) {
+      const { error } = await sb.from("success_stories").update(payload).eq("id", id);
+      if (error) throw error;
+      setSuccessStoriesMsg("✅ Caso de éxito actualizado correctamente.");
+    } else {
+      const { error } = await sb.from("success_stories").insert([payload]);
+      if (error) throw error;
+      setSuccessStoriesMsg("✅ Caso de éxito creado correctamente.");
+    }
+    
+    const modal = document.getElementById("successStoryModal");
+    if (modal) modal.style.display = "none";
+    await loadSuccessStoriesAdmin();
+  } catch (err) {
+    setSuccessStoriesMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function deleteSuccessStory(id) {
+  const story = successStoriesData.find(s => String(s.id) === String(id));
+  if (!story) return;
+  
+  const ok = await confirmAction({
+    message: `⚠️ ¿Eliminar el caso de éxito "${story.title}"?`,
+    type: "delete",
+    double: true,
+  });
+  if (!ok) return;
+  
+  setSuccessStoriesMsg("⏳ Eliminando...");
+  
+  try {
+    const { error } = await sb.from("success_stories").delete().eq("id", id);
+    if (error) throw error;
+    setSuccessStoriesMsg("✅ Caso de éxito eliminado correctamente.");
+    await loadSuccessStoriesAdmin();
+  } catch (err) {
+    setSuccessStoriesMsg(`❌ Error al eliminar: ${err.message}`, true);
+  }
 }
 
 /* =========================
@@ -2953,26 +3643,12 @@ async function toggleProjectFeatured(projectId, featured) {
   }
 }
 
-function setFeaturedProjectsMsg(msg, isError = false) {
-  const msgEl = document.getElementById("featuredProjectsMsg");
-  if (!msgEl) return;
-  msgEl.textContent = msg;
-  msgEl.classList.remove("msg--success", "msg--error");
-  msgEl.classList.add(isError ? "msg--error" : "msg--success");
-  setTimeout(() => {
-    if (msgEl.textContent === msg) {
-      msgEl.textContent = "";
-      msgEl.classList.remove("msg--success", "msg--error");
-    }
-  }, 4000);
-}
-
 /* =========================
    ELIMINAR HISTORIAL
 ========================= */
 async function clearProjectHistory() {
   const ok = await confirmAction({
-    message: "⚠️ ¿Eliminar TODO el historial de proyectos? Esta acción no se puede deshacer.",
+    message: "⚠️ ¿Eliminar TODO el historial de proyectos?",
     type: "delete",
     double: true,
   });
@@ -2993,7 +3669,7 @@ async function clearProjectHistory() {
 
 async function clearSettingsHistory() {
   const ok = await confirmAction({
-    message: "⚠️ ¿Eliminar TODO el historial de settings? Esta acción no se puede deshacer.",
+    message: "⚠️ ¿Eliminar TODO el historial de settings?",
     type: "delete",
     double: true,
   });
@@ -3012,30 +3688,650 @@ async function clearSettingsHistory() {
   }
 }
 
-function setHistoryMsg(msg, isError = false) {
-  const msgEl = document.getElementById("historyMsg");
-  if (!msgEl) return;
-  msgEl.textContent = msg;
-  msgEl.classList.remove("msg--success", "msg--error");
-  msgEl.classList.add(isError ? "msg--error" : "msg--success");
-  setTimeout(() => {
-    if (msgEl.textContent === msg) {
-      msgEl.textContent = "";
-      msgEl.classList.remove("msg--success", "msg--error");
-    }
-  }, 4000);
+/* =========================
+   ADMINISTRACIÓN DE SERVICIOS (CORREGIDO - TABLA "services")
+========================= */
+
+async function loadServicesAdmin() {
+  const container = document.getElementById("servicesList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("services")
+      .select("*")
+      .order("order_index", { ascending: true });
+    
+    if (error) throw error;
+    
+    servicesData = data || [];
+    renderServicesList();
+  } catch (err) {
+    console.error("Error loading services:", err);
+    container.innerHTML = `<div class="emptyState">⚠️ Error al cargar servicios: ${err.message}</div>`;
+  }
 }
 
-// Event listeners para botones de limpiar historial
-document.getElementById("clearProjectHistoryBtn")?.addEventListener("click", clearProjectHistory);
-document.getElementById("clearSettingsHistoryBtn")?.addEventListener("click", clearSettingsHistory);
-document.getElementById("featuredRefreshBtn")?.addEventListener("click", loadFeaturedProjects);
+function renderServicesList() {
+  const container = document.getElementById("servicesList");
+  if (!container) return;
+  
+  if (!servicesData.length) {
+    container.innerHTML = `<div class="emptyState">💼 No hay servicios cargados. Creá uno nuevo.</div>`;
+    if (servicesPaginator) servicesPaginator.updateItems([]);
+    return;
+  }
+  
+  if (!servicesPaginator) {
+    servicesPaginator = new Paginator({
+      items: servicesData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderServicesListPage(paginatedItems);
+      },
+      containerId: "servicesPagination",
+    });
+  } else {
+    servicesPaginator.updateItems(servicesData);
+  }
+  
+  servicesPaginator.setPage(1);
+}
+
+function renderServicesListPage(services) {
+  const container = document.getElementById("servicesList");
+  if (!container) return;
+  
+  if (!services.length) {
+    container.innerHTML = `<div class="emptyState">💼 No hay servicios para mostrar.</div>`;
+    return;
+  }
+  
+  container.innerHTML = services.map(service => `
+    <article class="listCard listCard--compact">
+      <div class="listCard__thumb">
+        ${service.image_url ? `<img src="${escapeHtml(service.image_url)}" alt="${escapeHtml(service.title)}" style="width:80px; height:60px; object-fit:cover;" />` : '<div style="width:80px;height:60px;background:var(--bg);display:flex;align-items:center;justify-content:center;">📷</div>'}
+      </div>
+      <div class="listCard__body">
+        <div class="listCard__title">💼 ${escapeHtml(service.title)}</div>
+        <div class="listCard__meta">🔗 Slug: ${escapeHtml(service.slug)} · 🏷️ Icono: ${escapeHtml(service.icon || '💼')}</div>
+        <div class="listCard__meta">💰 Precio: ${escapeHtml(service.price || 'Sin precio')}</div>
+        <div class="listCard__meta">📝 ${escapeHtml(service.description?.substring(0, 80) || '')}${service.description?.length > 80 ? '...' : ''}</div>
+        <div class="listCard__badges">
+          ${service.features?.slice(0, 3).map(f => `<span class="miniTag">${escapeHtml(f)}</span>`).join('') || ''}
+          ${service.features?.length > 3 ? `<span class="miniTag">+${service.features.length - 3}</span>` : ''}
+        </div>
+        <div class="listCard__meta">🔢 Orden: ${service.order_index || 0} · ${service.active ? '🟢 Activo' : '🔴 Inactivo'}</div>
+      </div>
+      <div class="listCard__actions">
+        <button class="btn btn--ghost btn--small" data-edit-service="${service.id}">✏️ Editar</button>
+        <button class="btn btn--danger btn--small" data-delete-service="${service.id}">🗑️ Eliminar</button>
+      </div>
+    </article>
+  `).join("");
+  
+  container.querySelectorAll("[data-edit-service]").forEach(btn => {
+    btn.addEventListener("click", () => openServiceModal(btn.getAttribute("data-edit-service")));
+  });
+  container.querySelectorAll("[data-delete-service]").forEach(btn => {
+    btn.addEventListener("click", () => deleteService(btn.getAttribute("data-delete-service")));
+  });
+}
+
+function openServiceModal(id = null) {
+  editingServiceId = id;
+  const modal = document.getElementById("serviceModal");
+  const title = document.getElementById("serviceModalTitle");
+  
+  const serviceId = document.getElementById("serviceId");
+  const serviceTitle = document.getElementById("serviceTitle");
+  const serviceSlug = document.getElementById("serviceSlug");
+  const serviceDescription = document.getElementById("serviceDescription");
+  const serviceIdealFor = document.getElementById("serviceIdealFor");
+  const serviceFeaturesInput = document.getElementById("serviceFeaturesInput");
+  const serviceWhatsappMessage = document.getElementById("serviceWhatsappMessage");
+  const serviceIcon = document.getElementById("serviceIcon");
+  const serviceImageUrl = document.getElementById("serviceImageUrl");
+  const servicePrice = document.getElementById("servicePrice");
+  const serviceOrder = document.getElementById("serviceOrder");
+  const serviceActive = document.getElementById("serviceActive");
+  const serviceImageFile = document.getElementById("serviceImageFile");
+  
+  const toggleSlugFromTitle = () => {
+    if (serviceSlug && !serviceSlug.dataset.manuallyEdited) {
+      serviceSlug.value = slugify(serviceTitle.value);
+    }
+  };
+  
+  if (serviceTitle) {
+    serviceTitle.removeEventListener("input", toggleSlugFromTitle);
+    serviceTitle.addEventListener("input", toggleSlugFromTitle);
+  }
+  if (serviceSlug) {
+    serviceSlug.removeEventListener("input", () => {});
+    serviceSlug.addEventListener("input", () => { serviceSlug.dataset.manuallyEdited = "true"; });
+  }
+  
+  if (!id) {
+    if (title) title.textContent = "💼 Nuevo Servicio";
+    if (serviceId) serviceId.value = "";
+    if (serviceTitle) serviceTitle.value = "";
+    if (serviceSlug) serviceSlug.value = "";
+    if (serviceDescription) serviceDescription.value = "";
+    if (serviceIdealFor) serviceIdealFor.value = "";
+    if (serviceFeaturesInput) serviceFeaturesInput.value = "";
+    if (serviceWhatsappMessage) serviceWhatsappMessage.value = "";
+    if (serviceIcon) serviceIcon.value = "💼";
+    if (serviceImageUrl) serviceImageUrl.value = "";
+    if (servicePrice) servicePrice.value = "";
+    if (serviceOrder) serviceOrder.value = "0";
+    if (serviceActive) serviceActive.checked = true;
+    if (serviceImageFile) serviceImageFile.value = "";
+  } else {
+    const service = servicesData.find(s => String(s.id) === String(id));
+    if (!service) return;
+    if (title) title.textContent = `✏️ Editar: ${service.title}`;
+    if (serviceId) serviceId.value = service.id;
+    if (serviceTitle) serviceTitle.value = service.title || "";
+    if (serviceSlug) serviceSlug.value = service.slug || "";
+    if (serviceDescription) serviceDescription.value = service.description || "";
+    if (serviceIdealFor) serviceIdealFor.value = service.ideal_for || "";
+    if (serviceFeaturesInput) serviceFeaturesInput.value = (service.features || []).join(", ");
+    if (serviceWhatsappMessage) serviceWhatsappMessage.value = service.whatsapp_message || "";
+    if (serviceIcon) serviceIcon.value = service.icon || "💼";
+    if (serviceImageUrl) serviceImageUrl.value = service.image_url || "";
+    if (servicePrice) servicePrice.value = service.price || "";
+    if (serviceOrder) serviceOrder.value = service.order_index || 0;
+    if (serviceActive) serviceActive.checked = service.active !== false;
+    if (serviceImageFile) serviceImageFile.value = "";
+  }
+  
+  if (modal) modal.style.display = "flex";
+}
+
+async function uploadServiceImage() {
+  const fileInput = document.getElementById("serviceImageFile");
+  const imageUrlInput = document.getElementById("serviceImageUrl");
+  if (!fileInput || !imageUrlInput) return;
+  
+  const file = fileInput.files?.[0];
+  if (!file) return;
+  
+  if (!file.type.startsWith("image/")) {
+    setServicesMsg("❌ El archivo debe ser una imagen", true);
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    setServicesMsg("❌ La imagen no debe superar 2MB", true);
+    return;
+  }
+  
+  setServicesMsg("📤 Subiendo imagen...");
+  
+  try {
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+    const stamp = Date.now();
+    const random = Math.random().toString(36).slice(2, 8);
+    const filePath = `services/${stamp}-${random}.${ext}`;
+    
+    const { error: uploadError } = await sb
+      .storage
+      .from("project-images")
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: true,
+        contentType: file.type,
+      });
+    
+    if (uploadError) throw new Error(uploadError.message);
+    
+    const { data: publicData } = sb.storage.from("project-images").getPublicUrl(filePath);
+    const publicUrl = publicData?.publicUrl || "";
+    
+    if (!publicUrl) throw new Error("No se pudo obtener la URL pública");
+    
+    imageUrlInput.value = publicUrl;
+    setServicesMsg("✅ Imagen subida correctamente");
+  } catch (err) {
+    setServicesMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function saveService() {
+  const id = document.getElementById("serviceId")?.value;
+  const title = document.getElementById("serviceTitle")?.value.trim();
+  let slug = document.getElementById("serviceSlug")?.value.trim();
+  const description = document.getElementById("serviceDescription")?.value.trim();
+  const ideal_for = document.getElementById("serviceIdealFor")?.value.trim();
+  const featuresInput = document.getElementById("serviceFeaturesInput")?.value || "";
+  const features = featuresInput.split(",").map(f => f.trim()).filter(Boolean);
+  const whatsapp_message = document.getElementById("serviceWhatsappMessage")?.value.trim() || null;
+  const icon = document.getElementById("serviceIcon")?.value.trim() || "💼";
+  const image_url = document.getElementById("serviceImageUrl")?.value.trim() || null;
+  const price = document.getElementById("servicePrice")?.value.trim() || null;
+  const order_index = parseInt(document.getElementById("serviceOrder")?.value) || 0;
+  const active = document.getElementById("serviceActive")?.checked || false;
+  
+  if (!title) {
+    setServicesMsg("❌ El título del servicio es obligatorio", true);
+    return;
+  }
+  
+  if (!slug) {
+    slug = slugify(title);
+  }
+  
+  const payload = { 
+    title, 
+    slug, 
+    description, 
+    ideal_for, 
+    features, 
+    whatsapp_message, 
+    icon, 
+    image_url, 
+    price, 
+    order_index, 
+    active, 
+    updated_at: new Date().toISOString() 
+  };
+  
+  const ok = await confirmAction({
+    message: id ? `¿Guardar cambios en "${title}"?` : `¿Crear el servicio "${title}"?`,
+    type: "generic",
+  });
+  if (!ok) return;
+  
+  setServicesMsg("⏳ Guardando...");
+  
+  try {
+    if (id) {
+      const { error } = await sb.from("services").update(payload).eq("id", id);
+      if (error) throw error;
+      setServicesMsg("✅ Servicio actualizado correctamente.");
+    } else {
+      const { error } = await sb.from("services").insert([payload]);
+      if (error) throw error;
+      setServicesMsg("✅ Servicio creado correctamente.");
+    }
+    
+    const modal = document.getElementById("serviceModal");
+    if (modal) modal.style.display = "none";
+    await loadServicesAdmin();
+  } catch (err) {
+    setServicesMsg(`❌ Error: ${err.message}`, true);
+  }
+}
+
+async function deleteService(id) {
+  const service = servicesData.find(s => String(s.id) === String(id));
+  if (!service) return;
+  
+  const ok = await confirmAction({
+    message: `⚠️ ¿Eliminar el servicio "${service.title}"?`,
+    type: "delete",
+    double: true,
+  });
+  if (!ok) return;
+  
+  setServicesMsg("⏳ Eliminando...");
+  
+  try {
+    const { error } = await sb.from("services").delete().eq("id", id);
+    if (error) throw error;
+    setServicesMsg("✅ Servicio eliminado correctamente.");
+    await loadServicesAdmin();
+  } catch (err) {
+    setServicesMsg(`❌ Error al eliminar: ${err.message}`, true);
+  }
+}
+
+/* =========================
+   LEADS DEL ASISTENTE
+========================= */
+async function loadGuideLeadsAdmin() {
+  const container = document.getElementById("guideLeadsList");
+  if (!container) return;
+  
+  container.innerHTML = '<div class="loading-skeleton"><div class="skeleton-line"></div><div class="skeleton-line"></div></div>';
+  
+  try {
+    const { data, error } = await sb
+      .from("guide_leads")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (error) throw error;
+    
+    guideLeadsData = data || [];
+    renderGuideLeadsList();
+  } catch (err) {
+    console.error("Error loading guide leads:", err);
+    container.innerHTML = `<div class="emptyState">⚠️ Error al cargar leads: ${err.message}</div>`;
+  }
+}
+
+function renderGuideLeadsList() {
+  const container = document.getElementById("guideLeadsList");
+  if (!container) return;
+  
+  if (!guideLeadsData.length) {
+    container.innerHTML = `<div class="emptyState">📭 No hay leads registrados todavía.</div>`;
+    if (guideLeadsPaginator) guideLeadsPaginator.updateItems([]);
+    return;
+  }
+  
+  if (!guideLeadsPaginator) {
+    guideLeadsPaginator = new Paginator({
+      items: guideLeadsData,
+      itemsPerPage: 10,
+      currentPage: 1,
+      onPageChange: (paginatedItems) => {
+        renderGuideLeadsListPage(paginatedItems);
+      },
+      containerId: "guideLeadsPagination",
+    });
+  } else {
+    guideLeadsPaginator.updateItems(guideLeadsData);
+  }
+  
+  guideLeadsPaginator.setPage(1);
+}
+
+function renderGuideLeadsListPage(leads) {
+  const container = document.getElementById("guideLeadsList");
+  if (!container) return;
+  
+  if (!leads.length) {
+    container.innerHTML = `<div class="emptyState">📭 No hay leads para mostrar.</div>`;
+    return;
+  }
+  
+  container.innerHTML = leads.map(lead => `
+    <article class="listCard listCard--compact">
+      <div class="listCard__body">
+        <div class="listCard__title">👤 ${escapeHtml(lead.name || 'Anónimo')}</div>
+        <div class="listCard__meta">📱 ${lead.whatsapp ? escapeHtml(lead.whatsapp) : 'Sin WhatsApp'} · 📧 ${lead.email ? escapeHtml(lead.email) : 'Sin email'}</div>
+        <div class="listCard__meta">🏢 ${lead.company ? escapeHtml(lead.company) : 'Sin empresa'} · 🎯 ${lead.result_title ? escapeHtml(lead.result_title) : 'Sin resultado'}</div>
+        <div class="listCard__meta">📅 ${formatDate(lead.created_at)}</div>
+        ${lead.free_text ? `<div class="listCard__meta">💬 Consulta: ${escapeHtml(lead.free_text?.substring(0, 100))}${lead.free_text?.length > 100 ? '...' : ''}</div>` : ''}
+        ${lead.flow_path ? `<details><summary>📋 Ver recorrido</summary><small>${escapeHtml(lead.flow_path)}</small></details>` : ''}
+      </div>
+      <div class="listCard__actions">
+        <button class="btn btn--ghost btn--small" data-wa-lead="${lead.id}">📱 WhatsApp</button>
+      </div>
+    </article>
+  `).join("");
+  
+  container.querySelectorAll("[data-wa-lead]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lead = guideLeadsData.find(l => String(l.id) === String(btn.getAttribute("data-wa-lead")));
+      if (lead && lead.whatsapp) {
+        const whatsappNumber = lead.whatsapp.replace(/[^0-9]/g, '');
+        const msg = `Hola ${lead.name || ''}, soy de Ciborg 347. Recibimos tu consulta. ¿Podemos ayudarte?`;
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+      } else {
+        setGuideLeadsMsg("❌ No hay número de WhatsApp registrado", true);
+      }
+    });
+  });
+}
+
+function exportGuideLeadsToCSV() {
+  if (!guideLeadsData.length) {
+    setGuideLeadsMsg("No hay leads para exportar.", true);
+    return;
+  }
+  
+  const headers = ["ID", "Nombre", "WhatsApp", "Email", "Empresa", "Resultado", "Consulta", "Recorrido", "Fecha"];
+  const rows = guideLeadsData.map(l => [
+    l.id,
+    l.name || "",
+    l.whatsapp || "",
+    l.email || "",
+    l.company || "",
+    l.result_title || "",
+    `"${(l.free_text || l.query || "").replace(/"/g, '""')}"`,
+    `"${(l.flow_path || "").replace(/"/g, '""')}"`,
+    l.created_at
+  ]);
+  
+  const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.setAttribute("download", `leads_asistente_${new Date().toISOString().split("T")[0]}.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  
+  setGuideLeadsMsg("✅ CSV exportado correctamente.");
+}
+
+/* =========================
+   EVENT LISTENERS EXTRA
+========================= */
+const reviewsApprovedRefreshBtn = document.getElementById("reviewsApprovedRefreshBtn");
+if (reviewsApprovedRefreshBtn) {
+  reviewsApprovedRefreshBtn.addEventListener("click", loadApprovedReviews);
+}
+
+const exportReviewsBtn = document.getElementById("exportReviewsBtn");
+if (exportReviewsBtn) {
+  exportReviewsBtn.addEventListener("click", exportReviewsToCSV);
+}
+
+const approvedSearchInput = document.getElementById("approvedSearchInput");
+if (approvedSearchInput) {
+  approvedSearchInput.addEventListener("input", () => renderApprovedReviews());
+}
+
+const approvedRatingFilter = document.getElementById("approvedRatingFilter");
+if (approvedRatingFilter) {
+  approvedRatingFilter.addEventListener("change", () => renderApprovedReviews());
+}
+
+const approvedSortFilter = document.getElementById("approvedSortFilter");
+if (approvedSortFilter) {
+  approvedSortFilter.addEventListener("change", () => renderApprovedReviews());
+}
+
+const saveEditReviewBtn = document.getElementById("saveEditReviewBtn");
+if (saveEditReviewBtn) {
+  saveEditReviewBtn.addEventListener("click", saveEditedReviewAndApprove);
+}
+
+const cancelEditReviewBtn = document.getElementById("cancelEditReviewBtn");
+if (cancelEditReviewBtn) {
+  cancelEditReviewBtn.addEventListener("click", () => {
+    const modal = document.getElementById("editReviewModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+const plansRefreshBtn = document.getElementById("plansRefreshBtn");
+if (plansRefreshBtn) plansRefreshBtn.addEventListener("click", loadPlansAdmin);
+
+const plansNewBtn = document.getElementById("plansNewBtn");
+if (plansNewBtn) plansNewBtn.addEventListener("click", () => openPlanModal());
+
+const planSaveBtn = document.getElementById("planSaveBtn");
+if (planSaveBtn) planSaveBtn.addEventListener("click", savePlan);
+
+const planCancelBtn = document.getElementById("planCancelBtn");
+if (planCancelBtn) {
+  planCancelBtn.addEventListener("click", () => {
+    const modal = document.getElementById("planModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+const planName = document.getElementById("planName");
+if (planName) {
+  planName.addEventListener("input", function() {
+    const slugInput = document.getElementById("planSlug");
+    if (slugInput && !slugInput.dataset.manuallyEdited) {
+      slugInput.value = this.value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+  });
+}
+
+const planSlug = document.getElementById("planSlug");
+if (planSlug) {
+  planSlug.addEventListener("input", function() {
+    this.dataset.manuallyEdited = "true";
+  });
+}
+
+// Event listeners para marcas
+const brandsRefreshBtn = document.getElementById("brandsRefreshBtn");
+if (brandsRefreshBtn) brandsRefreshBtn.addEventListener("click", loadBrandsAdmin);
+
+const brandsNewBtn = document.getElementById("brandsNewBtn");
+if (brandsNewBtn) brandsNewBtn.addEventListener("click", () => openBrandModal());
+
+const brandSaveBtn = document.getElementById("brandSaveBtn");
+if (brandSaveBtn) brandSaveBtn.addEventListener("click", saveBrand);
+
+const brandCancelBtn = document.getElementById("brandCancelBtn");
+if (brandCancelBtn) {
+  brandCancelBtn.addEventListener("click", () => {
+    const modal = document.getElementById("brandModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+const brandLogoFile = document.getElementById("brandLogoFile");
+if (brandLogoFile) brandLogoFile.addEventListener("change", uploadBrandLogo);
+
+// Event listeners para preguntas del asistente
+const assistantRefreshBtn = document.getElementById("assistantRefreshBtn");
+if (assistantRefreshBtn) assistantRefreshBtn.addEventListener("click", loadAssistantQuestionsAdmin);
+
+const assistantNewBtn = document.getElementById("assistantNewBtn");
+if (assistantNewBtn) assistantNewBtn.addEventListener("click", () => openAssistantQuestionModal());
+
+const assistantQuestionSaveBtn = document.getElementById("assistantQuestionSaveBtn");
+if (assistantQuestionSaveBtn) assistantQuestionSaveBtn.addEventListener("click", saveAssistantQuestion);
+
+const assistantQuestionCancelBtn = document.getElementById("assistantQuestionCancelBtn");
+if (assistantQuestionCancelBtn) {
+  assistantQuestionCancelBtn.addEventListener("click", () => {
+    const modal = document.getElementById("assistantQuestionModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+// Event listeners para respuestas del asistente
+const assistantResponsesRefreshBtn = document.getElementById("assistantResponsesRefreshBtn");
+if (assistantResponsesRefreshBtn) assistantResponsesRefreshBtn.addEventListener("click", loadAssistantResponsesAdmin);
+
+const exportResponsesBtn = document.getElementById("exportResponsesBtn");
+if (exportResponsesBtn) exportResponsesBtn.addEventListener("click", exportResponsesToCSV);
+
+// Event listeners para casos de éxito
+const successStoriesRefreshBtn = document.getElementById("successStoriesRefreshBtn");
+if (successStoriesRefreshBtn) successStoriesRefreshBtn.addEventListener("click", loadSuccessStoriesAdmin);
+
+const successStoriesNewBtn = document.getElementById("successStoriesNewBtn");
+if (successStoriesNewBtn) successStoriesNewBtn.addEventListener("click", () => openSuccessStoryModal());
+
+const successStorySaveBtn = document.getElementById("successStorySaveBtn");
+if (successStorySaveBtn) successStorySaveBtn.addEventListener("click", saveSuccessStory);
+
+const successStoryCancelBtn = document.getElementById("successStoryCancelBtn");
+if (successStoryCancelBtn) {
+  successStoryCancelBtn.addEventListener("click", () => {
+    const modal = document.getElementById("successStoryModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+const successStoryImageFile = document.getElementById("successStoryImageFile");
+if (successStoryImageFile) successStoryImageFile.addEventListener("change", uploadSuccessStoryImage);
+
+// Event listeners para historial
+const clearProjectHistoryBtn = document.getElementById("clearProjectHistoryBtn");
+if (clearProjectHistoryBtn) clearProjectHistoryBtn.addEventListener("click", clearProjectHistory);
+const clearSettingsHistoryBtn = document.getElementById("clearSettingsHistoryBtn");
+if (clearSettingsHistoryBtn) clearSettingsHistoryBtn.addEventListener("click", clearSettingsHistory);
+const featuredRefreshBtn = document.getElementById("featuredRefreshBtn");
+if (featuredRefreshBtn) featuredRefreshBtn.addEventListener("click", loadFeaturedProjects);
+
+// Event listeners para servicios
+const servicesRefreshBtn = document.getElementById("servicesRefreshBtn");
+if (servicesRefreshBtn) servicesRefreshBtn.addEventListener("click", loadServicesAdmin);
+
+const servicesNewBtn = document.getElementById("servicesNewBtn");
+if (servicesNewBtn) servicesNewBtn.addEventListener("click", () => openServiceModal());
+
+const serviceSaveBtn = document.getElementById("serviceSaveBtn");
+if (serviceSaveBtn) serviceSaveBtn.addEventListener("click", saveService);
+
+const serviceCancelBtn = document.getElementById("serviceCancelBtn");
+if (serviceCancelBtn) {
+  serviceCancelBtn.addEventListener("click", () => {
+    const modal = document.getElementById("serviceModal");
+    if (modal) modal.style.display = "none";
+  });
+}
+
+const serviceImageFile = document.getElementById("serviceImageFile");
+if (serviceImageFile) serviceImageFile.addEventListener("change", uploadServiceImage);
+
+// Event listeners para leads
+const guideLeadsRefreshBtn = document.getElementById("guideLeadsRefreshBtn");
+if (guideLeadsRefreshBtn) guideLeadsRefreshBtn.addEventListener("click", loadGuideLeadsAdmin);
+
+const exportGuideLeadsBtn = document.getElementById("exportGuideLeadsBtn");
+if (exportGuideLeadsBtn) exportGuideLeadsBtn.addEventListener("click", exportGuideLeadsToCSV);
 
 // INICIALIZAR MENÚ HAMBURGUESA
+function initSidebarToggle() {
+  const toggleBtn = document.getElementById("sidebarToggleBtn");
+  const sidebar = document.querySelector(".sidebar");
+  
+  if (!toggleBtn || !sidebar) {
+    return;
+  }
+  
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    sidebar.classList.toggle("open");
+  });
+  
+  document.addEventListener("click", (e) => {
+    if (window.innerWidth <= 980 && sidebar.classList.contains("open")) {
+      if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+        sidebar.classList.remove("open");
+      }
+    }
+  });
+  
+  document.querySelectorAll(".navBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (window.innerWidth <= 980) {
+        sidebar.classList.remove("open");
+      }
+    });
+  });
+  
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980 && sidebar.classList.contains("open")) {
+      sidebar.classList.remove("open");
+    }
+  });
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initSidebarToggle);
 } else {
   initSidebarToggle();
 }
 
-console.log("✅ Admin panel completamente cargado");
+console.log("✅ Admin panel completamente cargado con Servicios y Leads del Asistente");
