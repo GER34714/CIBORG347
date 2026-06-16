@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ciborg 347 — Quiénes somos</title>
+  <meta name="description" content="Conocé nuestra historia, filosofía y forma de trabajar. Desarrollamos soluciones digitales a medida." />
+  <meta property="og:title" content="Ciborg 347 — Quiénes somos" />
+  <meta property="og:description" content="Conocé nuestra historia, filosofía y forma de trabajar." />
+  <meta property="og:image" content="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://ciborg347.onrender.com/quienes-somos.html" />
+  <link rel="icon" type="image/png" href="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" />
+  <link rel="apple-touch-icon" href="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  
+  <style>
+    /* ========== MISMO CSS QUE EL INDEX ========== */
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0f0f1a;
+      --bg3: #1a1a2e;
+      --glass: rgba(26, 26, 46, 0.55);
+      --border: rgba(0, 212, 255, 0.13);
+      --border-h: rgba(0, 212, 255, 0.28);
+      --cyan: #00d4ff;
+      --violet: #8b5cf6;
+      --magenta: #ff47d1;
+      --grad: linear-gradient(135deg, var(--cyan), var(--violet));
+      --text: #e0e6ff;
+      --text2: #9ca3ff;
+      --white: #ffffff;
+      --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    [data-theme="light"] {
+      --bg: #f0f4f8;
+      --bg2: #ffffff;
+      --bg3: #e8edf5;
+      --border: rgba(0, 0, 0, 0.08);
+      --cyan: #0066cc;
+      --violet: #7c3aed;
+      --magenta: #db2777;
+      --grad: linear-gradient(135deg, #0066cc, #7c3aed);
+      --text: #1e293b;
+      --text2: #475569;
+      --white: #0f172a;
+      --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background: linear-gradient(180deg, rgba(5, 8, 20, 0.80), rgba(8, 14, 28, 0.92)), url('https://iili.io/qlbiQ5u.jpg') center/cover fixed no-repeat;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(900px 500px at 10% 0%, rgba(0, 229, 255, 0.09), transparent 60%), radial-gradient(900px 500px at 100% 10%, rgba(255, 60, 255, 0.09), transparent 60%), radial-gradient(700px 420px at 50% 100%, rgba(185, 124, 255, 0.08), transparent 60%);
+      backdrop-filter: blur(4px);
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar__inner {
+      min-height: 68px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; transition: transform 0.2s; }
+    .brand:hover { transform: translateY(-1px); }
+    .brand__logo { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; animation: neonPulse 2s ease-in-out infinite; }
+    .brand__logo:hover { animation: none; transform: scale(1.02); filter: drop-shadow(0 0 12px var(--cyan)) drop-shadow(0 0 25px var(--violet)); }
+    @keyframes neonPulse {
+      0% { filter: drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 5px var(--cyan)); }
+      50% { filter: drop-shadow(0 0 8px var(--cyan)) drop-shadow(0 0 20px var(--cyan)) drop-shadow(0 0 30px var(--violet)); }
+      100% { filter: drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 5px var(--cyan)); }
+    }
+    .brand__text { text-align: left; }
+    .brand__text strong { font-family: 'Syne', sans-serif; font-size: 18px; color: var(--white); display: block; line-height: 1.2; }
+    .brand__text span { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px; display: block; }
+    .nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    .nav a {
+      padding: 7px 14px; border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--text2); transition: all 0.15s;
+    }
+    .nav a:hover { color: var(--white); background: var(--glass); }
+    .topbar__cta { display: flex; align-items: center; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border: none; border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; transition: all 0.25s;
+    }
+    .btn--primary { background: var(--grad); color: white; }
+    .btn--primary:hover { transform: translateY(-2px); box-shadow: 0 0 15px var(--cyan); }
+    .btn--ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn--ghost:hover { background: var(--glass); transform: translateY(-1px); border-color: var(--cyan); }
+    .btn--wa { background: linear-gradient(135deg,#25d366,#128c7e); color: white; }
+    .btn--wa:hover { transform: translateY(-2px); box-shadow: 0 0 15px #25d366; }
+    .burger {
+      display: none; width: 40px; height: 40px;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: var(--glass);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 5px;
+    }
+    .burger span { width: 16px; height: 2px; background: var(--text); border-radius: 2px; }
+    .mobileMenu {
+      display: none; flex-direction: column;
+      position: fixed; top: 68px; left: 0; right: 0;
+      background: rgba(10,10,15,0.97); backdrop-filter: blur(16px);
+      padding: 1.5rem 24px; gap: 0.75rem; z-index: 99;
+    }
+    .mobileMenu.isOpen { display: flex; }
+    .mobileMenu a {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      color: var(--text2); padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+    }
+    .section { padding: 90px 0; position: relative; }
+    .section--alt { background: var(--bg2); }
+    .section__head { margin-bottom: 3rem; }
+    .section__head.center { text-align: center; }
+    .section__label {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--cyan); margin-bottom: 0.6rem; display: inline-block;
+      text-transform: uppercase;
+    }
+    .section__head h2 {
+      font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800; color: var(--white);
+    }
+    .section__head h2 em { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    /* ========== SECCIÓN QUIÉNES SOMOS ========== */
+    .about-us-section {
+      background: var(--bg2);
+    }
+    .about-us-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .about-us-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    .about-us-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+    .about-us-text p {
+      margin-bottom: 1rem;
+    }
+    .about-us-image img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+    @media (max-width: 900px) {
+      .about-us-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .about-us-text h3 {
+        font-size: 1.5rem;
+      }
+    }
+    
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+    .footer__brand { display: flex; align-items: center; gap: 12px; }
+    .footer__brand img { width: 38px; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; animation: neonPulse 2s ease-in-out infinite; }
+    .footer__brand img:hover { animation: none; filter: drop-shadow(0 0 12px var(--cyan)) drop-shadow(0 0 25px var(--violet)); transform: scale(1.02); }
+    .footer__brand div strong { font-family: 'Syne', sans-serif; font-size: 14px; color: var(--white); display: block; }
+    .footer__brand div span { font-size: 9px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+    .footer__links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .footer__links a { font-size: 12px; color: var(--text2); transition: color 0.2s; }
+    .footer__links a:hover { color: var(--cyan); }
+    .footer__copy { font-size: 11px; color: var(--text2); text-align: center; }
+    .footer__social { margin-top: 1rem; text-align: center; }
+    .btn-social { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); padding: 10px 20px; border-radius: 40px; color: white; font-family: 'JetBrains Mono', monospace; font-size: 12px; transition: all 0.3s ease; }
+    .btn-social:hover { transform: scale(1.05); box-shadow: 0 0 15px #fd1d1d; }
+    .waFloat {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 500;
+      transition: all 0.3s ease;
+      opacity: 1;
+      visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .waFloat svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+    .waFloat.hidden { opacity: 0; visibility: hidden; }
+    .waFloat:hover { transform: scale(1.08) rotate(5deg); box-shadow: 0 0 20px #25d366; }
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg3);
+      color: var(--cyan);
+      padding: 10px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--cyan);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text2);
+    }
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .burger { display: flex; }
+      .footer__inner { flex-direction: column; align-items: center; text-align: center; }
+      .footer__links { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 60px 0; }
+    }
+    
+    /* ===== ROBOT FLOTANTE (mismo que index) ===== */
+    .robot-help {
+      position: fixed;
+      right: 20px;
+      bottom: 100px;
+      z-index: 999;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .robot-help.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .robot-help.hide-robot {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .robot-help .robot-img {
+      width: 55px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .robot-help.enlarged .robot-img {
+      width: 130px;
+    }
+    .robot-help:hover .robot-img {
+      width: 130px !important;
+    }
+    .robot-help .robot-bubble {
+      font-size: 0.7rem;
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+    .robot-help.enlarged .robot-bubble {
+      font-size: 0.85rem;
+      padding: 10px 18px;
+    }
+    .robot-help:hover .robot-bubble {
+      font-size: 0.85rem;
+      padding: 10px 18px;
+    }
+    @keyframes neonPulseRobot {
+      0% { filter: drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 5px var(--cyan)); }
+      50% { filter: drop-shadow(0 0 10px var(--cyan)) drop-shadow(0 0 20px var(--cyan)) drop-shadow(0 0 30px var(--violet)); }
+      100% { filter: drop-shadow(0 0 2px var(--cyan)) drop-shadow(0 0 5px var(--cyan)); }
+    }
+    .robot-help.neon-pulse .robot-img {
+      animation: neonPulseRobot 2s ease-in-out infinite;
+    }
+    @keyframes vibrateRobot {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-3px) rotate(-2deg); }
+      75% { transform: translateX(3px) rotate(2deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+    .robot-help.vibrate {
+      animation: vibrateRobot 0.3s ease-in-out 3;
+    }
+    .robot-bubble {
+      position: absolute;
+      bottom: 100%;
+      right: 10px;
+      margin-bottom: 15px;
+      background: white;
+      color: #1a1a2e;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border: 1px solid rgba(0,212,255,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .robot-help.bubble-visible .robot-bubble {
+      opacity: 1 !important;
+      visibility: visible !important;
+      background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+      color: white;
+      border: none;
+    }
+    .robot-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid white;
+    }
+    .robot-help.bubble-visible .robot-bubble::after {
+      border-top-color: #8b5cf6;
+    }
+    @media (max-width: 600px) {
+      .robot-help { bottom: 80px; right: 10px; }
+      .robot-help .robot-img { width: 45px; }
+      .robot-help.enlarged .robot-img { width: 90px; }
+      .robot-help:hover .robot-img { width: 90px !important; }
+      .robot-bubble { padding: 5px 10px; font-size: 0.65rem; right: 5px; white-space: nowrap; }
+      .robot-help.enlarged .robot-bubble { font-size: 0.75rem; padding: 8px 14px; }
+    }
+  </style>
+</head>
+<body>
+<main id="contenido-principal">
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a href="index.html" class="brand">
+      <img class="brand__logo" id="brandLogo" src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" alt="Logo Ciborg 347 - Desarrollo Web" />
+      <div class="brand__text"><strong>CIBORG 347</strong><span>DESARROLLO WEB</span></div>
+    </a>
+    <nav class="nav">
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="index.html#servicios">Servicios</a>
+      <a href="index.html#casos-exito">Casos de éxito</a>
+      <a href="index.html#marcas">Marcas</a>
+      <a href="beneficios.html">Beneficios</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="quienes-somos.html" style="color: var(--cyan);">Quiénes somos</a>
+    </nav>
+    <div class="topbar__cta">
+      <a href="index.html#contacto" class="btn btn--primary btn--sm" aria-label="Solicitar presupuesto">Presupuesto</a>
+      <button class="burger" id="burgerBtn" aria-label="Menú de navegación"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobileMenu" id="mobileMenu">
+  <a href="index.html#portfolio">Portfolio</a>
+  <a href="index.html#servicios">Servicios</a>
+  <a href="index.html#casos-exito">Casos de éxito</a>
+  <a href="index.html#marcas">Marcas</a>
+  <a href="beneficios.html">Beneficios</a>
+  <a href="index.html#faq">FAQ</a>
+  <a href="index.html#contacto">Contacto</a>
+  <a href="quienes-somos.html">Quiénes somos</a>
+  <a href="#" class="btn btn--wa" id="mobileWhatsAppBtn">WhatsApp</a>
+</nav>
+
+<!-- ===== ROBOT FLOTANTE ===== -->
+<div class="robot-help" id="robotHelpBtn" aria-label="Asistente virtual">
+  <div class="robot-container">
+    <div class="robot-bubble" id="robotBubble">🤖 Hola, ¿necesitas ayuda?</div>
+    <img class="robot-img" id="robotImg" src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/8f4b1793-1886-4dee-9445-b9570c2047ea.png" alt="Asistente virtual Ciborg 347" loading="eager">
+  </div>
+</div>
+
+<!-- ========== SECCIÓN QUIÉNES SOMOS ========== -->
+<section class="section about-us-section" id="quienes-somos">
+  <div class="wrap">
+    <div class="section__head center fade-in-up">
+      <span class="section__label">Conocenos</span>
+      <h2 id="aboutTitle">Quiénes <em>somos</em></h2>
+    </div>
+    <div class="about-us-content fade-in-up" id="aboutContent">
+      <div class="about-us-text">
+        <h3 id="aboutMainTitle">Ciborg 347</h3>
+        <div id="aboutDescription">
+          <div class="loading">Cargando información...</div>
+        </div>
+      </div>
+      <div class="about-us-image">
+        <img id="aboutImage" src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" alt="Sobre Ciborg 347" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== BOTÓN VOLVER AL INICIO ========== -->
+<section class="section">
+  <div class="wrap" style="text-align: center;">
+    <a href="index.html" class="btn btn--primary" style="background: var(--grad);">← Volver al inicio</a>
+  </div>
+</section>
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="wrap">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img id="footerLogo" src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/fETkPEv.md.png" alt="Logo Ciborg 347 - Desarrollo Web" loading="lazy" width="38" height="38" />
+        <div><strong>CIBORG 347</strong><span>Desarrollo Web</span></div>
+      </div>
+      <div class="footer__links">
+        <a href="index.html#portfolio">Proyectos</a>
+        <a href="index.html#servicios">Servicios</a>
+        <a href="index.html#casos-exito">Casos de éxito</a>
+        <a href="index.html#marcas">Marcas</a>
+        <a href="beneficios.html">Beneficios</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#contacto">Contacto</a>
+        <a href="quienes-somos.html">Quiénes somos</a>
+      </div>
+      <div class="footer__copy">
+        © 2026 Ciborg 347 — Diseñamos hoy, impulsamos tu futuro.
+        <div class="footer__social">
+          <a href="https://instagram.com/CIBORG347" target="_blank" class="btn-social" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 110 2.881 1.44 1.44 0 010-2.881z"/>
+            </svg>
+            <span>Seguinos en Instagram</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="waFloat" id="waFloat" target="_blank" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Enlace copiado</div>
+
+<script>
+// ========== CONFIGURACIÓN ==========
+const SUPABASE_URL = "https://fhxcumwhgtfirznnznjx.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZoeGN1bXdoZ3RmaXJ6bm56bmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5OTYyNzEsImV4cCI6MjA4MzU3MjI3MX0.7z1B099L4yrA9k1JxwvYGCABzqiqYtkUClI3E8wQ2zA";
+const DEFAULT_WA = "5491164499481";
+const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
+}
+
+function waUrl(msg) { return `https://wa.me/${DEFAULT_WA}?text=${encodeURIComponent(msg)}`; }
+
+// ========== CARGAR QUIÉNES SOMOS ==========
+async function loadAboutUs() {
+  const titleElem = document.getElementById('aboutTitle');
+  const mainTitleElem = document.getElementById('aboutMainTitle');
+  const descElem = document.getElementById('aboutDescription');
+  const imageElem = document.getElementById('aboutImage');
+  
+  try {
+    const { data, error } = await sb
+      .from('about_us')
+      .select('*')
+      .eq('active', true)
+      .maybeSingle();
+    
+    if (error) throw error;
+    
+    if (data) {
+      if (titleElem) titleElem.innerHTML = data.title ? `${data.title.split(' ')[0]} <em>${data.title.split(' ').slice(1).join(' ') || 'somos'}</em>` : 'Quiénes <em>somos</em>';
+      if (mainTitleElem) mainTitleElem.textContent = data.title || 'Ciborg 347';
+      if (descElem) descElem.innerHTML = data.content || '<p>Somos una agencia de desarrollo web especializada en crear soluciones digitales a medida para empresas y emprendedores.</p><p>Nos apasiona la tecnología y nos dedicamos a construir herramientas que potencian negocios.</p>';
+      if (imageElem && data.image_url) imageElem.src = data.image_url;
+    } else {
+      // Contenido por defecto
+      if (descElem) descElem.innerHTML = '<p>Somos una agencia de desarrollo web especializada en crear soluciones digitales a medida para empresas y emprendedores.</p><p>Nos apasiona la tecnología y nos dedicamos a construir herramientas que potencian negocios.</p><p>Trabajamos sin plantillas, cada proyecto es único y diseñado específicamente para las necesidades de cada cliente.</p>';
+    }
+  } catch(e) {
+    console.error("Error loading about us:", e);
+    if (descElem) descElem.innerHTML = '<p>Error al cargar la información. Por favor, intentá más tarde.</p>';
+  }
+}
+
+// ========== ROBOT FLOTANTE (mismo comportamiento que index) ==========
+const robotBtn = document.getElementById('robotHelpBtn');
+const robotImg = document.getElementById('robotImg');
+const robotBubble = document.getElementById('robotBubble');
+let robotEnlargeTimeout = null;
+
+robotBtn.classList.remove('enlarged');
+
+function enlargeRobot() {
+  robotBtn.classList.add('enlarged');
+  if (robotEnlargeTimeout) clearTimeout(robotEnlargeTimeout);
+  robotEnlargeTimeout = setTimeout(() => {
+    robotBtn.classList.remove('enlarged');
+  }, 5000);
+}
+
+if (robotBtn) {
+  robotBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    enlargeRobot();
+    window.open('asistente.html', '_blank');
+  });
+}
+
+// Secuencia del robot (opcional)
+const IMG1 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/8f4b1793-1886-4dee-9445-b9570c2047ea.png";
+const IMG2 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/a586d88b-93c0-4fac-b28d-4f5758af46f0.png";
+const IMG3 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/ciborg%20sentado%20.png";
+
+let sequenceTimeout = null;
+let vibrationInterval = null;
+let isInSequence = false;
+let currentStep = 1;
+let isRobotHiddenByFooter = false;
+let bubbleTimeout = null;
+
+function hideBubble() {
+  robotBtn.classList.remove('bubble-visible');
+  if (bubbleTimeout) clearTimeout(bubbleTimeout);
+  bubbleTimeout = null;
+}
+
+function showTemporaryBubble() {
+  robotBtn.classList.add('bubble-visible');
+  if (bubbleTimeout) clearTimeout(bubbleTimeout);
+  bubbleTimeout = setTimeout(() => hideBubble(), 2000);
+}
+
+function startSequence() {
+  if (sequenceTimeout) clearTimeout(sequenceTimeout);
+  if (vibrationInterval) clearInterval(vibrationInterval);
+  
+  robotBtn.classList.remove('enlarged');
+  isInSequence = true;
+  currentStep = 1;
+  
+  robotImg.src = IMG1;
+  robotBubble.textContent = "🤖 Hola, ¿necesitas ayuda?";
+  robotBtn.classList.add('bubble-visible');
+  robotBtn.classList.add('neon-pulse');
+  
+  sequenceTimeout = setTimeout(() => {
+    if (!isInSequence) return;
+    robotImg.src = IMG2;
+    robotBubble.textContent = "💙 Cualquier duda o consulta, aquí estaré";
+    
+    sequenceTimeout = setTimeout(() => {
+      if (!isInSequence) return;
+      robotImg.src = IMG3;
+      robotBubble.textContent = "🤖 ¿Ayuda?";
+      isInSequence = false;
+      currentStep = 3;
+      sequenceTimeout = null;
+      
+      vibrationInterval = setInterval(() => {
+        if (currentStep === 3 && robotBtn.classList.contains('show') && !isRobotHiddenByFooter) {
+          robotBtn.classList.add('vibrate');
+          showTemporaryBubble();
+          setTimeout(() => robotBtn.classList.remove('vibrate'), 300);
+        }
+      }, 20000);
+    }, 7000);
+  }, 6000);
+}
+
+function resetSequence() {
+  if (sequenceTimeout) clearTimeout(sequenceTimeout);
+  if (vibrationInterval) clearInterval(vibrationInterval);
+  startSequence();
+}
+
+function setupRobotScroll() {
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+  
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        robotBtn.classList.remove('show');
+        robotBtn.classList.add('hide-robot');
+        isRobotHiddenByFooter = true;
+      } else {
+        robotBtn.classList.remove('hide-robot');
+        isRobotHiddenByFooter = false;
+        robotBtn.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1 });
+  footerObserver.observe(footer);
+  
+  robotBtn.classList.add('show');
+  if (currentStep !== 3 && !isInSequence) {
+    startSequence();
+  }
+}
+
+setupRobotScroll();
+
+// ========== WHATSAPP LINKS ==========
+function setWaLinks() {
+  ["heroWhatsAppBtn", "mobileWhatsAppBtn", "waFloat"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.href = waUrl("Hola CIBORG 347, vi la página 'Quiénes somos' y quiero consultar por una web.");
+  });
+}
+setWaLinks();
+
+// ========== INICIALIZAR ==========
+loadAboutUs();
+
+// Menú hamburguesa
+document.getElementById("burgerBtn")?.addEventListener("click", () => document.getElementById("mobileMenu")?.classList.toggle("isOpen"));
+document.querySelectorAll(".mobileMenu a").forEach(a => a.addEventListener("click", () => document.getElementById("mobileMenu")?.classList.remove("isOpen")));
+
+// Ocultar botón flotante al llegar al footer
+const footer = document.querySelector("footer");
+const waFloat = document.getElementById("waFloat");
+function checkWaFloatVisibility() {
+  if (!waFloat || !footer) return;
+  const footerRect = footer.getBoundingClientRect();
+  if (footerRect.top < window.innerHeight - 50) waFloat.classList.add("hidden");
+  else waFloat.classList.remove("hidden");
+}
+window.addEventListener("scroll", checkWaFloatVisibility);
+window.addEventListener("resize", checkWaFloatVisibility);
+setTimeout(checkWaFloatVisibility, 100);
+</script>
+</body>
+</html>
