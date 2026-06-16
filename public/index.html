@@ -1614,6 +1614,62 @@
       .robot-bubble { padding: 5px 10px; font-size: 0.65rem; right: 5px; white-space: nowrap; }
       .robot-help.enlarged .robot-bubble { font-size: 0.75rem; padding: 8px 14px; }
     }
+
+    /* ============================================= */
+    /* ===== FIX PARA CORTE LATERAL EN MÓVILES ===== */
+    /* ============================================= */
+    @media (max-width: 768px) {
+      /* Forzar que no haya desbordamiento horizontal */
+      html, body {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+      }
+      
+      /* Fix para el hero con background-attachment fixed */
+      .hero {
+        background-attachment: scroll !important;
+        background-position: center !important;
+      }
+      
+      /* Asegurar que todos los contenedores respeten el ancho */
+      .wrap, 
+      .hero .wrap, 
+      .section .wrap,
+      .topbar__inner {
+        overflow-x: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+      
+      /* Evitar que elementos se salgan */
+      .hero__copy {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      
+      /* Ajustar stats en móvil para que no se corten */
+      .hero__stats {
+        flex-wrap: wrap !important;
+      }
+      
+      .hero__stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+      
+      .hero__stat:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      
+      /* Ajustar tipo de letra para que no genere overflow */
+      .typewriter {
+        font-size: clamp(1.3rem, 5vw, 2rem);
+      }
+    }
   </style>
 </head>
 <body>
