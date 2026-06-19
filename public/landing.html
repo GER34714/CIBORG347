@@ -4,17 +4,32 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- SEO básico -->
+  <!-- ============================================================ -->
+  <!-- REDIRECCIÓN DEL DOMINIO VIEJO AL NUEVO (si aplica)           -->
+  <!-- ============================================================ -->
+  <script>
+    // Si alguien entra desde el dominio antiguo (landingciborg347...),
+    // lo redirigimos automáticamente al dominio principal unificado.
+    if (window.location.hostname === 'landingciborg347.onrender.com') {
+      window.location.replace('https://ciborg347.onrender.com/landing.html');
+    }
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- SEO BÁSICO                                                    -->
+  <!-- ============================================================ -->
   <title>CIBORG 347 — Desarrollo Web y Landing Pages que Venden | Buenos Aires, Argentina</title>
   <meta name="description" content="Construimos sistemas de venta digital a medida: landings, e-commerce y catálogos que generan consultas reales por WhatsApp. Sin plantillas. Primero te mostramos el resultado."/>
   <meta name="keywords" content="desarrollo web, landing page, e-commerce, sistemas de venta digital, WhatsApp, Buenos Aires, Argentina, CIBORG 347"/>
   <meta name="author" content="CIBORG 347"/>
   <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://ciborg347.onrender.com/"/>
+  <link rel="canonical" href="https://ciborg347.onrender.com/landing.html"/>
 
-  <!-- Open Graph -->
+  <!-- ============================================================ -->
+  <!-- OPEN GRAPH (para redes sociales)                              -->
+  <!-- ============================================================ -->
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://ciborg347.onrender.com/"/>
+  <meta property="og:url" content="https://ciborg347.onrender.com/landing.html"/>
   <meta property="og:title" content="CIBORG 347 — Desarrollo Web y Landing Pages que Venden"/>
   <meta property="og:description" content="Tu negocio no duerme. Tu web tampoco debería. Sistemas digitales que generan consultas, ventas y confianza las 24 hs."/>
   <meta property="og:image" content="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/Ciborg%203.png"/>
@@ -24,23 +39,33 @@
   <meta property="og:site_name" content="CIBORG 347"/>
   <meta property="og:locale" content="es_AR"/>
 
-  <!-- Twitter Card -->
+  <!-- ============================================================ -->
+  <!-- TWITTER CARD                                                  -->
+  <!-- ============================================================ -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="CIBORG 347 — Desarrollo Web y Landing Pages que Venden"/>
   <meta name="twitter:description" content="Tu negocio no duerme. Tu web tampoco debería. Sistemas digitales a medida con WhatsApp como canal principal de ventas."/>
   <meta name="twitter:image" content="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/Ciborg%203.png"/>
   <meta name="twitter:image:alt" content="CIBORG 347 - Sistemas de venta digital en Buenos Aires, Argentina"/>
 
-  <!-- Tema -->
+  <!-- ============================================================ -->
+  <!-- TEMA / COLOR                                                  -->
+  <!-- ============================================================ -->
   <meta name="theme-color" content="#07090f"/>
   <meta name="color-scheme" content="dark"/>
 
-  <!-- Tipografías -->
+  <!-- ============================================================ -->
+  <!-- TIPOGRAFÍAS                                                   -->
+  <!-- ============================================================ -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 
+  <!-- ============================================================ -->
+  <!-- ESTILOS                                                       -->
+  <!-- ============================================================ -->
   <style>
+    /* ===== RESET ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
@@ -52,7 +77,7 @@
       overflow-x: hidden;
     }
 
-    /* FONDO HERO */
+    /* ===== FONDO HERO (fijo) ===== */
     .hero-bg {
       position: fixed;
       inset: 0;
@@ -79,6 +104,7 @@
       );
     }
 
+    /* ===== GRID DE FONDO ===== */
     .bg-grid {
       position: fixed;
       inset: 0;
@@ -90,7 +116,7 @@
       pointer-events: none;
     }
 
-    /* ESQUINAS */
+    /* ===== ESQUINAS ===== */
     .corner {
       position: fixed;
       width: 20px; height: 20px;
@@ -103,12 +129,13 @@
     .corner.bl { bottom: 18px; left: 18px;  border-width: 0 0 1px 1px; }
     .corner.br { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
 
-    /* HERO */
+    /* ===== ANIMACIONES ===== */
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ===== HERO ===== */
     .hero {
       position: relative;
       z-index: 2;
@@ -219,7 +246,7 @@
       background: rgba(255,255,255,0.08);
     }
 
-    /* FRASES */
+    /* ===== FRASES ===== */
     .frases {
       position: relative;
       z-index: 2;
@@ -266,7 +293,7 @@
       font-weight: 500;
     }
 
-    /* CTA FINAL */
+    /* ===== CTA FINAL ===== */
     .cta-final {
       position: relative;
       z-index: 2;
@@ -306,7 +333,7 @@
       background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.3), transparent);
     }
 
-    /* FOOTER */
+    /* ===== FOOTER ===== */
     .footer {
       position: relative;
       z-index: 2;
@@ -324,10 +351,22 @@
       }
     }
   </style>
+
+  <!-- ============================================================ -->
+  <!-- Google Analytics (GA4)                                        -->
+  <!-- ============================================================ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2S0VWZCNY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-Z2S0VWZCNY');
+  </script>
+
 </head>
 <body>
 
-  <!-- Imagen de fondo fija (hero) -->
+  <!-- ===== FONDO ===== -->
   <div class="hero-bg">
     <img
       src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/710478090_921107700943207_8371047012180220047_n.jpg"
@@ -397,18 +436,30 @@
     </a>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">© 2026 CIBORG 347</footer>
 
+  <!-- ============================================================ -->
+  <!-- SCRIPT PARA ANIMACIÓN DE FRASES (Intersection Observer)      -->
+  <!-- ============================================================ -->
   <script>
-    const cards = document.querySelectorAll('.frase-card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 120);
-        }
-      });
-    }, { threshold: 0.2 });
-    cards.forEach(c => observer.observe(c));
+    (function() {
+      const cards = document.querySelectorAll('.frase-card');
+      if (!cards.length) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            // Retraso escalonado para efecto cascada
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, i * 120);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      cards.forEach(c => observer.observe(c));
+    })();
   </script>
 
 </body>
