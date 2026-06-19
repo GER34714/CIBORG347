@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- SEO básico -->
+  <title>CIBORG 347 — Desarrollo Web y Landing Pages que Venden | Buenos Aires, Argentina</title>
+  <meta name="description" content="Construimos sistemas de venta digital a medida: landings, e-commerce y catálogos que generan consultas reales por WhatsApp. Sin plantillas. Primero te mostramos el resultado."/>
+  <meta name="keywords" content="desarrollo web, landing page, e-commerce, sistemas de venta digital, WhatsApp, Buenos Aires, Argentina, CIBORG 347"/>
+  <meta name="author" content="CIBORG 347"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://ciborg347.onrender.com/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://ciborg347.onrender.com/"/>
+  <meta property="og:title" content="CIBORG 347 — Desarrollo Web y Landing Pages que Venden"/>
+  <meta property="og:description" content="Tu negocio no duerme. Tu web tampoco debería. Sistemas digitales que generan consultas, ventas y confianza las 24 hs."/>
+  <meta property="og:image" content="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/Ciborg%203.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="CIBORG 347 - Sistemas de venta digital en Buenos Aires, Argentina"/>
+  <meta property="og:site_name" content="CIBORG 347"/>
+  <meta property="og:locale" content="es_AR"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="CIBORG 347 — Desarrollo Web y Landing Pages que Venden"/>
+  <meta name="twitter:description" content="Tu negocio no duerme. Tu web tampoco debería. Sistemas digitales a medida con WhatsApp como canal principal de ventas."/>
+  <meta name="twitter:image" content="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/Ciborg%203.png"/>
+  <meta name="twitter:image:alt" content="CIBORG 347 - Sistemas de venta digital en Buenos Aires, Argentina"/>
+
+  <!-- Tema -->
+  <meta name="theme-color" content="#07090f"/>
+  <meta name="color-scheme" content="dark"/>
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #07090f;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* FONDO HERO */
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(7,9,15,0.50) 0%,
+        rgba(7,9,15,0.68) 50%,
+        rgba(7,9,15,0.93) 100%
+      );
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* ESQUINAS */
+    .corner {
+      position: fixed;
+      width: 20px; height: 20px;
+      border-color: rgba(56,189,248,0.25);
+      border-style: solid;
+      z-index: 4;
+    }
+    .corner.tl { top: 18px; left: 18px;  border-width: 1px 0 0 1px; }
+    .corner.tr { top: 18px; right: 18px; border-width: 1px 1px 0 0; }
+    .corner.bl { bottom: 18px; left: 18px;  border-width: 0 0 1px 1px; }
+    .corner.br { bottom: 18px; right: 18px; border-width: 0 1px 1px 0; }
+
+    /* HERO */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px 40px;
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 80px 28px 40px; }
+    }
+
+    .brand {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(38px, 10vw, 72px);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: #fff;
+      line-height: 1;
+      animation: fade-up 0.7s ease both;
+    }
+    .brand span { color: #38bdf8; }
+
+    .sub {
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      letter-spacing: 5px;
+      color: rgba(56,189,248,0.5);
+      text-transform: uppercase;
+      margin-top: 10px;
+      animation: fade-up 0.7s 0.1s ease both;
+    }
+
+    .headline {
+      margin-top: 36px;
+      font-size: clamp(22px, 5vw, 34px);
+      font-weight: 300;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.9);
+      animation: fade-up 0.7s 0.2s ease both;
+    }
+    .headline em {
+      font-style: normal;
+      color: #38bdf8;
+      font-weight: 400;
+    }
+
+    .tagline {
+      margin-top: 18px;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.4);
+      animation: fade-up 0.7s 0.3s ease both;
+    }
+
+    .btns {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: fade-up 0.7s 0.4s ease both;
+    }
+
+    /* ===== BOTÓN PRINCIPAL (Ver mi trabajo) ===== */
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(56,189,248,0.12);
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 14px 22px;
+      border-radius: 6px;
+      border: 1px solid rgba(56,189,248,0.5);
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-main:hover {
+      background: #38bdf8;
+      color: #07090f;
+      box-shadow: 0 0 24px rgba(56,189,248,0.45);
+    }
+
+    /* ===== BOTÓN INSTAGRAM ===== */
+    .btn-ig {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 12px;
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-ig:hover {
+      color: rgba(255,255,255,0.85);
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* FRASES */
+    .frases {
+      position: relative;
+      z-index: 2;
+      padding: 70px 56px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      max-width: 560px;
+    }
+    @media (max-width: 600px) {
+      .frases { padding: 60px 28px; }
+    }
+
+    .frase-card {
+      border-left: 2px solid #38bdf8;
+      padding: 16px 20px;
+      background: rgba(7,9,15,0.6);
+      backdrop-filter: blur(6px);
+      border-radius: 0 8px 8px 0;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .frase-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .frase-card .numero {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      color: #38bdf8;
+      letter-spacing: 3px;
+      margin-bottom: 7px;
+      opacity: 0.6;
+    }
+    .frase-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .frase-card p strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* CTA FINAL */
+    .cta-final {
+      position: relative;
+      z-index: 2;
+      padding: 40px 56px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    @media (max-width: 600px) {
+      .cta-final {
+        padding: 40px 28px 80px;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    .cta-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #38bdf8;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+    .cta-final h2 {
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.4;
+      max-width: 280px;
+    }
+    .cta-final h2 span { color: #38bdf8; }
+
+    .divider {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.3), transparent);
+    }
+
+    /* FOOTER */
+    .footer {
+      position: relative;
+      z-index: 2;
+      padding-bottom: 28px;
+      padding-left: 56px;
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.1);
+    }
+    @media (max-width: 600px) {
+      .footer {
+        text-align: center;
+        padding-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Imagen de fondo fija (hero) -->
+  <div class="hero-bg">
+    <img
+      src="https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/710478090_921107700943207_8371047012180220047_n.jpg"
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="bg-grid"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <h1 class="brand">CIBORG<span>347</span></h1>
+    <p class="sub">Sistemas de venta digital</p>
+    <p class="headline">Tu negocio no duerme.<br/><em>Tu web tampoco debería.</em></p>
+    <p class="tagline">
+      Construimos herramientas digitales a medida,<br/>
+      que trabajan por vos las 24 horas del día.
+    </p>
+    <div class="btns">
+      <!-- BOTÓN VER MI TRABAJO -->
+      <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Ver mi trabajo
+      </a>
+      <!-- BOTÓN INSTAGRAM -->
+      <a class="btn-ig" href="https://instagram.com/ciborg347" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Seguinos en Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FRASES ===== -->
+  <section class="frases" aria-label="Por qué elegirnos">
+    <div class="frase-card">
+      <div class="numero" aria-hidden="true">01</div>
+      <p><strong>¿Tu competencia ya tiene web?</strong><br/>Cada día sin presencia digital es un cliente que se va a otro lado.</p>
+    </div>
+    <div class="frase-card">
+      <div class="numero" aria-hidden="true">02</div>
+      <p><strong>Sin plantillas. Sin límites.</strong><br/>Cada proyecto es único, construido desde cero para tu negocio.</p>
+    </div>
+    <div class="frase-card">
+      <div class="numero" aria-hidden="true">03</div>
+      <p><strong>Primero te mostramos el resultado.</strong><br/>Pagás solo cuando estés conforme con lo que ves.</p>
+    </div>
+    <div class="frase-card">
+      <div class="numero" aria-hidden="true">04</div>
+      <p><strong>No vendemos páginas.</strong><br/>Construimos sistemas que generan consultas, ventas y confianza.</p>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-final" aria-label="Llamada a la acción">
+    <div class="divider" aria-hidden="true"></div>
+    <p class="cta-label">¿Te genera curiosidad?</p>
+    <h2>Entrá y mirá lo que<br/><span>podemos hacer juntos.</span></h2>
+    <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Visitá mi sitio web
+    </a>
+  </section>
+
+  <footer class="footer">© 2026 CIBORG 347</footer>
+
+  <script>
+    const cards = document.querySelectorAll('.frase-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        }
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(c => observer.observe(c));
+  </script>
+
+</body>
+</html>
