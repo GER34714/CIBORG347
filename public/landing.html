@@ -393,7 +393,7 @@
     </p>
     <div class="btns">
       <!-- BOTÓN VER MI TRABAJO -->
-      <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener">
+      <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener" id="btnVerTrabajo">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         Ver mi trabajo
       </a>
@@ -430,7 +430,7 @@
     <div class="divider" aria-hidden="true"></div>
     <p class="cta-label">¿Te genera curiosidad?</p>
     <h2>Entrá y mirá lo que<br/><span>podemos hacer juntos.</span></h2>
-    <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener">
+    <a class="btn-main" href="https://ciborg347.onrender.com/" target="_blank" rel="noopener" id="btnVisitarWeb">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Visitá mi sitio web
     </a>
@@ -440,8 +440,10 @@
   <footer class="footer">© 2026 CIBORG 347</footer>
 
   <!-- ============================================================ -->
-  <!-- SCRIPT PARA ANIMACIÓN DE FRASES (Intersection Observer)      -->
+  <!-- SCRIPTS                                                       -->
   <!-- ============================================================ -->
+
+  <!-- 1. Animación de frases (Intersection Observer) -->
   <script>
     (function() {
       const cards = document.querySelectorAll('.frase-card');
@@ -450,7 +452,6 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
           if (entry.isIntersecting) {
-            // Retraso escalonado para efecto cascada
             setTimeout(() => {
               entry.target.classList.add('visible');
             }, i * 120);
@@ -460,6 +461,64 @@
 
       cards.forEach(c => observer.observe(c));
     })();
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- 2. TRACKING DE CLICS EN BOTONES (NUEVO)                      -->
+  <!-- ============================================================ -->
+  <script>
+    /**
+     * Este script mide los clics en los botones que llevan desde la landing
+     * hacia la web principal (ciborg347.onrender.com).
+     *
+     * Los eventos se ven en GA4 en: Informes → Eventos
+     * Evento: clic_web_principal
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // --- Botón "Ver mi trabajo" (en el hero) ---
+      const btnVerTrabajo = document.getElementById('btnVerTrabajo');
+      if (btnVerTrabajo) {
+        btnVerTrabajo.addEventListener('click', function(e) {
+          gtag('event', 'clic_web_principal', {
+            'event_category': 'landing',
+            'event_label': 'boton_ver_trabajo',
+            'link_url': this.href,
+            'method': 'hero'
+          });
+          console.log('✅ GA4 Event: clic_web_principal - boton_ver_trabajo');
+        });
+      }
+
+      // --- Botón "Visitá mi sitio web" (en el CTA final) ---
+      const btnVisitarWeb = document.getElementById('btnVisitarWeb');
+      if (btnVisitarWeb) {
+        btnVisitarWeb.addEventListener('click', function(e) {
+          gtag('event', 'clic_web_principal', {
+            'event_category': 'landing',
+            'event_label': 'boton_visitar_web',
+            'link_url': this.href,
+            'method': 'cta_final'
+          });
+          console.log('✅ GA4 Event: clic_web_principal - boton_visitar_web');
+        });
+      }
+
+      // --- (Opcional) Botón Instagram: mide clics en redes ---
+      const btnIg = document.querySelector('.btn-ig');
+      if (btnIg) {
+        btnIg.addEventListener('click', function(e) {
+          gtag('event', 'clic_instagram', {
+            'event_category': 'social',
+            'event_label': 'instagram_landing',
+            'link_url': this.href
+          });
+          console.log('✅ GA4 Event: clic_instagram');
+        });
+      }
+
+      console.log('✅ Tracking de clics activado en landing.html');
+    });
   </script>
 
 </body>
