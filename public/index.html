@@ -27,6 +27,7 @@
   </script>
   
   <style>
+    /* ========== CSS ORIGINAL (sin modificar excepto agregados) ========== */
     :root {
       --bg: #0a0a0f;
       --bg2: #0f0f1a;
@@ -350,6 +351,7 @@
       .servicesGrid { grid-template-columns: 1fr; }
     }
     
+    /* ========== BENEFICIOS ========== */
     .benefits-section {
       padding: 60px 0;
     }
@@ -409,6 +411,7 @@
       .benefit-card__icon { font-size: 2.2rem; }
     }
 
+    /* ========== MARCAS QUE CONFÍAN EN NOSOTROS ========== */
     .brands-section {
       background: var(--bg2);
       border-radius: 24px;
@@ -494,6 +497,7 @@
       .brands-carousel-btn { width: 28px; height: 28px; font-size: 0.9rem; }
     }
 
+    /* ========== CASOS DE ÉXITO ========== */
     .success-stories-section {
       padding: 2rem 0;
     }
@@ -576,6 +580,7 @@
       .stories-grid { grid-template-columns: 1fr; }
     }
 
+    /* ========== CARRUSEL DE BANNERS PROMOCIONALES ========== */
     .banners-section {
       padding: 60px 0;
     }
@@ -773,6 +778,7 @@
       color: var(--cyan);
     }
     
+    /* ========== FORMULARIO DE RESEÑA (OPINIÓN) ========== */
     .review-form-container {
       margin-top: 3rem;
       background: var(--bg2);
@@ -1046,6 +1052,7 @@
     }
     @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
     
+    /* ========== MODAL DE PROYECTOS CON GALERÍA (NUEVO) ========== */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1086,6 +1093,7 @@
     .modal-body {
       padding: 1.5rem;
     }
+    /* Galería */
     .gallery-container {
       position: relative;
       margin-bottom: 1rem;
@@ -1187,6 +1195,7 @@
       box-shadow: 0 0 30px rgba(0,212,255,0.3);
     }
     
+    /* ========== CARRUSEL INFINITO DE TECNOLOGÍAS ========== */
     .tech-strip {
       background: rgba(15, 15, 26, 0.6);
       backdrop-filter: blur(6px);
@@ -1498,6 +1507,7 @@
       display: grid !important;
     }
 
+    /* ===== ROBOT FLOTANTE (MODIFICADO) ===== */
     .robot-help {
       position: fixed;
       right: 20px;
@@ -1605,15 +1615,23 @@
       .robot-help.enlarged .robot-bubble { font-size: 0.75rem; padding: 8px 14px; }
     }
 
+    /* ============================================= */
+    /* ===== FIX PARA CORTE LATERAL EN MÓVILES ===== */
+    /* ============================================= */
     @media (max-width: 768px) {
+      /* Forzar que no haya desbordamiento horizontal */
       html, body {
         overflow-x: hidden !important;
         max-width: 100% !important;
       }
+      
+      /* Fix para el hero con background-attachment fixed */
       .hero {
         background-attachment: scroll !important;
         background-position: center !important;
       }
+      
+      /* Asegurar que todos los contenedores respeten el ancho */
       .wrap, 
       .hero .wrap, 
       .section .wrap,
@@ -1622,24 +1640,32 @@
         padding-left: 16px;
         padding-right: 16px;
       }
+      
+      /* Evitar que elementos se salgan */
       .hero__copy {
         max-width: 100% !important;
         width: 100% !important;
       }
+      
+      /* Ajustar stats en móvil para que no se corten */
       .hero__stats {
         flex-wrap: wrap !important;
       }
+      
       .hero__stat {
         border-right: none;
         border-bottom: 1px solid var(--border);
         margin-bottom: 10px;
         padding-bottom: 10px;
       }
+      
       .hero__stat:last-child {
         border-bottom: none;
         margin-bottom: 0;
         padding-bottom: 0;
       }
+      
+      /* Ajustar tipo de letra para que no genere overflow */
       .typewriter {
         font-size: clamp(1.3rem, 5vw, 2rem);
       }
@@ -1663,8 +1689,6 @@
       <a href="#faq">FAQ</a>
       <a href="#contacto">Contacto</a>
       <a href="quienes-somos.html">Quiénes somos</a>
-      <!-- 👇 NUEVO ENLACE REFERIDOS -->
-      <a href="/referidos/" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6); color: white; padding: 7px 16px; border-radius: 20px; font-weight: 600; box-shadow: 0 0 20px rgba(0,212,255,0.2); transition: all 0.3s;">🎯 Referidos</a>
     </nav>
     <div class="topbar__cta">
       <a href="#contacto" class="btn btn--primary btn--sm" aria-label="Solicitar presupuesto">Presupuesto</a>
@@ -1681,12 +1705,10 @@
   <a href="#faq">FAQ</a>
   <a href="#contacto">Contacto</a>
   <a href="quienes-somos.html">Quiénes somos</a>
-  <!-- 👇 NUEVO ENLACE REFERIDOS MOBILE -->
-  <a href="/referidos/" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; text-align: center;">🎯 Programa de Referidos</a>
   <a href="#" class="btn btn--wa" id="mobileWhatsAppBtn">WhatsApp</a>
 </nav>
 
-<!-- ROBOT FLOTANTE -->
+<!-- ===== ROBOT FLOTANTE (MODIFICADO) ===== -->
 <div class="robot-help" id="robotHelpBtn" aria-label="Asistente virtual">
   <div class="robot-container">
     <div class="robot-bubble" id="robotBubble">🤖 Hola, ¿necesitas ayuda?</div>
@@ -1694,7 +1716,7 @@
   </div>
 </div>
 
-<!-- HERO -->
+<!-- ========== 1. HERO ========== -->
 <section class="hero" aria-label="Sección principal">
   <canvas id="matrixCanvas" aria-hidden="true"></canvas>
   <div class="wrap">
@@ -1722,7 +1744,7 @@
   </div>
 </div>
 
-<!-- BENEFICIOS -->
+<!-- ========== 2. BENEFICIOS ========== -->
 <section class="section" id="beneficios">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -1739,7 +1761,7 @@
   </div>
 </section>
 
-<!-- SERVICIOS -->
+<!-- ========== 3. SERVICIOS ========== -->
 <section class="section" id="servicios">
   <div class="wrap">
     <div class="section__head fade-in-left">
@@ -1754,7 +1776,7 @@
   </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- ========== 4. PORTFOLIO ========== -->
 <section class="section section--alt" id="portfolio">
   <div class="wrap">
     <div class="section__head fade-in-right">
@@ -1797,7 +1819,7 @@
   </div>
 </section>
 
-<!-- CASOS DE ÉXITO -->
+<!-- ========== 5. CASOS DE ÉXITO ========== -->
 <section class="section" id="casos-exito">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -1813,7 +1835,7 @@
   </div>
 </section>
 
-<!-- TESTIMONIOS -->
+<!-- ========== 6. TESTIMONIOS ========== -->
 <section class="section section--alt" id="resenas">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -1837,7 +1859,7 @@
   </div>
 </section>
 
-<!-- MARCAS QUE CONFÍAN -->
+<!-- ========== 7. MARCAS QUE CONFÍAN ========== -->
 <section class="section" id="marcas">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -1855,7 +1877,7 @@
   </div>
 </section>
 
-<!-- BANNERS PROMOCIONALES -->
+<!-- ========== 8. BANNERS PROMOCIONALES (CARRUSEL AUTOMÁTICO - FLECHAS FUERA) ========== -->
 <section class="section" id="banners">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -1874,124 +1896,7 @@
   </div>
 </section>
 
-<!-- ===== PROGRAMA DE REFERIDOS (NUEVA SECCIÓN) ===== -->
-<section class="section" id="referidos">
-  <div class="wrap">
-    <div class="section__head center fade-in-up">
-      <span class="section__label" style="color: #f59e0b;">💰 GANA DINERO EXTRA</span>
-      <h2>Programa de <em>Referidos</em></h2>
-      <p style="color: var(--text2);">Recomienda CIBORG 347 y ganá comisiones del 10% al 20% por cada proyecto concretado</p>
-    </div>
-
-    <div class="benefits-grid" style="grid-template-columns: repeat(3, 1fr);">
-      <div class="benefit-card" style="border-color: rgba(0,212,255,0.2);">
-        <div class="benefit-card__icon" style="font-size: 3rem;">💰</div>
-        <div class="benefit-card__title" style="color: var(--white);">Ganá Comisiones</div>
-        <div class="benefit-card__desc" style="color: var(--text2);">
-          Hasta <strong style="color: #f59e0b;">20%</strong> de comisión por cada referido que contrate
-        </div>
-        <div style="margin-top: 12px; display: inline-block; background: rgba(245,158,11,0.15); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; color: #f59e0b; border: 1px solid rgba(245,158,11,0.2);">
-          🔥 Sin límite de referidos
-        </div>
-      </div>
-
-      <div class="benefit-card" style="border-color: rgba(16,185,129,0.2);">
-        <div class="benefit-card__icon" style="font-size: 3rem;">🎁</div>
-        <div class="benefit-card__title" style="color: var(--white);">Cliente Ahorra</div>
-        <div class="benefit-card__desc" style="color: var(--text2);">
-          Tu cliente obtiene un <strong style="color: #34d399;">descuento especial</strong> por mencionarte
-        </div>
-        <div style="margin-top: 12px; display: inline-block; background: rgba(16,185,129,0.15); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; color: #34d399; border: 1px solid rgba(16,185,129,0.2);">
-          ✅ Ahorro garantizado
-        </div>
-      </div>
-
-      <div class="benefit-card" style="border-color: rgba(139,92,246,0.2);">
-        <div class="benefit-card__icon" style="font-size: 3rem;">🚀</div>
-        <div class="benefit-card__title" style="color: var(--white);">Recomendá Sin Límites</div>
-        <div class="benefit-card__desc" style="color: var(--text2);">
-          Podés recomendar <strong style="color: #a855f7;">cuantos negocios quieras</strong>, sin restricciones
-        </div>
-        <div style="margin-top: 12px; display: inline-block; background: rgba(139,92,246,0.15); padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; color: #a855f7; border: 1px solid rgba(139,92,246,0.2);">
-          ♾️ Ilimitado
-        </div>
-      </div>
-    </div>
-
-    <!-- Tabla de comisiones -->
-    <div style="margin-top: 40px; background: var(--bg2); border-radius: 24px; padding: 24px; border: 1px solid var(--border);">
-      <h3 style="font-family: 'Syne', sans-serif; font-size: 1.3rem; color: var(--white); text-align: center; margin-bottom: 20px;">
-        Comisiones por tipo de proyecto
-      </h3>
-      <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-          <thead>
-            <tr style="border-bottom: 2px solid var(--border);">
-              <th style="text-align: left; padding: 12px 16px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Tipo de Proyecto</th>
-              <th style="text-align: left; padding: 12px 16px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Comisión</th>
-              <th style="text-align: left; padding: 12px 16px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;">Pago</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background: rgba(245,158,11,0.05); border-left: 3px solid #f59e0b;">
-              <td style="padding: 12px 16px; font-weight: 600;">📱 Sistema a Medida</td>
-              <td style="padding: 12px 16px; color: #f59e0b; font-weight: 700;">20%</td>
-              <td style="padding: 12px 16px; color: #34d399;">Al finalizar</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 12px 16px;">⚙️ Panel Admin</td>
-              <td style="padding: 12px 16px; color: var(--cyan); font-weight: 600;">18%</td>
-              <td style="padding: 12px 16px; color: var(--text2);">Al finalizar</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 12px 16px;">🌐 Web Institucional</td>
-              <td style="padding: 12px 16px; color: var(--cyan); font-weight: 600;">15%</td>
-              <td style="padding: 12px 16px; color: var(--text2);">Al finalizar</td>
-            </tr>
-            <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 12px 16px;">🛒 Tienda Online</td>
-              <td style="padding: 12px 16px; color: var(--cyan); font-weight: 600;">12%</td>
-              <td style="padding: 12px 16px; color: var(--text2);">Al finalizar</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px 16px;">🎯 Landing Page</td>
-              <td style="padding: 12px 16px; color: var(--cyan); font-weight: 600;">10%</td>
-              <td style="padding: 12px 16px; color: var(--text2);">Al finalizar</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="text-align: center; color: var(--text2); font-size: 0.75rem; margin-top: 12px;">
-        * Las comisiones se abonan al finalizar y pagar el proyecto.
-      </p>
-    </div>
-
-    <!-- CTA -->
-    <div style="text-align: center; margin-top: 40px;">
-      <a href="/referidos/" 
-         style="display: inline-block; 
-                background: linear-gradient(135deg, #00d4ff, #8b5cf6); 
-                color: white; 
-                padding: 16px 48px; 
-                border-radius: 50px; 
-                text-decoration: none; 
-                font-weight: 700; 
-                font-size: 1.1rem;
-                font-family: 'Syne', sans-serif;
-                box-shadow: 0 0 40px rgba(0,212,255,0.25);
-                transition: all 0.3s ease;"
-         onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 60px rgba(0,212,255,0.4)';"
-         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 40px rgba(0,212,255,0.25)';">
-        🚀 Participar en el Programa
-      </a>
-      <p style="color: var(--text2); font-size: 0.8rem; margin-top: 12px;">
-        Sin costo • Comisiones garantizadas • Pago al finalizar el proyecto
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
+<!-- ========== 9. FAQ ========== -->
 <section class="section" id="faq">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -2002,7 +1907,7 @@
   </div>
 </section>
 
-<!-- OPINIÓN -->
+<!-- ========== 10. DEJANOS TU OPINIÓN ========== -->
 <section class="section section--alt" id="opinion">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -2035,7 +1940,7 @@
   </div>
 </section>
 
-<!-- CONTACTO -->
+<!-- ========== 11. CONTACTO ========== -->
 <section class="section" id="contacto">
   <div class="wrap">
     <div class="section__head center fade-in-up">
@@ -2061,7 +1966,7 @@
 </section>
 </main>
 
-<!-- FOOTER -->
+<!-- ========== 12. FOOTER ========== -->
 <footer>
   <div class="wrap">
     <div class="footer__inner">
@@ -2075,7 +1980,6 @@
         <a href="#casos-exito">Casos de éxito</a>
         <a href="#marcas">Marcas</a>
         <a href="beneficios.html">Beneficios</a>
-        <a href="#referidos" style="background: linear-gradient(135deg, #00d4ff, #8b5cf6); color: white; padding: 4px 14px; border-radius: 20px; font-weight: 600;">🎯 Referidos</a>
         <a href="#faq">FAQ</a>
         <a href="#contacto">Contacto</a>
         <a href="quienes-somos.html">Quiénes somos</a>
@@ -2105,16 +2009,15 @@
 
 <script src="config.js"></script>
 <script>
-// ===== CONFIGURACIÓN =====
+// ========== CONFIGURACIÓN ==========
 const SUPABASE_URL = "https://fhxcumwhgtfirznnznjx.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZoeGN1bXdoZ3RmaXJ6bnpu
-
-nzx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5OTYyNzEsImV4cCI6MjA4MzU3MjI3MX0.7z1B099L4yrA9k1JxwvYGCABzqiqYtkUClI3E8wQ2zA";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZoeGN1bXdoZ3RmaXJ6bm56bmp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njc5OTYyNzEsImV4cCI6MjA4MzU3MjI3MX0.7z1B099L4yrA9k1JxwvYGCABzqiqYtkUClI3E8wQ2zA";
 const DEFAULT_WA = "5491164499481";
 const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 console.log("🔌 Conectando a Supabase...");
 
+// ========== FUNCIÓN PARA FORMATEAR PRECIOS ==========
 function getPrecioMostrar(service) {
   let precioRaw = service.price_ars;
   if (precioRaw === undefined || precioRaw === null) {
@@ -2140,6 +2043,7 @@ function getPrecioMostrar(service) {
   return precioRaw;
 }
 
+// ========== FUNCIÓN PARA CARGAR SERVICIOS ==========
 async function loadServicesReal() {
   const container = document.getElementById('servicesGrid');
   if (!container) return;
@@ -2200,6 +2104,7 @@ async function loadServicesReal() {
   }
 }
 
+// ========== FUNCIÓN PARA CARGAR BENEFICIOS ==========
 async function loadBenefits() {
   const container = document.getElementById('benefitsGrid');
   if (!container) return;
@@ -2248,6 +2153,7 @@ async function loadBenefits() {
   }
 }
 
+// ========== CARRUSEL DE BANNERS CON SWIPE TÁCTIL ==========
 let currentBannerIndex = 0;
 let bannersData = [];
 let bannerInterval = null;
@@ -2452,6 +2358,7 @@ document.getElementById('bannerCarouselNext')?.addEventListener('click', () => {
   resetearCarruselAutomatico();
 });
 
+// ========== RESTO DEL CÓDIGO ORIGINAL (marcas, casos de éxito, reseñas, etc.) ==========
 let brandsData = [];
 let currentBrandIndex = 0;
 let brandsPerPage = 4;
@@ -2600,11 +2507,13 @@ function escapeHtml(str) {
   });
 }
 
+// ===== ROBOT FLOTANTE (MODIFICADO) =====
 const robotBtn = document.getElementById('robotHelpBtn');
 const robotImg = document.getElementById('robotImg');
 const robotBubble = document.getElementById('robotBubble');
 let robotEnlargeTimeout = null;
 
+// Estado inicial: chiquito (sin clase enlarged)
 robotBtn.classList.remove('enlarged');
 robotBtn.classList.add('shrink');
 
@@ -2632,6 +2541,7 @@ if (robotBtn) {
   });
 }
 
+// ===== FUNCIONES ORIGINALES DEL ROBOT (secuencia, vibración, etc.) se mantienen =====
 const IMG1 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/8f4b1793-1886-4dee-9445-b9570c2047ea.png";
 const IMG2 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/a586d88b-93c0-4fac-b28d-4f5758af46f0.png";
 const IMG3 = "https://fhxcumwhgtfirznnznjx.supabase.co/storage/v1/object/public/Imagenes/ciborg%20sentado%20.png";
@@ -2763,6 +2673,7 @@ function setupRobotScroll() {
 
 setupRobotScroll();
 
+// ===== RESEÑAS =====
 let reviewsData = [];
 let currentReviewIndex = 0;
 let reviewsPerPage = 3;
@@ -2834,6 +2745,7 @@ async function loadFaqs() {
   } catch(e) { console.error("Error loadFaqs:", e); }
 }
 
+// ===== PROYECTOS =====
 let projectsData = [];
 let allCategories = [];
 let activeFilter = "all";
@@ -2891,10 +2803,13 @@ function typeWriter() {
 }
 setTimeout(typeWriter, 500);
 
+// ===== NUEVA FUNCIÓN openModal CON GALERÍA =====
 function openModal(project) {
+  // Obtener todas las imágenes del proyecto
   const images = [];
   if (project.image_url) images.push(project.image_url);
   if (project.image2_url) images.push(project.image2_url);
+  // Preparado para más imágenes en el futuro (si hay image3_url, image4_url, etc.)
   
   let galleryHtml = '';
   if (images.length === 0) {
@@ -2908,6 +2823,7 @@ function openModal(project) {
       </div>
     `;
   } else {
+    // Múltiples imágenes: galería con navegación y miniaturas
     galleryHtml = `
       <div class="gallery-container">
         <div class="gallery-main" id="galleryMain">
@@ -2944,6 +2860,7 @@ function openModal(project) {
   document.body.insertAdjacentHTML("beforeend", modalHTML);
   document.body.style.overflow = "hidden";
   
+  // Configurar galería si hay múltiples imágenes
   if (images.length > 1) {
     let currentIndex = 0;
     const mainImg = document.getElementById('galleryMainImg');
@@ -2974,6 +2891,7 @@ function openModal(project) {
     prevBtn.onclick = (e) => { e.stopPropagation(); prevImage(); };
     nextBtn.onclick = (e) => { e.stopPropagation(); nextImage(); };
     
+    // Swipe táctil
     const galleryContainer = document.getElementById('galleryMain');
     let touchStartX = 0;
     let touchEndX = 0;
@@ -3177,6 +3095,7 @@ function setupWhatsAppVisibility() {
   observerFooter.observe(footer);
 }
 
+// Inicializar todo
 loadServicesReal();
 loadBenefits();
 loadBannersCarousel();
@@ -3187,6 +3106,7 @@ loadBrands();
 loadSuccessStories();
 setupWhatsAppVisibility();
 
+// Matrix canvas
 (function() {
   const canvas = document.getElementById('matrixCanvas');
   if (!canvas) return;
